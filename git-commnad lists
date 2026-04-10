@@ -1,0 +1,26 @@
+1.git --version :- to check version of git
+2.git --config :- to configure git need to mention to things 
+1.username 2.email
+	• git config --global --List
+	• git config --global user.name "pavithra" user.email
+
+3.git Init :- to initialize/create a empty git repository 
+git init -b main :- we can use this command to change branch(-b) name whatever we want in local repository
+
+4.git status :- it will give you project status.
+5.git add Firstcode.txt(file name):- to add file in staging area on local repository
+6.git commit -m "message" :- to commit code in local repository
+7.git log :- to check commit history or total commits happen 
+8.git diff :- to check differences in file when changes are in working directory
+9.git diff -- staged :- to check differences in staging area
+10.git rm --cached filename :- to delete file from git and then working directory 
+11. SSH-keygen -o :- to connect local to remote repository
+
+12.git push origin main :- to push code from local to remote repository
+13. git tag  :- to create versions
+	  they are two types of tags 
+		1. Annotated tagging  
+		2.light weighted tagging
+14.git tag -a v1.0 :- annotated  tagging will use if you want to release this to the user give more information about the user who is committing who own sets and we can specify annotated tag.
+15.git show v1.0 :- git show will give you the information about the particular tag
+16.git clone URL :- to clone the project use HTTPs/SSH URL
