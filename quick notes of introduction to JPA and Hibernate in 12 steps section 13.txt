@@ -1,0 +1,46 @@
+JDBC to Spring JDBC to JPA to Spring Data JPA
+
+1. JDBC:-
+-------------
+1.write a lot of SQL queries!(delete from todo where is=?)
+2. and write a lot of java code
+
+2.Spring JDBC:-
+-------------------------
+1.write a lot of SQL queries!(delete from todo where is=?)
+2.But lesser java code
+
+3.JPA :-
+---------------
+1. Do Not worry about queries.
+2.map entities to tables!
+
+4.Spring Data JPA:-
+----------------------
+178. Step 10 - Getting Started with Spring Data JPA
+-------------------------------------------------------------------------------------
+1. Let's make JPA even more simple!
+2. I will take crae of everything!
+
+
+Difference between Hibernate vs JPA:-
+-----------------------------------------------
+
+1. JPA makes talking to the database very, very easy.
+2. we are making use of annotations in Jpa is Jakartha - persisdtance
+3. in maven dependencies we are seeing dependencies Jakarta-persistence-api-3.0.0.jar.it is coming from spring data jpa
+4. hibernate jars also location in sprin data jpa 
+
+JPA:-
+JPA defines the specification .it is an API.JPA is like an interface.
+1.It defines how you can define entities -we can define an entity is by adding an @Entity annotation.so jakartha.persisteance.Entity so here we are using using the Jpa API.
+2. how do you define an primary key you make use of jakartha.persiatance.id
+5.how do you map attributes? - to map attributes we talked about annotation like @column. so if we looked at @column annotation it is coming from jakartha.persiatance.API
+6.who manages the entities - entity manager
+
+
+Hibernate:-
+------------------
+1.hibernate is one of the popular implementations of jPA.
+2.using hibernate directly would result in a lock into hibernate.There are other JPA implementations that are available.
+One of the other alternatives is something called Toplink.

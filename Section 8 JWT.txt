@@ -1,0 +1,104 @@
+115.step 85 - Introduction to jwt
+----------------------------------------------
+-welcome to the section of JWT means JSON web Token.
+-JWT also called JOT.thats what we would be refer from here on,it will be called jot.
+
+-before starting with Jot lets start with basic authentication:-upto now we are using basic authentication
+---------------------------------------------------------------------------------
+1.as part of basic authentication we are using base 64 encoded username and password.
+2.The important thing about basic authentication is there is no expiration time.If somebody's able to get access to the basic authentication token or the header value,then he can use it for unlimited time.
+3.basic authentication token does not have any user details on them,does not have any authorization details on them.It's pure user ID and password. That's it.
+
+
+Custom token -based authentication system
+-------------------------------------------------------
+--that's the reason we created number of attempts to extend and create custom, token-based authentication systems.
+----------------------------------------------------------------------------------------------------------------------------
+1.these custom, token-based authentication systems the final output is a token.It's some kind of a hashed value, some tokenized value.
+Typically, these tokens contain the user details,the user authorizations and any other details.which the systems which are talking to each other might need.
+2.The problem with the custom token system is the custom structure and because of it there might be security flaws.
+
+JWT:-
+----------
+--Over a period of time, what happened was we evolved to a common token standard,which is called jot, JSON web token.
+-- The awesome thing about jot is that it can contain user authorizations and a number of other details.
+--There is a standard part which is defined and there is a part where you can extend and add your custom information.
+
+If you go to the website, JWT dot IO,this is built by the Auth0 team.
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+116. Step 86 - Next Lecture - Configure JWT Authentication
+--------------------------------------------------------------------------------------------------------------------------
+
+👉 WHAT SHOULD YOU DO?
+Request you to bookmark this page. We will make use of it in the next lecture - https://github.com/in28minutes/full-stack-with-angular-and-spring-boot/blob/master/99-reuse/01-spring-security.md
+
+----------------------------------------------------------------------------------------------------------------------------------------
+117. Step 87 - Importing JWT Framework into Eclipse
+------------------------------------------------------------------------------------------------------------------
+In this step let's integrate JWT code into our application, to our REST API.
+1.disable basic authentication:-
+---------------------------------------------------------
+2.so rename this package :- com.in28minutes.rest.webservices.restful_web_services.basic.auth to com.in28minutes.rest.basic.auth
+3. so it's not sub package of the restfulwebservices package where our RestfulWebServicesApplication is present And therefore the basic authentication would now be completely disabled.
+
+4.I would also go into src/main/resources/application.properties comment this code
+# spring.security.user.name=in28minutes
+# spring.security.user.password=dummy
+
+5.However, remember that Spring Security would continue to protect our application.
+Why? Because we have spring-boot-starter-security in our dependencies.
+
+
+Let's now shift our attention to configuring JWT:-
+-----------------------------------------------------
+JWT configuration :-
+------------------------
+1.The first thing that we want to configure a URL for Jwt same as basic authentication URL,And the URL will be /authenticate and it should be configured in application.properties 
+ex:- jwt.get.token.uri=/authenticate
+
+1.add a couple of dependencies to our pom.xml.:-
+---------------------------------------------------------
+1.first stopped the application and make changes to the pom.xml  
+
+for this we need two dependencies:-
+----------------------------------------------
+1.Our application, our REST API, will be doing JWT authentication.And for JWT authentication we would need something called a Resource Server.
+
+ <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+		
+2.Another dependency is spring-boot-configuration-processor.
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+		
+2.The next thing that we'd want to do is configure a lot of classes which are related to JWT.:-
+---------------------------------------------------------------------------------------------------
+
+
+
+ @Service
+1.JwtTokenService.java
+2.JwtAuthenticationController.java ;- this is JWT controller So this is where the authenticate URL is exposed from.So if you send a request to this /authenticate URL it would return a JWT token back,and we can use that JWT token to file requestto our REST api.
+3.JwtSecurityConfig.java
+4.JwtTokenRequest.java ,JwtTokenResponse.java :-The request and response structure are defined in JwtTokenRequest and JwtTokenResponse.
+JwtTokenService,java
+
+
+jwt.get.token.uri=/authenticate
+jwt.get.token.uri=/authenticate
+
+# spring.security.user.name=in28minutes
+# spring.security.user.password=dummy
+   

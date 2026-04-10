@@ -1,0 +1,18 @@
+veracode issuses :-
+
+HOme -------> reports
+Reports-----------------compliane summary-----------------not bale to generate
+samples-----printpdf--initially it is not openned when i went other tabs and comeback again samples and click print pdf then it is working
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+--
+
+\\Hhsc4avfsvloi02\APPSDEV2\Projects\1010920 - CAPM Tool Replacement\Analysis\Mamatha\DBMD_Updates\Monitoring Tool - DBMD New Standards added 11-2024 (003).xlsx
+
+
+1938--cma
+1939-dsa
+
+

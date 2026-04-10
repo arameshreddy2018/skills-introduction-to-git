@@ -1,0 +1,686 @@
+  Section 12:Appendix -Introduction to Spring Boot in 10 steps
+  -------------------------------------------------------------------------
+  
+ Step 1- Getting Started with Spring boot - goals
+-----------------------------------------------------------
+  Welcome to this section,Spring Boot in 10 (ish) steps.
+
+--We would want to learn Spring Boot in a little bit more than 10 steps.
+
+--What are the goals of this specific section? We want to understand 
+
+--WHY Spring Boot?
+   1)You can build web applications and REST API without using Spring Boot as well.
+   2)So what is the need for spring Boot?
+   
+---WHAT are the goals of the Spring Boot framework? 
+
+--- HOW does Spring Boot work?
+
+--At the end of this section, we'll also 
+
+COMPARE Spring Boot versus Spring MVC versus Spring.
+
+---spring Boot was introduced in 2016.
+
+start with understanding the world before Spring Boot.Getting Started with Spring boot Approach
+-----------------------------------------------------------------------------------------------------------------------
+1.How were applications built without Spring boot? We will get a 10,000 feet overview of that.
+2. we will create a Spring Boot project and 
+3.we will implement a simple REST API using Spring Boot.
+4.Using two and three,we will understand the magic of Spring Boot.We'll understand some of the very important concepts related to Spring Boot.
+  1)Spring Initializer, 
+  2)Starter Projects,
+  3)Auto Configuration, 
+  4)Developer Tools, 
+  5)Actuator 
+  and a number of other Spring Boot features.
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+Step 2:-Setting up New spring Boot Project with spring initializer
+--------------------------------------------------------------------------------------------------
+--we'll get a 10,000 feet overview of the world before Spring Boot.
+Q)How are we building applications before Spring Boot?
+A)1)setting up spring project before spring Boot was not easy
+  2)We needed to configure a lot of things before we would have a production-ready application.
+  
+let us see few examples :-
+----------------------------------
+1.dependency management or POM.xml:- 
+--------------------------------------------------------
+<dependency>
+<gropuId> org.springframework</groupId>
+<artifactId>spring-webmvc<artifactId>
+<version>6.2.2 Release </version>
+</dependency>
+
+<dependency>
+  <gropuId> org.fasterxml.jackson.core</groupId>
+  <artifactId>spring-databind<artifactId>
+  <version>2.13.3</version>
+</dependency>
+
+<dependency>
+    <gropuId> log4j</groupId>
+    <artifactId>log4j<artifactId>
+    <version>1.2.17</version>
+</dependency>
+
+manage frameworks and verison :-
+------------------------------------
+--let's say i would want to build a Rest API in this scenario i need :- i need Spring Framework,Spring MVC framework,JSON binding framework, ineed logging. I would need to create a POM.XML with all the dependencies and the versions in there.So we need to manage frameworks and their versions in our pom.XMLs.
+
+
+--if you want to write Unitests:- we need to import spring test framework.Mockito,Junit and manage all those versions
+
+that's is  the dependency management
+
+2.web.xml
+------------
+<servelet>
+<servlet-name> dispatcher</servlet-name>
+<servlet-class> org.springFramework.web.servlet.dispatcherservlet</servlet-class>
+<init-param>
+ <param-name> contextConfiguration</param-name>
+ <param-value>/WEB-INF/todo-servlet.xml</param-value>
+</init-param>
+ <load-on-startup> 1 </load -on-start-up>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>dispatcher</servlet-name>
+  <url-pattern>/*</url-pattern>
+ </servlet-mapping>
+ 
+-- we need to configure lot of things for your web applications 
+for exam ple:- if you want to make use of Spring MVC :-you need to configure DispatcherServlet for Spring MVC. 
+
+3. in addition,there is a lot of spring configuration as well-------Manage Spring Beans (context.xml)
+--you need to define component scan
+--you are building wed application we need to define a view resolver
+-- if your building database related application you need to define a data source
+
+<context:component-scan base-package="com.in28minutes"/>
+
+<bean class="org.framework.web.servlet.view.InternalResourceViewResolver">
+<property name="prefix">
+   <value> /WEB-INF/views/ </value>
+</property>
+<property name="suffix">
+   <value> .jsp </value>
+</property>
+</bean>
+
+
+4. in addition you also need to worry  about non-functional requirements 
+-- your application needs to have logging,
+--you need to have error handling,
+--you need to monitor your application in production
+--You need to be able to look at metrics for your application in production.
+
+<plugin>
+
+	<groupId> org.apache.tomacat.maven </groupId>
+	<artifactId> tomcat7-maven-plugin </artifactId>
+	<version> 2.2 </version>
+	<configuration>
+	 <path>/</path>
+	 <contextReloadable> true </contextReloadable>
+</plugin>
+
+
+<dependency>
+		<groupId> log4j </groupId>
+	<artifactId> log4j </artifactId>
+	<version> 1.2.17 </version>
+</dependency>
+
+so world before spring boot setting up projects was not easy:-
+-----------------------------------------------------------------------------
+--you need dependency management(pom.xml>
+-- you need to provide a lot configuration to define webApp congiguration(web.xml)
+--manage spring beans (context.xml)
+-- you needed to write a lot of code to implement your non-functional requirements(NFRS>.
+
+and you need to repeat this every new project.
+--Every few months, let's say you're building a new project,you need to keep repeating this.This takes a lot of time, typically a few days to set up.
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+Step 3 - Build a Hello World API with Spring Boot
+-----------------------------------------------------------------------------------------------------------------------------------
+understanding Power of the Spring boot:-
+1. creating a spring Boot project is very easy
+a) go to web site -----------------start.spring.io
+
+Project:-
+----------------------
+  project:- maven as build tool ,   language :- java as language
+  
+  
+Spring Boot:-
+--------------------
+  spring boot 3 :- we can select a springboot project with sanpshot or M1 or M3
+  M3 mean milestone versions
+  snapshot versions are versions under development.these are activity developed spring nad spring boot teams and therefore we should  avoid as much as possible
+  
+project metadata:-
+----------------------------
+  groupId and artifact id are very very similar to our class name and package name--when i create a class I give it name and I put it into a package
+  similarly , when I create a project I need to give it a artifact Id and also place it into a group.
+  group:- com.in28minutes.springboot.
+  artifact id :- learn-spring-boot
+  pacaking :- jar or war
+  java 17 -- spring boot 3 needs atleast java 17 or higher version of java
+  
+
+Dependencis:-
+----------------------
+--The last thing we would need to configure in here are the dependencies.
+We want to create a Spring boot project.
+what kind of project we want to build?
+A)We want to build a REST API and to be able to build REST API,we would need a dependency
+Q)What's the dependency?
+A)It's called Spring Web.
+This is actually Spring Boot Starter Web.This is used to build web applications and rest API with Spring MVC.
+
+This uses Apache Tomcat as embedded Container.
+So let's choose Spring web and now we are ready to create our Spring Boot project.
+
+All that you need to do now is to click the generate button in here.
+------------
+--This would generate a zip file and download it to your downloads folder.
+As you can see, creating a new Spring Boot project is very, very easy.
+What I've done is I've extracted the zip file in my download folder to a folder on my hard disc.You can choose a convenient folder on your hard disc,something like c:/
+we would want to import the project into Eclipse.
+--you can either do a file import or you can click import projects in here over here I would type in Maven.If you type in Maven, you would see something called existing Maven Projects come in.
+So file import existing Maven projects. 
+--Click next and I would recommend you to browse to the directory where you have extracted your zip file.
+--extracted  zip file to this specific folder in here,
+
+--project structure in the project explorer:-
+src/main/java :-  is the where the java code or source code 
+src/main/resource :- this the application configuration,
+src/test/java :- is where you write your unit tests,
+Maven dependencies :- which are coming
+Pom.xml:- where you would see couple of dependencies which are defined Spring Boot Starter Web and Spring Boot Starter Test.
+--all Maven dependencies in which are in here are coming in because of these two starter projects.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+Step 4 - Build a Hello World API with Spring Boot
+-----------------------------------------------------------------------------------------------------------------------------------
+  
+--in this step to understand power of Spring Boot
+--we'll see how you can build a simple REST API.
+-- go to ecilipse iDe and create  a new class--file new or rightclick on project ---> new---->select class---gice Name: CourseController
+--- inside CourseController class --create API like this
+//http://localhost:8080/courses
+[
+{
+ "id" :1,
+ "name": "learn AWS",
+ "author" : "in28minutes"
+}
+]
+
+--to create simple restApi with /courses And when somebody hits that URL,what we want to do is to return this data back.
+--So we'd want to return course details with id, name, and author.
+--In courseController we want to build a REST API.
+--so here we are build a REST API by using @RestController annotation
+----you can create methods in here and expose the link that you'd want to create.So this is what we want to do in here.So we'd want to retrieve a set of courses and return them back.So, a set of courses.
+ 
+package com.in28minutes.springboot.learn_spring_boot;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RestController;
+
+// Url:- /courses
+// return Course : id,name,author
+// so here we are build a REST API by using @RestController annotation
+
+@RestController
+public class CourseController {
+	
+	public List<Course> retrieveAllCourses() {
+				return Arrays.asList(
+				new Course(1, "Learn AWS", "in28minutes"),
+				new Course(2, "Learn DevOps", "in28minutes")
+				);
+		
+	}
+
+}
+
+package com.in28minutes.springboot.learn_spring_boot;
+
+--creating course class
+
+public class Course {
+	
+	// creating variables 
+	private long id;
+	private String name;
+	private String author;
+	
+	/*
+	 * 1.create a Constructor.
+	 * 2.create few methods like getters and setters  
+	 * 3.to string
+	 */
+	
+	// 1.create a Constructor.
+	
+	public Course(long id, String name, String author) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.author = author;
+	}
+	
+	//2.create few methods like getters
+
+	public long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+	
+	
+	
+	
+	//3.to string
+	
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", name=" + name + ", author=" + author + "]";
+	}
+	
+	
+---What we want to do is to map a URL to this specific method.What's the URL I would want to map?
+
+A)  /courses.
+
+--When somebody hits /courses,I would want to return this list of courses back.How can I do that?
+
+ @Requestmapping() --here we need to map the URL
+ 
+ 
+ -----------------------------------------------------------------------------------------------------------------------------------
+Step 5 - Understanding the Goal of Spring Boot
+-----------------------------------------------------------------------------------------------------------------------------------
+Q) what's the Most Important Goal of Spring Boot
+A)The most important goal of Spring Boot is 
+---to help you build PRODUCTION-READY app QUICKLY
+
+  build quickly:-
+  -------------------
+   --Spring initializer :-It helps you to easily create Spring Boot projects.That's the website, start.spring.io.
+   -- Spring Boot Starter Projects:- Spring Boot Starter Projects help you to quickly define dependencies for your projects.
+   --Spring Boot Auto Configuration,:- Spring Boot Auto Configuration would automatically provide configuration based on the dependencies which are in the classpath.
+   -- Spring Boot DevTools :- Spring Boot DevTools will help you to make application changes without having to manually restart the server.
+   
+--We will be exploring these three features in the next three steps.
+
+----Is it sufficient if you are able to build applications quickly?
+
+Nope. You also want them to be production-ready.
+
+production-ready.:-
+----------------------
+
+1.you need thinks like logging.
+2. need to provide Different configuration for different environments:- profiles,configuration properties
+3 monitoring (Spring Boot actuator) :-And you also want to be able to monitor your application.
+
+
+ -----------------------------------------------------------------------------------------------------------------------------------
+Step 6 - Understanding Spring Boot Magic Spring Boot Starter Projects
+-----------------------------------------------------------------------------------------------------------------------------------
+One of the most important feature of Spring Boot is Spring Boot Starter Projects.
+
+
+Exploring Spring Boot Starter Projects:
+------------------------------------------------------------------
+when ever I need a lot of frameworks to build application features i need a lot of framework:
+for example:-
+  if I would want to build a REST API, :i need Spring,Spring MVC, tomcat,JSON conversion
+  If let's say I would want to write a unit test:- I need Spring Test framework, Junit framework,Mockito framework,
+  
+-- how can I group them and make it easy to build applications?
+A)That's what Starter Projects provide.They provide convenient, dependency descriptors for different features.
+--In pom.xml 
+1.Spring boot starter web 
+2.Spring boot starter test 
+
+1.Spring boot starter web enables you to build REST API and web applications.
+2.Spring boot starter test help you to write unit test.
+
+--Spring boot provides variety of starter projects,Depending on the feature you need for your specific project,you can make use of different starter projects.:-
+1.spring boot starter web:-
+-------------------------
+ If you are building a web application and REST API, you can make use of spring boot starter web(We saw that it brings in dependencies, spring web MVC and spring web ,spring-boot-tomcat,spring-boot-starter-json)
+ 
+2.spring boot starter test:-
+----------------------------
+If you'd want to be able to write unit test easily, you can make use of spring boot starter test.
+
+3.spring boot starter data JPA:-
+------------------------------------------
+If you'd want to be able to talk to a database,let say you'd want to use a database like oracle,
+or MySQL, and you'd want to be able to write code to talk to the database using JPA.
+
+4. spring boot starter data JPA:-
+------------------------------------------
+ If you'd want to talk to a database using JDBC,in that Kind of a scenario you can make use of
+spring boot starter JDBC.
+
+
+5.spring boot starter security :-
+---------------------------------------
+If you'd want to secure your web application, or if you'd want to secure your REST API, you can make use of spring boot starter security.
+
+---------------------------------------------------------------------------------------------------
+------------------------------------------161. Step 07 - Understanding Spring Boot Magic - Auto Configuration-----------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	in this step lets us look at Spring Boot Auto Configuration:-
+	------------------------------------------------------------------
+	
+	Exploring Spring boot Auto configuation:-
+	--------------------------------------------------------------------------------------
+	
+	1. when ever you want to build webapplication with spring boot,
+	2.we need lot of  configuration to build spring app:
+	  i need to configure component scan,DispatcherServlet,id i want to talk data base i need to configure Data Sources,if i need to convert Bean to Json and Json to bean we need JSON Conversion
+	  
+How can i simplify this?
+A)That is the concept of auto configuration,
+  automated configuration for your application
+  
+Q)How is this generated?
+
+A) The automatic configuration is generated based on which frameworks are in the class path.In the POM.XML, we can add in a lot of starter projects and these bring in a lot of frameworks.
+
+2.The other factor is what is the existing configuration?Spring Boot provides default auto configuration.However, you can also override that by providing your own configuration.
+
+  
+ -- autoConfiguration specified in specific jar it is called spring-boot-autoconfigure.jar
+ 
+ 
+-- Spring Boot Auto configures a lot of things for you based on the frameworks which are present in the class path.
+ 
+ A good example :-is Spring Boot Starter Web.
+
+When you're using Spring Boot Starter Web,all these things are automatically auto configured for you:-
+
+1.A dispatcher servlet.
+2.A embedded servlet container.We want to use Tomcat to run our application,so by default, Tomcat is auto configured.
+3.Default error pages are auto configured for you.
+4. we saw that JSON conversion is auto configured for you.The JSON conversion is done by a framework called Jackson.
+--Springboot Auto Configuration,when you have Spring Boot Starter Web on the class path,would automatically provide a message converter from Bean to JSON.
+
+--And that's the reason why when we were returning a bean, a error list from our method,it was automatically converted out to JSON. 
+
+--This magic is happening because of the JacksonHTTPMessageConvertersConfiguration.
+
+--In this step, we looked at Spring Boot Auto Configuration.In the last step, we understood the fact that Spring Boot Starter projects bring in a lot of dependencies,and Spring Boot Auto Configuration
+would look at the dependencies,look at the jars, classes,and it would provide automatic configuration for your application.
+
+--All the logic for Spring Boot Auto Configuration is present in a jar file called spring-boot-autoconfigure.jar
+
+
+---------------------------------------------------------------------------------------------------------------------
+---------162  Step 08 - Understanding Spring Boot Magic - Embedded Servers-----------------------------------------------------------------------------------
+three spring boot features which helps you to build application fast:-
+1.spring initilizer
+2.spring boot starter projects
+3.Spring boot Auto configuration.
+4. now foruth one which is Spring Boot DevTools.
+	  
+1. spring Boot Dev tools helps to increase developer productivity Whenever the applications,you want to build them very, very quickly.Developer productivity is very, very important.
+
+2.The questions Spring Boot DevTools asks is,
+
+Q) "why do we need to restart the server manually for every code change?"How about automatically restarting the server and picking up the code change?
+
+A)to make use of DevTools,we need to add it to our pom.XML.So open up pom.XML,
+
+<dependency>
+  <groupId> org.springframework.boot</groupId>
+  <artifactId>spring-boot-devtools</artifactId>
+</dependency>
+  
+
+--One very, very important thing to remember is that if you're making any changes to pom.XML,this is where we define all our dependencies.
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+---------163. Step 09 - Exploring Spring Boot ActuatorServers-----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+lets look at some importent features that springboot provides to help you create production ready application,easy
+1. Managing Application configuration using profiles:-
+---------------------------------------------------------
+--Applications have different environments like Dev,Qa,stage,prod environment.
+--different environments need different configuration for the same applications 
+    for the same code different configuration in different environments
+  1) you might talking different databases
+  2)you might calling different webservices
+--Dev environment would be talking to dev database.Test environment, would be talking to test database.Production environment would be talking to production database.That's the concept of profiles.Profiles enable you to provide environment specific configuration.
+--How can you provide different configuration for different environments?
+A)1.Profiles enable you to provide environment specific configuration.
+Let's say I want to configure different things for my environment--dev,qa,stage,prod
+we need to create separate configuration for each of these environments
+--we need to configure this profie configuration in application.properties
+--When you're not making use of any profiles,the application makes use of the default properties which are configured in application.properties.
+--there are multiple logging levels which are supported:trace,debug,info,warning,error and off.
+
+Off would actually turn off entire logging.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------164. Step 10 - Get Production Ready with Spring Boot - 2 - ConfigurationProperties-----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+    let's look at how you can set up,complex configuration for your application. 
+-If you want to create a lot of application, configuration for your application, then the recommended approach in spring boot,is to use something called configuration properties.
+--Let's go ahead and create a class.I'll call this, Currency Service Configuration.Now, what are the things I would want to define in
+ 1)you need to do, is to add an annotation called configuration properties.and prefix("currency-service)
+ 2) properties that you would want to have?
+   private String url;
+	private String username;
+	private String key;
+3)generatte getters and setters and constructors
+ 
+ 4)add @component annotation --we would want spring to manage this.
+ 
+	ex:-package com.in28minutes.springboot.learn_spring_boot;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@ConfigurationProperties(prefix="currency-service")
+@Component
+public class CurrencyServiceConfiguration {
+
+	private String url;
+	private String username;
+	private String key;
+	
+	
+	public CurrencyServiceConfiguration() {
+		
+		
+	}
+	
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
+	
+	
+}
+
+
+--- creating controller class
+
+package com.in28minutes.springboot.learn_spring_boot;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+// Url:- /courses
+// return Course : id,name,author
+// so here we are build a REST API by using @RestController annotation
+
+@RestController
+public class CurrencyConfigurationController {
+	
+	@Autowired
+	private CurrencyServiceConfiguration configuration;
+	
+	
+	@RequestMapping("/currency-configuration")
+	public CurrencyServiceConfiguration retrieveAllCourses() {
+				return configuration;
+		
+	}
+
+}
+
+
+
+	
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----165. Step 11 - Get Production Ready with Spring Boot - 3 - Embedded Servers----------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--How can you simplify deployment with spring boot embedded servers?	
+--Whenever we want to deploy something to production,we would want our deployment process to be really, really simple.Why?	
+-Because we have multiple environments.You have a development environment,a QN environment, a staging environment,a production environment, and typically 
+if you are following an agile approach,then you might be doing multiple deployments per day.	
+	
+	--Let's quickly look at the old approach of deploying applications.:-
+	-------------------------------------------
+	step1:-install java
+	step 2:install web/application server
+	step 3:- we deploy the application war(web archive)---this is the old WAR approach,which is a little complex to set up
+	
+	--new approch:-
+	----------------------
+	The concept of embedded server is a simpler alternative.When you are making use of embedded server,the server, or something like Tomcat,is already part of your JAR file,and therefore all that you need to do is to
+	1.install java
+	2.you are ready to install your JAR file.
+--Embedded servers help in simplifying your deployment processes and that's why Josh Long,spring and spring-boot developer advocate,he says, "Make JAR not WAR."Spring-boot's approach a number of embedded servers.The default is spring-boot-starter-tomcat.So that's the one which is used by default,however, there are other things like jetty and undertow, which are also supported.In this step, we talked about embedded servers.
+	
+	
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+---------- 166. Step 12 - Get Production Ready with Spring Boot - 4 - Actuator------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------		 
+--another important feature for production -ready application is monitoring	and what's happening background with your application .
+--The spring boot feature which enables you to do that is Spring boot Actuator.	 
+--it helps you to Monitor and manage your Application in production.
+--So spring boot Actuator provides you with a number of end points :-
+----------------------------------------------------------------------
+--beans:-You'd be able to look at all the spring beans,which are part of your application using this Beans endpoint
+--health:- Application health information-is your application up and running,that's health.
+--Metrics:- we can also get number on metrics related applicatiions going to the metrics endpoint
+--Mappings :- and also get details around the request mappings
+
+Q)how do you make use of SpringBoot Actautor?
+A)let's go Pom.xml
+     <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+  in broweser type :- localhost:8080/actuator
+  
+  --if you would want more features from actuator we would enable them in application.properties---->management.endpoints.web.exposure.include=*
+
+
+So Actuator provides you with a lot of information about your application and the environment in which your application is running.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+----167. Step 13 - Understanding Spring Boot vs Spring vs Spring MVC-------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+
+Spring Boot vs Spring vs Spring MVC
+
+1.spring framework is all about Dependency injection
+--it's about defining the dependencies identifying the dependencies and auto wiring them in.
+--You can define dependencies using variety of annotations at component at service,
+---just Dependency Injection is not sufficient(you need other frameworks to build apps)
+   spring Modules and Spring Projects : extend Spring Eco system --provide good integration with other framework(Hibernate?JPA,Junit and Mockito for unit testing)
+ 
+ 
+2:- what is Spring MVC?
+A) Spring MVC Simplify building web apps and REST APi
+--before spring MVC we are using struts to build webapplications
+--With Spring MVC,you can make use of annotations like @Controller,@RestController, and @requestmapping("/corses").
+
+
+-- So the core of spring framework is dependency injection.
+
+-- Spring MVC helps you to build web applications.
+
+--As we evolved with Spring framework and Spring MVC,we saw that there is a lot of configuration that is needed in your pond, XML, in your web, XML, in your application context or XML.
+
+Whenever you'd want to build even a simple application with Spring and Spring MVC,
+--and that's where Spring Boot comes in.
+
+
+3) Spring Boot:-
+
+--Spring Boot is a Spring Project.As we discussed earlier,the goal is to help you build production ready applications quickly.
+--The key features of Spring Boot are starter projects and auto configuration.
+--f you want to develop a web application,the web starter would bring in all the dependencies
+--and auto configuration would eliminate the need to set up Spring, Spring MVC and other frameworks.It automatically provides a default configuration based on whatever is in your class path.
+--Spring Boot also enables a number of non-functional requirements.
+-- If you don't want to monitor your application you have Actuator Servers simplifies the deployment of your applications.
+--And Spring Boot also provides default logging and error handling.
+--that Spring Boot simplifies application configuration through profiles and configuration properties.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+-------------168. Step 14 - Getting Started with Spring Boot - Review------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+

@@ -1,0 +1,148 @@
+step 1:-169. Step 01 - Getting Started with JPA and Hibernate - Goals
+------------------------------------------------------------------------------
+--introducing JPA and Hibernate
+--build a simple JPA application using the Modern Spring Boot approach.
+--will use a hands on approch to learn JPA and Hibernate
+-- start understanding world before JPA,JDBC,spring jDBC
+--why JPA?
+--why Hibernate ? 
+--what is different between JPA and Hibernate?
+--and we also understand why spring boot and Spring Boot data JPA?
+
+learning JPA and Hibernate - Approach :-
+-------------------------------------
+1.create a Spring Boot Project using H2 as a in memory database
+2.create COURSE table
+3.start using SPRING JDBC to play with COURSE table
+4.after use JPA and Hibernate to play with Course table
+5. at end we will be using Spring Data JPA with COURSE table.
+
+----------------------------------------------------------------------------------------------
+Step 02 - Setting up New Spring Boot Project for JPA and Hibernate
+-------------------------------------------------------------------------------------------------
+1.lets create spring boot project :- 
+---------------------------------------------------
+--go to website start.spring.io, 
+--project:- Maven, 
+--Spring Boot :- 3.0.0 , 
+--project meta data:- group : com.in28minutes.springboot ,Artifact :- learn-jpa-and-hibernate,i will take the defaults for the rest of --the things in here.
+--SpringBoot 3 need at least java 17 or greater than Java 17
+-- add Dependencies :-
+---------------------
+1.spring web(spring web is starter project which help us to build simple web applications),
+2.JDBC(Spring Data JDBC) persists data in SQL stores with plain JDBC using Spring Data.
+3.JPA(Spring Data JPA)persists data in SQL stores with Java Persistence API using Spring Data and Hibernate
+4.Data base( H2 ).H2 Database:- Provides a fast in-memory database that supports JDBC API and R2DBC access, with a small (2mb) footprint. Supports embedded and server modes as well as a browser based console application.
+
+---click generate
+
+quick note:-
+-------------------
+in this step, we created a project using Spring Initilizer,imported it into Eclipse and we launched the spring boot application 
+
+---------------------------------------------------------------------------------------------------------------------------------
+171. Step 03 - Launching up H2 Console and Creating Course Table in H2
+-------------------------------------------------------------------------------------------------------------------------------------
+
+here we connect to the H2 database.How can i do H2 database
+1.there is h2 database url that is printed in console which launch up the application.
+example :- something like this
+2025-06-23T13:34:08.085-05:00  INFO 18544 --- [learn-jpa-and-hibernate] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:ee7e12e1-9eda-4464-a1d6-183961bc84e2 user=SA
+
+2. to access or enable H2 database we need to configure so information inside the application.properties and configuring a property.
+application.properties:-
+spring.h2.console.enabled=true
+
+3. now you can go to the URl, localhost:8080/h2-console-this URL will give access to the h2-console.then update URL .this UYL get from your console and paste it on JDBC URL
+
+example :- JDBC URL = jdbc:h2:mem:92da7d50-3a6a-4c44-aa31-314958cb7593
+
+4.now time to configure static url instead of dynamic url which always changing in console
+spring.datasource.url=jdbc:h2:mem:testdb
+then save and restart the application
+
+5.We would want to create a table in H2.so we need to configure a file called schema.sql
+so i need to created new sql file for that
+ 1.we need to rightclick on src/main/resources  ---> new --> sql file --- give file name (schema.sql)
+ 2.then create a table --- now our table aname is course
+
+ create table course(
+ 
+ id bigint not null,
+ name varchar(255) not null,
+ author varchar(2550 not null,
+ primary key(id)
+ 
+ 
+ 
+ );
+ 
+ define primary :- above table Id is the primary key.
+ primarykey:- that means all the rows in this table should have unique values for the ID field.that's the ID which will be used to identify a specific row in this specific table.
+ 
+ 
+--So whenever you are making use of spring data JPA starter,it would automatically pick up the file called schema.SQL and create the table in H2.
+--So if I stop the server and start it again,learn JPA hibernate application.I'm starting it up again.
+
+--You'd see that there are no errors which are present in here. And if I go over to H2 console and refresh,
+ 
+
+ -----------------------------------------------------------------------------------------------------------------------
+172. Step 04 - Getting Started with Spring JDBC
+---------------------------------------------------------------------------------------------------------------- 
+
+--let's focus on Spring JDBC to insert and delete data in course table using spring JDBC.
+--insert data in course table. on H2 database.
+insert into course(id,name,author) values (1,'Learn AWS','in28minute')
+-- if i want to see these details i can execute a select query.--select * from Course.
+--for delete i can use -- delete from course where id=1
+--here we are using sql
+--in JDBC and Spring JDBC even there you'll be making use of SQl queries
+JDBC
+--------------
+1. Write a lot of SQl queries!
+2.and write a lot of java code
+
+Spring JDBC
+-----------------
+1.Write a lot of SQL queries 
+2.But lesser Java code
+
+
+------------------------------------------------------------------------------------------------------------------------------
+Step 05 - Inserting Hardcoded Data using Spring JDBC
+----------------------------------------------------------------------------------------------------------------------------
+
+When you have some logic to run,at the start of a spring application,you can make use of the command line runner.
+add @component for commandlineRunner class then only spring framework can find it in component scan.
+
+174. Step 06 - Inserting and Deleting Data using Spring JDBC:-
+--------------------------------------------------------------------------------------------------------
+
+in spring jdbc we need to write lot of queries but nee to write more java code
+
+
+
+
+
+176. Step 08 - Getting Started with JPA and EntityManager
+--------------------------------------------------------------------------------------------------------
+
+1. in last few steps we palyed with spring jdbc the javacode is simple but we saw tahtthe queries might get really complex .
+!if you want to see the sequels which are generated in your application then we need to add below state in application.proeprties
+spring.jpa.show-sql=true 
+
+
+177. Step 09 - Exploring the Magic of JPA
+--------------------------------------------------------------------
+in JPa do not worry about queries at all.
+let's map entities to table. we mapped our course entiti to our course table which is present in the database and we were able to easily insert data using JPA.What we needed to do,was to make use of entity manager.
+
+Now you might be wondering,this code is easy to write,Why do I need Spring Data JPA?What is the need for going for Spring Data JPA?
+Let's explore that further in the next step.
+
+
+178. Step 10 - Getting Started with Spring Data JPA
+-------------------------------------------------------------------------------------
+1. Let's make JPA even more simple!
+2. I will take crae of everything!

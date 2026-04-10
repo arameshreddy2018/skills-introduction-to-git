@@ -1,0 +1,174 @@
+step 41:-what is webservices:-
+-------------------------
+where we will try and understand what is webservice 
+let's us consider simple definiton of web service:
+-A service delivered over the web is that a complete definition?
+Think about it.So, if I delivered a service over the internet or http does it really become a web service?
+
+You might be using a lot of web applications, right?
+--all these web applications are facebook,Twitter,your shopping applications and variety of applications ----------- all these are webservices
+
+
+
+Q)what is the reason concept of webservice come into picture?
+A)if the one application is able to provide output in a format that other applications are able to understand.
+
+Q)what is w3c definition of a webservice?
+A) its software system designed to support interoperable, machine-to-machine interaction, over a network.
+the three key words here is interoperable machine-to-machine interaction over a network.
+
+1. machine-to-machine interaction:-the first thing is webservices are designed for application to application interaction.
+2. interoperable:- any other kind of applications  that means that application may develop different or same  tachenologies (like .net,php,java) irrespectable of their technologies they should be able to 
+talk or able to access another application (our to-dos application)
+3. over a network:- communication should happen over a network.for an application to be a webservice, it should allow communication over a network.other applications should be able to talk to it. the application sould have been deployed any where They might have been deployed on the same system on a different system, or somewhere on the internet.They should be allowed to talk to my application.only then, my application will be webservice.
+
+
+the most important things that a web service should support.:-
+
+--We learned that a web service should support application to application interaction.
+-- It should be interoperable.
+  ex --application A is develop on php--------application b dvelop on .Net-------application c develop on pyton -------for all these application able to understand or get services from our todo's application which is develped on Java
+  
+--  it should allow communication over the network.
+
+
+step 42:- Important How Questions related to Web services
+-----------------------------------------------------------------------------------------------
+
+Q) How does data exchange between applications take place?
+
+for example:- application A wants lits of to-dos from ------------ to-dos webservice
+             Application A need to sewnd input to ------------------webservice
+			 Application A ----send input i want to-dos related to ranga-----------------------webservice
+			 webservice --------------sends out put back to Application A
+			 
+			 so here is input and output
+			 so here input to a webservice is called Request
+			 and     output to a webservice is called  Response
+			 
+	-So if application A needs some data/action from the web service it creates a request
+	--so webservice(to-dos) creates response and sends back to  Application A 
+----Request and response are the basic concepts behind web services.
+--The important thing is web services should be platform independent.
+--Our WebService, we should be able to call it from a JavaApplication, a DotNetApplication,and a PHPApplication as well.
+			 
+ Q) how do we achieve that?
+ If the request format,let's say it's a Java specific format,or a .NET specific format,will other applications and other platforms
+be able to send a request in that format? Nope. 
+
+A) The important thing for the web service to be platform independent is that the request and the response also should be platform independent.
+  They should be in formats which are supported by all different kinds of platforms.
+ they are two popular formats for request and response.
+   1. XML format:- Extensible Markup Language. You can generate XML from a Java platform or a .NET platform or any other platform of your choice.
+   <getCourseDetailRequest>
+     <id> Course1 </id>
+	</getCourseDetailsRequest>
+   
+   you have node,aclosing node,another node,another closing node,which is specifying the detail of the course that we would want I would want to get the details of Course1.I'm creating an XML request.So XML is one of the popular formats for request and response in web services.
+   
+   
+   2. Json format :-  json  is java script object notation.it's language Javascript,which is used typically on the front end nav.
+   We are also using JavaScript in the backend,like Node.js and things like that.But JavaScript for a long while was a language of the front end.
+   
+   And JSON is how JavaScript represents its objects. The great thing now is JSON is supported by a wide variety of platforms,
+not just front end systems, but also backend systems,Java, .NET, and all other platforms.
+
+So to make the web service platform independent,what we do is make the request and the response platform independent.
+   
+  Q)how does application A know the format of request and response?
+  
+  Application A needs to send a request to the web service,and once it gets the response,it needs to be able to process it and do whatever it wants to do with it.  
+  
+  
+Q) How does it know what request to send,where to send it,and what is the format of the request and response?
+A) service definition.
+
+----- every web service offers a service definition every web service offers a service definition.
+-- the service definition would specify a request and response format.----------------- Request/Response format
+-- it specifies the structure of the request--------------------------------------------Request Structure --------------  what is this structure of the request
+--- also defines the structure of the response ----------------------------------------- Response Structure ------------ what is this structure of the response
+---- how to call this service --------------------------------------------------------end point -------------------------what is end point? where is service available?
+
+
+
+question :-
+
+Q)How does data exchange take place?
+
+Through request and response.
+
+Q)How do we make web services platform independent?
+A)By creating platform independent requests and responses,by using data exchange formats like XML and JSON.
+
+Q)How does an application know the format of a request and response?
+A)We do that by providing something called a service definition.
+
+----------------------------------------------------------------------------------------------------------------------------------------Step 43 :- Key terminology :-
+-----------------------------------------------------------------------------------------------------------------------------
+let's revise some of the key terminology that is associated with webservices.
+ Request
+ Response
+ message exchange format
+ what is a service consumer?
+ what is a service definition?
+ what is transport?
+ 
+ 
+ 
+1.Request and Response:-
+----------------------------------
+Request is input from webservice and Response is output from our webservice.
+
+2.Message Exchange Format:- 
+--------------------------------------------------
+Message Exchange Format is the format of the request and response
+Are we using XML?
+Are we using JSON?
+what is the format of the request and responses That's basically the message exchage format.
+  
+3.service provider or server consumer :-
+-------------------------------------------------
+
+Application A ------------------ webservice(to-do's aplication)
+
+
+--Application A wants to consume a service from the webservice which is present in here.
+-- the webservice here is called a service provider-Service provider is the one which hosts the webservice.
+--service provider is the guy who's is providing the service is called service provider.
+
+4.service consumer or client
+-------------------------------------
+the service consumer is the one which is consuming the webservice.
+--Application A is Consumer of the webservice
+-- the service consumer is the guy who is using the service.
+
+5.service definition:- 
+---------------------------
+the service definition is the contract between the service provider and the service consumer.
+The service definition defines what is the format of the request and response, XML or JSON?
+What is the structure of the request?
+What is the structure of the response?
+And where is the service available?
+That's the endpoint.Endpoint defines what URL the service is exposed at.
+How can this service consumer call this service which is exposed by the service provider?
+
+
+6.what is transport:-
+---------------------------
+
+Transport defines how a service is called
+is service exposed over internet?---so i'll be given a URL, and I'll call it. 
+or 
+is the service exposed over a queue? ---- two popular format HTTP and MQ
+Http is basically all the web and just like you type a URL in the browser,
+
+The other format is MQ.It's to use communication over a queue.The service requester would place a message in the queue.The service provider would be listening on the queue.And as soon as there's a request on the queue,it would take the request, do the processing of it,create the response, and put it back in the queue,and the service requester would get the response from the queue.The transport which is used is MQ.
+
+-It does not necessarily be WebSphere MQ.It can be any of the other MQs as well,but the fact is the communication happens over queue.
+which is exposed over the transport MQ.
+
+
+--Transport indicates whether the service is exposed over a queue or whether it's exposed over the web, that's the internet.
+
+
+

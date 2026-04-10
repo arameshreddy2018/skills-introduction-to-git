@@ -1,0 +1,227 @@
+Play
+97. Step 71 - Overview of Security with Basic Auth and JWT
+----------------------------------------------------------------------------
+
+if you want execute every Requestion first we need to pass userid and password
+so we'll discuss the fact that sending a userId and password with every request is not safe.if some body gets UseriD and password then they can do anything with it
+and that's where we create a temporary token called JWT --- Json web Token
+we will discuss between basic security and JWT and how JWT is more secure
+
+
+98. Step 72 - Setting up Spring Security
+-----------------------------------------------------------------
+
+---In pom.xml add spring boot starter security dependency 
+--Spring boot starter security is the spring boot starter for implementing security in web applications as well as rest services.
+					<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+-- after adding dependency please stop the server and restart the application . so that the chnages are picked up
+		
+--Now in browser when you enter url login page will present.
+--when you see that login page that looks like a form for that reason this form is called form based authentication.
+-- now enter the user name and password .
+-- username is default user
+-- password defalut pasword is acutally printed into your console.
+     username : user
+     password is : it will printed in console
+--So once you enter the user ID and password with form-based authentication, a session cookie is set.
+--So there's a session for you which is created on the server side, and a cookie is now registered in your browser, and that cookie is sent along with every request.
+--So you'd see that as long as I'm in the same browser and keep opening tabs, all the requests would continue succeeding.This is what is called form based authentication
+
+restclient:-
+------------------------
+resquest is :-gets
+Headers:- Origin ,http://localhost:4200
+--No, what I would want to do is I would want to send something called basic authentication header.for that i need to send basic authentication header
+-- 401 response means noT authorized
+--and I'm the one to choose the basic authentication approach.
+--Spring Security enables both basic and form-based authentication.
+
+-- Form-based authentication is based on a session which is created on the server and a cookie, which is in your browser.
+--So this cookie identifies the session on the browser and that would be used as the authentication mechanism.
+-- However a form based authentication needs us additional session which is created on the server side, so that's an overhead.
+--With the case of a basic authentication what we do is we keep sending something called a basic authorization header as part of the request.
+
+------------------------------------------------------------------------------------------------------------
+99. Step 73 - Configure standard userid and password
+--------------------------------------------------------------------------------------------------------------
+-we added Spring Security in and we saw that we were able to check for form authentication and basic authentication.
+--One of the problems that we had is the password which is being used is a generated password.
+--I would want to have a stable user ID and password that we would want to use across the application
+--In this step, let's configure a proper user ID and password.
+--easiest way to configure userId and password is in application.properties
+spring.security.user.name = in28minutes
+spring.security.user.name = dummy
+-----------------------------------------------------------------------------------------
+100. Step 74 - Enhancing Angular Welcome Data Service to use Basic Auth
+---------------------------------------------------------------------------------------
+welcome-data service.ts:-
+-------------------------------------
+      // Access to XMLHttpRequest at 'http://localhost:8080/hello-world-bean2/path-variable/in28minutes' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+    createBasicAuthenticationHttpHeader(){
+      let username='in28minutes';
+      let password='dummy'
+      let basicAuthHeaderString = 'Basic' + window.btoa(username + ':' +password);
+      return basicAuthHeaderString;
+    }
+	
+	
+	   executeHelloWorldBeanServiceWithPathVariable(name: any){
+      let  basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+     let headers = new HttpHeaders({
+      Authorization:basicAuthHeaderString})
+
+      return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world-bean2/path-variable/${name}`,
+        {headers});
+    //console.log("Execute Hello world Bean service from Data service.ts file");
+     
+     }
+	 
+-------------------------------------------------------------------------------------------
+102. Step 75 - Configure Spring Security to disable CSRF and enable OPTION Requests
+--------------------------------------------------------------------------------------------------------
+option request:-
+when we are firing a request from the front end,we are getting an error.We saw that an options request was being sent but the server was denying the request.
+2.n our rest API we have added in Spring Security and by default, Spring Security would protect all your resources.So even the options requests are protected.
+3. So we are able to fire things from the Talend API Tester,but from the front end there is a failure.
+Why is there a failure?
+-As we discussed earlier, Spring Security authenticates every request.
+
+The front end, when you're sending an authorization header first sends something called an options request,
+and that options request is being denied by Spring Security.
+--What we want to do now is to configure Spring Security to allow options request.For all URLs we would want to automatically
+allow options requests.
+
+How do we configure that?
+
+package com.in28minutes.rest.webservices.restfulwebservices.basic.auth;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class SpringSecurityConfigurationBasicAuth{
+    
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        //1: Response to preflight request doesn't pass access control check
+        //2: basic auth
+        return 
+                http
+                    .authorizeHttpRequests(
+                        auth -> 
+                            auth
+                            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                            .anyRequest().authenticated()
+                        )
+                    .httpBasic(Customizer.withDefaults())
+                    .sessionManagement(
+                        session -> session.sessionCreationPolicy
+                        (SessionCreationPolicy.STATELESS))
+                    .csrf().disable()
+                    .build();
+    }
+}
+------------------------------------------------------------------
+
+104. Step 76 - Creating Angular HttpInterceptor to add Basic Auth Header
+----------------------------------------------------------------------------
+
+in previous step we enabled the customized spring security configuration.for home page.
+Now, what we want to do is,we would want to do the same thing for all the other requests.
+2.in this stpe we will try and configure a HTTP interceptor that would enable us to add a specific header to every request.
+3.So if you make a HTTP request from this web application,the interceptor will intercept it,and add a specific header, authentication header on top of whatever is already there.
+4. we need to create a service for hTTPInterceptor
+ ng generate service service/http/HttpIntercepterBasicAuth
+------------------------------------------------------------------------------------------ 
+105. Course Update: Adding HttpInterceptor
+-----------------------------------------------------------------------------------------------------
+
+
+import { BrowserModule } from '@angular/platform-browser';
+
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+
+import { provideRouter } from '@angular/router';
+
+import { routes } from './app.routes';
+
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'; // IMPORT
+
+import { HttpIntercepterBasicAuthService } from './service/http/http-intercepter-basic-auth.service'; // IMPORT
+
+
+export const appConfig: ApplicationConfig = {
+
+providers: [importProvidersFrom(BrowserModule, FormsModule), provideRouter(routes),
+
+{ provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuthService, multi: true }, // ADD THIS
+
+provideHttpClient(withInterceptorsFromDi())]
+
+};
+
+------------------------------------------------------------------------------------------------------------------------------------- 
+ 106. Step 77 - Configure HttpInterceptor as Provider in App Module
+ ---------------------------------------------------------------------------------------------------------------------------------
+ 1.previous ste we worte HttpInterceptorsBasicAuthService
+ 2.in this step,let's configure it to be used in our module.
+ 3 in that module is app.module.ts
+ 4.In here you have to configure a provider for Http interceptor.So all that you need to do is create an object and provide a few attributes.
+ 
+ providers:[{provider:HTTP_INTERCEPTORS, useClass:HttpIntercepterBasicAuthService, multi:true}],
+ 
+ 
+ ------------------------------------------------------------------------------------------------------------
+ 107. Step 78 - Create Basic Authentication RESTful Service in Spring Boot
+ ------------------------------------------------------------------------------------------
+ --One of the things you would have already observed is the fact that our login page still uses hard coded authentication.
+ -creating service in backend whenever user is trying to log in we'll try to hit this service and if the service returns a validated response then that means the user is authenticated,otherwise the user is not really authenticated.
+ 
+ 
+ package com.in28minutes.rest.webservices.restful_web_services.basic.auth;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+public class BasicAuthenticationController {
+
+	/*
+	 * RequestMapping is Get Method URI-/hello-world method - "Helloworld"
+	 * 
+	 * //this method return string message
+	 * 
+	 */
+
+	@GetMapping(path = "/basicauth")
+	public AuthenticationBean helloworld() {
+
+		return new AuthenticationBean("you are authenticated");
+	}
+
+}
+--------------------------------------------------------------------------------------------------------------------
+108. Step 79 - Create Angular Basic Authentication Service
+--------------------------------------------------------------------------------------
+
+in this step we would want to use this service from the backend and call it in our login page
+
+--------------------------------------------------------------------------------------------------------------------------------
+110. Step 81 - Connect Login Page to Basic Authentication Service - Part 2
+
+---------------------------------------------------------------------------------------------
+Stop
+111. Step 82 - Refactoring Angular Basic Authentication Service

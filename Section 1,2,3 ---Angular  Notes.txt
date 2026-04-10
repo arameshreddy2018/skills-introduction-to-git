@@ -1,0 +1,1685 @@
+ 
+ 
+ for angular application we need two tools
+ 
+ 1.npm
+ 2.visual studio code
+ 3.java and eclipse
+ 
+ --npm and visual studio code will install first
+
+-- java and eclipse will install later on somng serve
+e point
+
+step 01:- installing Nodejs and NPM
+step02 - quick intoduction to NPM
+step 03 installing visual studio code
+
+
+step 01:- installing Nodejs and NPM-----
+------------------------------------------------------------------
+
+
+1.for npm install need to install node.js
+2. checking node version :- node -v
+note:- anything greater than version 10 is good
+3.checking npm version npm -v
+
+step02 - quick intoduction to NPM
+------------------------------------------------
+Npm means means node package manager
+1.npm is the package manager for java script
+2.home page of npm is https://www.npmjs.com
+3.npm is works similar to maven and gradle:- maven download the dependencies and download it from maven repository same way NPM helps us to do in the javaScript world we can define specific file and you'be able to download it
+
+npm init is used to create new project:- npm init
+if you want to install or update versions of any javascript or jquery we need to say :- npm install jquery 
+3. for example if we deleted node modules unexpectdly in this case we just need to do  :- npm install
+
+Note:- node js used to do package management.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+--------step 01----------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+step 01:-here we are discussing about high-level architecture of the application which we are going to build:-
+
+--going to build to-do management application
+we can :-
+-add,delete,update to-dos
+--we also have authentication and authorization features:- login and logout
+
+
+Before discussing high level architectute we need to discuss full stack web application
+------------------------------------------------------------------------------------------------------------------
+1. fullstack web application:-front application which is talking to a backend API or a web service.
+
+Angular application(Type script)------------------->Restful Api(Spring boot on java)------------------->Database
+
+Angular application(Type script):-
+---------------------------------------------------
+--in this course we are using Angular to build front end applications.
+--Angular is one of most popular framework to build front end API's.
+-- Angular has a variety of features like components, modules,forms,HTTP communication to talk with webservices.it makes easy to develop front end   applications
+--Angular uses a language called Type script.
+--Typescript is nothing but Modern javascript plus typing.
+
+
+Restfull Api :- 
+--------------------------------
+
+1. to build Restful Api or restfull webservices in the backend.we will be using the spring boot framework. we would be using Java as the language.
+2. Spring boot is the number one java framework to build restful APIs and microservices.
+
+3. we will create multiple restful services for authentication as well as to-do management. 
+4. as for as authentication is concerned,we will start with basic authentication and also discuss.about how to use JWTS or JSON web tokens for authentication.
+
+5 to build authetication we will be using Spring security framework
+
+use latest angular cli version 
+---------------------------------------------------------------------------------------------------------------------------------------
+-----------------step 03----------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+installing Angular CLi:- 
+1.Angular CLI is command Line interface for angular.
+2.Angular cli not only helps to create new angular applications, but it also helps you to generate a lot of code while we are developing the angular application.it also helps us to run our application locally,and also run our unit test,integration test,run our code quality checks, and things like that.
+3. installing angular cli is very easy first lanuch terminal up.
+4.before installing angular cli we need to check node version and npm version .
+5.if node and npm versions is not available we need to install first npm and node.
+6.6. if you want to install angularcli with particular version we need to use like this :- npm install -g @angular/cli@7.0.3 other wise just say like this --- npm install -g @angular/cli
+Note :- angular cli almost like a Maven plugin,and we are using npm to download
+
+Q) how to check angular CLI version?
+7. to check the version of angular cli is :- ng version
+
+----------------------------------------------------------------------------------------------------------------------------------------
+--------------------step 04----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
+creating and launching Angular Application with Angular CLI:-
+
+ng help:- get help on  Angualr client.
+ng version :- gives you what version of Angular cLi
+ng new :- used to create new workspace and an initial Angular app.when ever you want to create new angular project we need to use NG new.
+ng generate :-angular application builts using modules,components,services. inistial code for thsose modules and components can be generated by using the command NG genertae.
+ng lint :- to build your code to run the code  quality check.which is called lint.
+ng test:- to run unit test
+ng e2e :- to run end-to-end test
+ng serve :- as soon as i change code.change will be automatically picked up by the application.
+
+1.create project using :- ng new project-name 
+example:- ng new to-do
+
+2.after creating project we need to build and run application to start executing the command ng serve
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------step 05 visual studio code ----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+11.course update :- ng lint and ng e2e commands no longer available.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------step 06 Exploring Angular CLI commands - test,lint,e2e,serve,build ----------------------------------------------------------------------------------------------------------
+
+
+1. if run ng serve inside the angular application we will launch up the application.we will able to look at it in browser. 
+if you take file index.html
+ng lint:-
+---------
+  1.when you run this commonds it has any coding standards violations 
+     it will print no code violations others it throws coding standrards violation error.
+  2. checking your code for coding standards
+  3. all this rules defined in tslint.json file
+  
+ng build:- 
+--------------------
+  1.when you run ng build it will cretae few files main.js,polyfill.js,runtime.js,styles.js,vendor.js
+  2. when we see in IDE new folder will be presented there that is dist folder.
+  3. we can take that todo application inside dist folder put in any web server and you would be able to directly launch index.html and run entire application
+  
+  ng test:-
+-------------
+--ng  runs the unit test which are return for angular
+ -- unit test return in a framework :- jasmine
+ -- to run tests using in karma--karm.config.js
+ 
+  ng e2e:-
+-----------
+1. ng end to end test --we will lauch entire application and running in entire test around it .
+2.framework:-protector suse arounf selenium api
+----------------------------------------------------------------------------------------------------
+Following files are NOT created any more: todo/src/polyfills.ts, todo/src/test.ts, todo/src/browserslist, todo/src/karma.conf.js, todo/src/environments/environment.prod.ts, todo/src/environments/environment.ts, todo/src/app/app-routing.module.ts, todo/e2e/tsconfig.e2e.json, todo/e2e/src/app.e2e-spec.ts, todo/e2e/src/app.po.ts, todo/src/app/app.module.ts
+  
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------step 07 Exploring Angular CLI project structure ----------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+ -- in this sections we are going to discuss other folders which are present in our workspace
+ 
+-- when we opened source folder we would see something called 
+src folders:-
+-----------------------
+app folder :- what ever the components and modules are created as part of angular code will be present here.
+assets folder  :- the assets folder is where all the images go into,the content which needs to be rendered as it is ,like images.they all go into the assests folder.
+environemnts:- when we develop application we need to deploy that code into multiple enviroments(local,dev,QA,production,test) . All the configuration for each of these environments go into the environments folder.
+
+tsconfig.json:-
+------------------------------
+1. in angualr we are using typescript as a language
+ but browser will not understand typescript.browser will understand only javaacript. 
+ so we need to convert typescript to Javascript.
+ that is specified as part of your tsconfig.JSON.
+
+readme.md:-
+---------------
+which is kind of the documentation for this project.so if you have something to document about the project.you can put it in readme.md.
+
+Package.json:-
+-----------------------
+1.all angular ng commands which we were able to execute in the last step ng serve,ng build, ng test, ng e2e 
+2.and all these ng commnads need a lot of external framework and tools.
+3.all these external tools and frameworks are specified in the Package.json
+4.whatever modules you have defined in package.json are downloaded when you run NPM install.
+5.node package manager is the package manager we are using its very similar to Maven ,
+
+node_modules folders:-
+-----------------------------
+once you specifiy all the dependencies in package.json when we run NPM install, and these dependencies are downloaded to the node_modules folders. 
+2. the node_modules is  where all your packages thats basically your frameworks and also the tools which you'd need to build and run your project are download to.
+3. we node to tun NPM install explicitly
+4.whenever we cretae a new angular app using ng new,the NPm install command is automaticallly executed.
+
+gitignore:-
+--------------------
+the gitignore file contains what are the different folders which should not be committed to version control.so when you commit this project to version control all these folder would be ignored
+
+index.html and main.ts:-
+-------------------------------
+index.html and main.ts presented in inside the src folder.
+index.html and main.ts files which is presente in here are the two things which are loaded up when we launch the angular application.
+this are the responsible for bootstrapping the Angular application.which would be launched up by test.ts which would be included in index.html and thats how the application gets bootsrapped.
+
+ployfills.ts:-
+------------
+differet browers have different levels of supports for all the web standards. the same javascript code might not work in all the browsers,so pollyfills.ts would take care of these browsers incompatibilites and make sure that whatever code that we write would be compatible with all the browsers.
+
+the sytles.css:-
+-------------------
+ where you specify the golbal applications style,so what ever styles and css you'd wnat to use across the application you'd put inside the style.css.
+ 
+test.ts:-
+-----------
+is basically starting point running unit test
+
+----------------------------------------------------------------------------------------------------------------------------------------
+---step 08 Introduction to Angular Components-Basics --------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------
+
+
+1.lets introduce one of the most important concepts in angular which is called components.
+2.let consider we would wnat to develop a page like this. 
+   2.1:-  menu at the top 
+   2.2 :- list of to-do's 
+   2.3 :- footer 
+   
+ 3. in angualr, the way we would devlop this is as a set of components ,so the entire page would divided into a number of components,so we would have a 
+ 3.1 menu components,:-this menu componet is responsible for showing the list of menu items which is highlighted,whihc is not higligted the styling for that,and handling the click of the events.
+ 3.2 we would have a list of to-dos component,
+ 3.3 we would have footer components, 
+ 
+ 4.each of this  components will responsible for displaying.
+ 4.1 the view that basically Html,
+ 4.2 the styling css that basically css
+ 4.3 as well as code to react to the user actions.
+ when user clicks update,when user clicks delete,when user clicks add to-do what need to be done all that is handled by the view logic.which is present in that specific component.
+ 
+ when ever we build angular applications,we first start thinking about the components which should be created?
+ 
+ 
+ ----------------------------------
+ what is component?
+ 
+ A component is associated with 
+ 1.the template,which is basically the HTML.how should it be shown ? the template file having a extension of .component.html
+ 2.the styling,which is basically the CSS,how should be elements be styled?.the css file having a extension .component.css
+ 3.and the code, how should you really respond to user actions?--this is written in typescript. and the code file has component.ts extension.ts stands for typescript.
+ 
+ --in workspace one componnet which is already present in here it called the app component, and you'd see that the exactly match to what we have seen earlier.
+ so we have component.html for that app.component.html
+ for styling .component.css for that app.componet.css
+ code which is present here .componnet.ts that is app.component.ts
+ 
+4.in angular you would indicate that something is a component by using something called a decorator.the decorator is very similar to annotations in java.
+we use a decorator @componentt to indicate that the app component is a compnent and we  have afew attributes which are specified as part of the componnet decorator.
+
+
+
+ ex:- 
+ imports {component} from '@angular/core';
+ @component({
+   selector:'app-root',
+   templateUrl:'./app.componnet.html',
+   styleUrls:['./app.component.css']
+   })
+   exports class appcomponent{
+   title='todo';
+   message='welcome to in28Minutes'
+   }
+   
+   
+--- @component({
+   selector:'app-root',
+   templateUrl:'./app.componnet.html',
+   styleUrls:['./app.component.css']
+   })
+   
+ --  selector:- selector is basically the tag name for this component.so if i want to make use of this component,what tag name should i use that's the selector.
+    if you look at index.html which is where this particular component is used,it says <app-root>
+	
+-- template URL or template:- that is [.app.component.html] where is the location of html template?for this specific component,we said its in the app.component.html
+-- styleUrls:- where is the styling for this specfic componnet? app.component.css is where typically the styling,which is specific to this specific component is present
+
+  exports class appcomponent{
+   title='todo';
+   message='welcome to in28Minutes'
+   }
+   
+-- all angular applications built up on number of components.Each componnet has the HTMl or the template,
+    the styling or the CSS,and the code to handle the view actions.
+	this code is written in Typescript.
+
+-------------------------------------------------------------------------------------------------------------------------------------	
+Step09 -Introduction to Angular components-Playing with App component----------------------------------------------------------------------------------------------------------------------------------------------	
+	
+1. starting with  app.component.ts
+-------------------------------------
+ 1.first directly include the entire template in here instead of actually putting the URL to where the HTML is present.you can also include exact template
+
+  @component({
+   selector:'app-root',
+   template:'<h1> {{title}}<h1>',
+   styleUrls:['./app.component.css']
+   })  
+    
+2. if you got to template url we'll do here is create an additional div.
+
+--create one div in app.component.html
+
+<div> component content </div>
+
+--another div in index.html :-
+<div> Index html content </div>
+
+
+-- app.component.css
+div{
+
+	background-color:beige
+	
+	}
+	
+	
+	
+	Course Update: Please use --skip-import --standalone
+	--------------------------------------------------------------------------
+	
+	in the next step we are using	ng generate command.
+	
+	1.if it is not standalone application (not using ng modules)
+
+     ng generate component welcome --skip-import --standalone
+   
+ 
+-------------------------------------------------------------------------------------------------------------------------------------
+--Step10 - Generating Welcome component with ng generate----------------------------------------------------------------------------------------------------------------------------------------------	
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+  
+  
+---we want to open one window and run ng serve running
+--- another command window will use to run other ng commands
+Q) what is ng command to generate new command?
+A)to generate a new component --ng generate component (or) n g c
+example:- ng generate component welcome
+1.once you run ng generate it will cretae four files and one is updated
+    create src/app/welcome/welcome.component.css
+	create src/app/welcome/welcome.component.html
+	create src/app/welcome/welcome.component.spec.ts
+	create src/app/welcome/welcome.component.ts
+	update src/app/app.module.ts
+	
+2. this newly created welcome component is added in app.module.ts file under @NgModule declarations sections.
+
+
+@NgModule({
+  declarations: [  
+    AppComponent,
+    WelcomeComponent
+  ],
+3. ngmodule stands for angular module
+4.every component that we create as part of an Angular application should be associated with a angular module.
+
+  
+5. declarations: [  :- declarations indicates what are the different things,different components that are part of this particular ng module.
+6. when you generate new component its automatically generated as part of this particular declarations array.
+--welcome component is created under app folder
+
+--ngOnInit this method would run when this component is initialized. 
+
+-- if i would show or use a particular component we need to do include that particular component tag in app.component.html 
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------Step 11 - Language variations with an Example- Java,Java script and Type script---------------------------------------------------------------------------------------------------------------------------------------------	
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+  
+1.understanding  the syntax of typeScript class 
+2.look at syntax and will identify which parts are coming from Javascript,
+3.which parts added in by Typescript and how do compare against your Java code
+
+
+4.in java we would write classes and group them into packages.if your not package declaration it is part of defalut package 
+5. in javascript we write classes all the classes in a single file are considered to be part of a module. we can also create anumber of classes in here combined is called one module.
+A module in javascript represents one file,which contains class and function  definitions
+-- one file per module and one module per file.
+6. if i want to use one component from another component we need to use import statement
+
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-welcome',
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.css']
+})
+export class WelcomeComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+7. defenition of a classes:-
+
+--class classname making class implemente interface implements OnInit
+--when if you want to use this class outside this module or outside this particular file in javacript we need to use Export.
+
+--if you want to use a class from outside the module,you'd have to import it
+--if you would want to expose a class out side the boundary of this module,then you need to export it
+
+
+methods:-
+------------------
+
+1.we define a constructor by using a keyword called constructor.
+2. in java script we no need return type when we declare method .type script makes it safer 
+
+ngOnInit(){ }---------------------java script
+void ngOnInit(){          } ------------------ Java
+ngOnInit():void {          } -------------------Typescript
+
+
+member variables:-
+-----------------------
+
+message =' some welcome message'----------------------javaScript
+
+String message = "some welcome message";------------------java
+
+message:string = ' some welcome message'----------------------typeScript
+
+
+1. In java we use packages to organize classes,
+2.where as in javascript,all the classes which is present in a single file,and all the other functions which are present in here are part of a module,
+3. if you'd want to use a class from external module,you need to import it in.
+4.of you would wnat to use this class outside this specific module ,you need to export it.
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+---------Step 12 - Generating and Setting up Login Component-------------------------------------------------------------------------------------------------------------------------------	---------------------------------------------------------------------------------------------------------------------------------------
+
+
+creating a login page:-
+
+1. A login page contains Username and password for that we are going to create Login component to contain all the code of that
+Q) how do you create an component?
+A) by using ng client ng generate component login
+-- now Login component will create four files and updated on one file that is app.module.ts
+Create src/app/login/login.component.css---------------------------------this would contain styling
+Create src/app/login/login.component.html--------------------------------this would contain view
+Create src/app/login/login.component.spec.ts-----------------------------this file typicaly contains the unit test file.
+Create src/app/login/login.componnet.ts-----------------------------this would contain view logic.
+Update src/app/app.module.ts----login componnet and newly created components updated in this app.module.ts file.
+
+-- we need you include (login component tag this will present in login.component.ts file ) in inside app.component.html because this root component.
+--if i want to show this newly created component content in browers i want include this component tag in inside the app.component.html .
+-- now we start focus on login component  ng generate component login
+-- after generating login component output is like below
+Microsoft Windows [Version 10.0.22621.4890]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\pAryabhumi01\Documents\Personal\Angular\frontend\todo>ng generate component login
+CREATE src/app/login/login.component.html (20 bytes)
+CREATE src/app/login/login.component.spec.ts (592 bytes)
+CREATE src/app/login/login.component.ts (271 bytes)
+CREATE src/app/login/login.component.css (0 bytes)
+UPDATE src/app/app.module.ts (557 bytes)
+
+C:\Users\pAryabhumi01\Documents\Personal\Angular\frontend\todo>
+
+--now start focusing on login component
+
+--lets create simple Loginpage 
+  User name : <input type ="text" name="username">
+  Password:<input type="password"  name="password">
+  
+  now wecreated basic login page with username and password
+  
+--------------------------------------------------------------------------------------------------------------------------------------------------------Step 13 - Understanding Event Binding - Adding click event on login page ---------------------------------------------------------------------------------------------------------------------------------------------	
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+
+1.we are adding a login button in Login screen by using button tag
+2. we need to create external java script file external one, we create a method in it
+onclick
+
+3.
+
+secnario 1:-
+
+ now we are using databinding concept.now here we are adding/hardcode defalut value in login.component.ts
+username='in28minutes'
+password=''
+
+  User name : <input type ="text" name="username" value="{{username}}">
+  Password:<input type="password"  name="password" value="{{password}}">
+  
+  --here we are taking data from component and tieing it to the template
+  
+  
+scenario 2:- 
+
+when login buton is clicked i would want to print the username the way we are doing in angular something called event binding
+--so here we are adding click event for login button
+sy:-<button (event)=whatShouldyouDo()>Login</button>
+ex:-<button (click)=handleLogin()>Login</button>
+
+--this component would handle all the view logic  so all the methods which are related to view would be coded in login.component.ts
+ so all that we need to do is define a method called handlelogin in inside login.component.ts
+ 
+ handleLogin(){
+ console.log(username);
+ 
+ }
+ 
+ 
+ Q) how do i take data from the screen element from the view element and populate it into the component data?
+ A) solution is two-way data binding in login.component.html
+   2. we need to import formsModule in the @component section to make use of two-way data binding
+   
+ Q)   WHAT SHOULD YOU DO?
+To use input components and the ngModel feature for two-way data binding in login.component.html, import FormsModule in the @Component section.
+
+
+
+import { Component, OnInit } from '@angular/core';
+
+import { FormsModule } from '@angular/forms'; // Imported
+
+
+
+@Component({
+
+selector: 'app-login',
+
+standalone: true,
+
+imports: [
+
+FormsModule, // Added this
+
+],
+
+templateUrl: './login.component.html',
+
+styleUrl: './login.component.css'
+})
+
+export class LoginComponent implements OnInit {
+
+
+
+}
+
+
+
+ ---------------------------------------------------------------------------------------------------------------------------------------
+-------------Step 14 - Using ng Model with 2 way Databinding in Login page---------------------------------------------------------------------------------------------------------------------------------------------	
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+
+
+1. upto now we are lookin into two types of bindings
+ 1 interpolation
+ 2. event binding
+ 3. Mix of both of interpolation and event binding this is called banana in a box approach.
+ syntax of this bannana in a box approach :-[()]
+ there is specific angular feature we need to use to enable this is called ngModel.
+
+  User name : <input type ="text" name="username" [(ngModel)}="username">
+  Password:<input type="password"  name="password" value="{{password}}" [()]>
+  
+  
+ 1. we are trying to make feature called ngModel( this is a class from another module,i am trying to make use of it here)
+ 2.import ngmodel feature in app.module.ts that is FormsModule and its defined in @angular/forms
+  FormsModule
+  import {FormsModule } from @angular/forms
+3.. this data something called two-directional binding.and also called two-way binding.
+
+we are able to take the data from view logic of the LoginComponent,and tie it down to a template,to a HTML
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------- step 15 --Quick review of Data Binding Approaches----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. we want to use two-way binding for password field.
+2. we can replace [(ngModel)] in value place on password field.
+
+3.in angular there are three types of databindings:-
+-----------------------------------------------------
+1.interpolation:-
+---------------------------------
+  user name :{{username}} --it takes data from component property and showing it on the view--- where we tie a component property to a view element.
+  
+2. event binding :-
+------------------------------------
+    Event binding helps us to bind view event to a component event method.--where we tie up a user event, a click of a button,to a event which is defined inside the component.this is called a component event. 
+	
+3.two-way data binding :-
+------------------------
+
+     the two-way data binding implemented by using ngModel.this make sure that whatever value which is present,for the component property,is tied to the view element and what ever data which is entered in the view element is automatically tied back to component property as well.
+ 
+     example :- [()]   ------[(ngModel)]--one of the interested thing is this ngModel over here is called a angular directive
+   Angualr directive adding additonally adding on top of the typical HTML
+   
+   
+   -------------------------------------------------------------------------------------------------------------------------------------
+-------------------step 16 --Quick review of Data Binding Approaches----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ngIf directive :-
+----------------
+import NgIf:-
+         Example :- import { NgIf} from '@angular/common'; //added
+		 imports :[NgIf]
+		 
+		 
+-- introducing some validations around username and the password.
+errorMessage='Invalid Credentials'
+invalidlogin = false
+
+ handleLogin(){
+ if (this.username=="in28minutes" && this.password==='dummy'){
+ this.invalidLogin=false
+ }else{
+ this.invalidLogin = true
+ }
+ }
+ app.componnet.html
+ 
+ <small &ngIf=invalidLogin>{{errorMessage}}</small>
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  course update : use app.routes.ts file instead of app.routing.module.ts----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+o add Routing, we use app.routes.ts file instead of app-routing.module.ts.
+
+
+
+Here is the updated code for app.routes.ts
+
+
+
+import { TodoComponent } from './todo/todo.component';
+
+import { RouteGuardService } from './service/route-guard.service';
+
+import { LogoutComponent } from './logout/logout.component';
+
+import { ListTodosComponent } from './list-todos/list-todos.component';
+
+import { WelcomeComponent } from './welcome/welcome.component';
+
+import { Routes } from '@angular/router';
+
+import { LoginComponent } from './login/login.component';
+
+import { ErrorComponent } from './error/error.component';
+
+
+
+// welcome
+
+export const routes: Routes = [
+
+{ path: '', component: LoginComponent },//canActivate, RouteGuardService
+
+{ path: 'login', component: LoginComponent },
+
+{ path: 'welcome/:name', component: WelcomeComponent},
+
+
+
+{ path: '**', component: ErrorComponent }
+
+];
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------- Step 17 - Implementing Routes for Login, welcome and Error components----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Implementing routing for a component:-
+
+basics of routing and try and implementing a little bit of routing :-
+-------------------------
+1.app-routing.module.ts file  this the module which will handle all the routing.
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [--------------------------------------------------here we  can define all the routes which we want to use in this specific application.
+
+  {path:'login', component: LoginComponent} ,-------for Login component we would want to create new route by creating object in here
+  { path: 'welcome', componnet:welcomeComponent}
+       
+
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+2. to enable route we need to use <routing-outlet> tag in HTMl file
+
+3. App routing module is responsible for initialization of the routes.we need to tag called ,"router-outlet."
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Step 18 - Implementing Routing form Login to welcome component ----------------------------------------------------- 
+
+
+if i enter correct username and password and hit login it should go welcome page how can i do this?
+A) in this case i would redirect to welcome page so i need instance of the router.
+I would want to use router which is currently defined by Angular is Dependency Injection befor this we used Angular.giveMeRouter
+--The concept of dependency injection is basically that,if i need something,I should declare it as a dependency and angular would make sure that the dependency would be given to me.
+--in Angular dependency Injection is a build in feature so we don't really need to add any libraries.
+--one component make use of another component forexample, the router in here,The router is called a dependency.router is dependency of login component.if i want to get this dependency i want to declare it in construtor argument
+ create the variable of type route 
+ 
+ login.component.ts
+    constructor(router:Router){
+	}
+	
+-- In type script whenever you pass in a parameter to a constructor,that parameter would be available as a member variable.
+-- if you don't want it to be used outside this specific class,so we add private access modifier.
+
+how can we redirect it?
+A) this.router.navigate(['welcome'])
+
+about question we are redirecting the welcome page but not we are not passing in the parameter name.
+--so how can we pass parameter name.
+A)this.router.navigate(['welcome',this.username])
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------Step 19 - Adding Route parameter for Welcome component ------------------------------------------------------------------- 
+------------------------------------------------------------------------------------------------------------------------------------------------------
+adding parameters
+--routes can accept parameters-----------------so i can say localhost:4200/welcome/in28minutes------------here in28minutes value for the parameter
+
+-- we add parameter name in app-routing.module.ts file in 
+
+const routes: Routes = [
+  {path:'', component: LoginComponent},
+
+  { path: 'welcome/:name', component:WelcomeComponent},
+  
+];
+
+---to accept that route parameter in angualr we need to inject  dependency in welcome.component.ts
+    //Activatedroute
+  constructor(private route:ActivatedRoute) { }
+  
+Q) how can i get this route parameter name?
+A)    this.route.snapshot.params['name']
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------Add imports in ListTodosComponent-----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+import { NgIf, NgFor, UpperCasePipe, DatePipe } from '@angular/common'; // Added
+    imports: [NgIf, NgFor, UpperCasePipe, DatePipe] // Added
+	import { Component, OnInit } from '@angular/core';
+ 
+import { NgIf, NgFor, UpperCasePipe, DatePipe } from '@angular/common'; // Added
+ 
+@Component({
+    selector: 'app-list-todos',
+    templateUrl: './list-todos.component.html',
+    styleUrls: ['./list-todos.component.css'],
+    standalone: true, // Generated - Change
+    imports: [NgIf, NgFor, UpperCasePipe, DatePipe] // Added
+    
+})
+export class ListTodosComponent implements OnInit {
+ 
+  constructor() { }
+ 
+  ngOnInit() {
+  }
+ 
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------step 20 Add imports in ListTodosComponent----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. started creating List todos component.
+2. creating list todos component -----------------by saying ng generate component listTodos---------------------now here four files created and one file us updated
+3. as soon as creating component we need to add route in app-rouitng.modules.ts--------------------------------{path:'todos', component:ListTodosComponent}
+4.order of the routes is very important
+
+5.lets open up list component.html
+  <table border="1">
+   <caption> My Todo's<caption>
+   <thead>
+   <tr>
+   <th> id </th>
+   <th> description </th>
+   </tr>
+   <thead>
+   <tbody>
+   <tr> 
+   <td> {{todo.id}}</td>
+   <td> {{todo.description}} </td>
+   </tr>
+ </tbody>
+ </table>
+ 
+ if have to use list of todos 
+ 
+   
+   
+   
+  
+  
+  </table>
+
+
+
+6.list-todos.component.ts
+   Q) java script how we create objects?
+   A) todo ={
+       id:1,
+	   description : 'Learn to Dance'
+	    }
+		
+		this we can display as part of the to-dos component
+		
+		
+7. now we would want to create a list of to-dos
+  Q)how do we create list of to-dos?
+  A)list of to-dos we created as an array
+    todos = [
+	{id : 1,description : 'Learn to Dance'},
+ 	{id : 2,description : 'Become to Expert at Angualar'},
+	 {id : 3,description : 'visit India'},
+	 ]
+	 
+  Q)how do we map this list todos to the html?
+  A)they by using a ng directive. we would want to loop around all the to-dos.so we need to-do ngfor
+  
+  
+
+  <table border="1">
+   <caption> My Todo's<caption>
+   <thead>
+   <tr>
+   <th> id </th>
+   <th> description </th>
+   </tr>
+   <thead>
+   <tbody>
+   <tr *ngFor= let todo of todos"> 
+   <td> {{todo.id}}</td>
+   <td> {{todo.description}} </td>
+   </tr>
+ </tbody>
+ </table>
+ 
+ 
+ -- in java for loop we declared like this
+    for (Todo todo:todos)--java
+ --ngFor= let todo of todos .here ngFor F should be capital(case-sensitive,capital "F")
+ --importing thing is here "of" the keyword 
+ --"let" and "of" are key words
+ -----------------------------------------------------------------------------------------------------------------------------------------------------Standalone Update: Add Imports in WelcomeComponent------------------------------------------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+Please add the imports after creating the WelcomeComponent in the next step:
+
+
+
+import { NgIf } from '@angular/common'; // Added
+import { ActivatedRoute, RouterLink } from '@angular/router'; // Added RouterLink
+imports: [RouterLink, NgIf] // Added
+
+
+Complete code:
+
+import { ActivatedRoute, RouterLink } from '@angular/router'; // Added RouterLink
+import { Component } from '@angular/core';
+import { NgIf } from '@angular/common'; // Added
+ 
+@Component({
+  selector: 'app-welcome',
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.css'],
+  standalone: true, // Generated - Change
+  imports: [RouterLink, NgIf] // Added
+})
+export class WelcomeComponent implements OnInit {
+   constructor() { }
+   
+   ngOnInit() {
+   }
+}
+
+ ---------------------------------------------------------------------------------------------------------------------------------------
+ -------------step 21-Create a Link to Todos in welcome Component-------------------------------------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+---creating a way to route from the welcome page at the todo page.
+--creating a simple route between welcome page and to-dos page
+--in Welcome.component.html page 
+
+<div>
+    welcome {{name}}
+    
+    welcome to our awesome App.<br>
+    </div>
+    
+    <div>
+    
+    you can manage your todos <a routerLink="/todos">here</a>
+    </div>
+
+
+here we are adding  router link tag to navigate from welcome page to to-do's page
+
+----------------------------------------------------------------------------------------------------------------------------------------
+ -------------------------------------------------DatePipe -------------------------------------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+@Component({
+
+selector: 'app-list-todos',
+
+standalone: true,
+
+imports: [
+
+NgFor,
+
+DatePipe, // Added DatePipe
+
+],
+
+templateUrl: './list-todos.component.html',
+
+styleUrl: './list-todos.component.css'
+
+})
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ------------------------------------------------------------Step 22-Best Practice - Create a Todo Class -------------------------------------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+lets create a class called to-do.
+--in jvacript module each typescript file is a javascript module
+
+-- in this javascript class we can create n number of classes
+--lets create one more class
+
+export class Todo{
+
+  //each of this constructor arguments becames a member.when ever we create objects of this to-do's class
+  constructor(
+    public id:number,
+    public description:string,
+    public done:boolean,
+    public targetdate:Date,
+  ){
+
+  }
+  }
+  
+  --creating object for above todo class
+    todos = [
+    new Todo(1,'Learn to Dance',false, new Date()),  
+    new Todo(2, 'Become an Expert at Angular',false,new Date()),
+     new Todo(3,'visit India',false,new Date()),
+     ]
+	 
+	 
+	 
+	 
+	   <table border="1">
+
+
+  <caption>My Todo'</caption>
+  <thead>
+    <tr>
+    <th> Description </th>
+    <th> Target date </th>
+    <th> is Completed?</th>
+
+    </tr>
+ </thead>
+ <tbody>
+    <!--for (Todo todo: todos)}-->
+    <tr *ngFor="let todo of todos">
+<td>{{todo.description}}</td>
+<td> {{todo.targetdate|date | uppercase}}</td> <!-- this feild formitted by date--> <--pipe is the way we convert one value to another value -->
+<td>{{todo.done}}</td>
+
+
+    </tr>
+ </tbody>
+ 
+ 
+ -- in Angular pipes( | ) are used to convert afield in one format to another format. you would want some conversion with field we would use pipe
+
+</table>
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ ------Step 23 - Quick introduction to Angular Modules---------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------
+ 
+
+-- up to now we created number of components  welcome,login component,error components and list-todos component
+
+-- when ever we created a component using ng genertae component each time .the component was getting added into a NG Module, which was app module
+--this app module as  anannotation @ngModule on it which stands for angular module
+-- anything starts with Ng is angular modular
+
+Q)what is angualr module and how are angualr modules different from Java script modules?
+A)
+what is angualr module?
+
+Q)when ever you think about angular application they are built using a number of angular modules.
+--some of the Angular module like 
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+
+All these are built in angular modules inside the angular framework.
+
+-- when ever you want to use any of the angular features or any built in feature we needed to import that specific angular module.for it 
+
+Summary:-
+------------------------
+
+--all the components that we created until now are associated with this angular module called app module.when ever we want to use some other feature from angular, we needed to import the specific module.
+--when we think about angular applications we should think about them as a group of angular modules.
+--each component and each directives that you create as part of the angular application are always associated with a angualr module.
+
+if you look at syintax of angular module:
+---------------------------------------
+
+ --it starts with an NG module decorator.
+ 
+-- declaration is says that this five components are part of this specific module.
+
+@NgModule is first attribute:-
+---------------------------
+@NgModule({
+  declarations: [
+    AppComponent,
+    WelcomeComponent,
+    LoginComponent,
+    ErrorComponent,
+    ListTodosComponent
+  ],
+  
+--if some other application wants to use this particular component or they want to reuse any of the component they have to import this app module.
+
+
+imports is the second attribute:-
+--------------------------------------------
+
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
+  ],
+  
+1.imports is nothing but in the components or directives of this specific module.
+2. components in the app module needs all these modules to work. so we said we need the app-routing module, we need the browser module, we need the forms module
+
+providers thrid attributes:-
+----------------------------------
+  providers: [],
+  
+we will talk about the providers later when we talk more about dependency injection.
+
+bootstarp is the fourth attribute:- 
+-------------------------------------
+ bootstrap: [AppComponent]
+ 
+when this module is loaded,which component should be loaded as well those are called the boot strap components
+
+
+1)Angular Module is a group components or directives which are dedicated for a a specific purpose
+2) Angular module is the fundamental block of the use in an Angular application.
+3)if you want to reuse an component we need to import the corresponding Angular module.
+
+Q) how is the Angular module different from a javaScript module?
+A)
+Angular module:-
+--------------------------
+   1. angular modules has the annotation  @NgModule and it is used to group  angular components or  angular building blocks.
+
+   2.these angular component might be defined in a separate file as well.
+
+
+JavaScript:-
+----------------------
+   1.. A javascript module is any file that means any of these module.ts files ,compnonent.ts files 
+   for example:- upto now we created alot of component.ts files until now 
+   3. all these components.ts files like login.ts, welcome.component.ts ,error.ts files each of these files is a module. 
+   4. you can create any number of classes and functions in that specific module.
+   5. java script module is used to group  different elements which are present in a single file,
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+ --------Step 24 - understanding bootstrapping of Angular App with Root Module and component------------------------------------------------------------------------------------------------------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+
+in here we can discuss 
+
+Q)what is happening when you load a page? How is specific component getting rendered?
+A)now we are discussing about bootstrapping of an angular application.
+  In Bootstrapping of an angular application  there are two things which play a crucial role,
+  that is root module and root component.
+  
+  lets understanding what is root module and root component?
+  A)  if you right click viewpage source on this page we are able to see index.html page which is loading and <app-root></app-root> is present in here
+    1. first index.html and parellel to that there is a file called main.ts 
+	2.if you look at with main.ts we are loading up a AppModule ------------
+	platformBrowserDynamic().bootstrapModule(AppModule)  
+	.catch(err => console.error(err));
+	
+	3. we are importing Appmodule (--import { AppModule } from './app/app.module';---) and we are bootstrapping it (--platformBrowserDynamic().bootstrapModule(AppModule))
+	4. which ever the one first bootstrapped in an angular application is called the root module.that is the reason we called AppModule is the root module.
+	5.once this root Module gets initialized
+	6.along with this rootModule(App module) we are initializing the app component.we are defining that it's a app component there fore appcomponnet also bootsrapped it gets ready to be loaded and what we are doing index.html is loading up the app component
+	7. if you see that app-component that tha tag associated with its app-root and that's waht present in this index.html
+	
+	
+	1. App-module is getting initialized----main.ts file(platformBrowserDynamic().bootstrapModule(AppModule))
+	2. one Appmodule initialized, the app component gets initialized and 
+	3. in the index.html the app root(<app-root></app-root> ) that is basically the tag of the app component is getting initialized.
+	4. once we gothere,we get the app.component.html.what ever is in inside app.component.html becomes the view source. what ever we are seeing is in app.component.html becames the main part of the screen/redering on the screen.
+	
+	
+	
+	Summary:-
+	--------------------------
+	
+	1.appModule is the route module which gets loaded first
+	2.AppModule which would load the app component when the app component is loaded 
+	3.in the index.html because of this app-root. app.component.html what is rendered we see </router-outlet> because of the </router-outlet> and the fact that in the app-routing.module.ts we said the default path matches to login component.inside the router the login component is first initialized what why when we enter localhose:4200 we will the LoginComponent first
+	
+	
+
+  
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ------------------------------------------- Step 25 - Quick Review - Angular Modules and components ------------------------------------------------------------------------------------------------------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+	
+   1. Angular Applications built using a number of Angular modules.
+   2.There will be a custom built Angular modules which are built as part of your application as well as inbuilt Angular modules, which you make use of.
+   3.Whenever you want to reuse a component you need to import this specific Angular module.
+   4.Whenever you create a angular component.you need to associate it with a Angular module.So Angular application is built up of Angular modules
+   5.which in turn is nothing but a set of Angular components or directives or building blocks of Angular.
+   6.Template :-
+   ---------------------------
+   Each component has a template,which is basically a HTML file where typical HTML is combined with a few Angular specific things,like Angular binding syntax, right?We looked at interpolation, we looked at two-way binding.      We looked at event binding as well.
+
+   7.Style:
+   -----------
+   The style is CSS part of it,
+   
+   8.code :-
+   ------------
+   the code is basically the place where we put all the data in as well as how should we react to the view actions.So we'll put methods which help us react to the view actions.
+
+   9.The different data binding features in Angular help us to bind the template to the code so we are able to bind the view, the HTML, to specific data and specific events which are described in the code.
+
+   10.Routing :-
+   --------------------
+   We also looked at routing which helps us navigate from one component to another.
+
+   11.We also made use of a number of NG directives,Angular directives, Ngfor, we made use of NGif.We also made use of the pipes.
+   
+  going forward we need to do below steps:-
+----------------------------------------------------------
+
+   While we learned a lot of things in the last few steps there are a lot of things remaining as well.One of the things is look at the design of the pages right now.they don't really look appealing.
+
+   13.We would want to use something like Bootstrap.We would want to create a few proper menus.You'd want have a proper footer.The other important thing is there is no security for the menus at all.
+
+   14.If I just type in localhost:4200/todos, you'd be able to directly look at the list of todos. You don't really have to log in to be able to see your todos.
+
+   15.I don't need to really do this and go and click this to go to todos.Even without logging in,if I go to a new page and type in todos, I'll be able to still see the todos.That's not highly secure.
+
+   16.The other thing is hard coded logic.Right now, the to-do list is hard coded,it's not really coming from a REST API or something of that kind.
+
+   17.The same is the case with authentication,we have a hard coded logic, which is presenting there.And there is a lot of to-do functionality which is remaining to create, right?
+
+   18.We need to be able to edit, view, and delete todos and add todos, and we have not even started creating the basics of REST APIs with Spring Boot and Spring Security.There are a lot of work ahead of us.And in the future steps,
+
+   19.let's focus on getting these done one by one.I'm really excited to go on this journey of building a full stack application with you and I'll see you in the next step.
+ 
+---------------------------------------
+
+
+ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ------- Step 26 - Overview of Next Few steps-Bootstrap , Menu,footer, and Refactoring------------------------------------------------------------------------------------------------------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--In the previous few steps the focus was on getting things working.We were able to quickly get started with creating a simple login page, a welcome page,and My Todos page.
+
+--The focus of the next few steps is on building upon what we already have and giving it a nice look and feel.
+
+--Have a nice navigation menu and footer.Use bootstrap to style everything out.Have proper security systems so that not everybody would be able to get into to-dos without logging in,and to refactor some of the stuff that we did
+into separate service components.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-----Course Updates: Creating Menu and Footer Components ---------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
+
+I'm delighted to have the privilege of being your instructor.
+
+👉 DO YOU KNOW?
+In the next step, we will create Menu and Footer components.
+
+👉 WHAT SHOULD YOU DO?
+Remember to use --skip-import --standalone flags while creating the components
+
+ng generate component menu --skip-import --standalone
+
+ng generate component footer --skip-import --standalone
+
+
+
+Remember to add both MenuComponent and FooterComponent in app.component.ts:
+
+
+
+import { Component } from '@angular/core';
+
+import { RouterOutlet } from '@angular/router';
+
+import { MenuComponent } from './menu/menu.component'; // Added Menu
+
+import { FooterComponent } from './footer/footer.component'; // Added Footer
+
+
+
+@Component({
+
+selector: 'app-root',
+
+standalone: true,
+
+imports: [
+
+RouterOutlet,
+
+AppComponent,
+
+MenuComponent, // Added Menu
+
+FooterComponent, // Added Footer
+
+],
+
+templateUrl: './app.component.html',
+
+styleUrl: './app.component.css'
+
+})
+
+export class AppComponent {
+
+title = 'todo';
+
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Step 27 - Adding Bootstrap framework and Creating Components for Menu and footer------------------------------------------------------------------------------------------------------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Started working on Bootstrap
+-------------------------------------------
+1. BootStrap is one of the most popular CSS frameworks.it helps us to design our pages in a very attractive way.
+2. we will use a Bootstrap from a content delivery Network we just need to search for a 
+    2.1 UNPKG delivery networks
+	2.2 and then select bootstrap version which is greater than 4.1.0 
+	  in css :- 
+	  -----------
+	  --taking bootstarp.min.css :- https://app.unpkg.com/bootstrap@4.1.0/files/dist/css/bootstrap.min.css i will take this link and put it in style.css file.the style.css file is the root of the inside the source directory.this style.css file applicable to the entire angular application.
+	  -- the way you import this is by saying @import,basically this is css syntax and you can specify the URL.--https://app.unpkg.com/bootstrap@4.1.0/files/dist/css/bootstrap.min.css
+	  
+	  
+add a menu and footer as well:-
+-----------------------------------------------
+	           
+Create a couple of components for Menu and footer.
+
+creating menu component  :- ng generate component menu
+
+creating footer component :- ng generate component footer
+
+--------now every top of page we need header and footer How can we do that?
+A) so i can go to the root component that is  app-componnet.html
+    in menu.component.html -------------  TOP MENU ELEMENTs <Br><BR>
+	 footer.componnet.html -------------  <BR><BR> Footer
+	 
+	 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ------- Step 28 - Using Bootstrap framework to Create a Menu with  navigation Links ------------------------------------------------------------------------------------------------------------------------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ --- lets format few of the elements on the screen so they look much better 
+ -- lets start with top menu
+ 
+ menu.component.html:-
+ ---------------------------------------------
+ 
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+     <div><a class="navbar-brand" href="https://www.in28minutes.com">in28minutes</a></div> 
+  
+        <!-- LEFT SIDE: Todo -->
+        <ul class="navbar-nav" >
+            <li> <a href="/welcome/in28minutes"  class="nav-link">Home</a> </li>
+            <li> <a href="/todos"  class="nav-link"  >Todo</a>         </li>
+        </ul>
+  
+        <!-- RIGHT SIDE: Login & Logout -->
+        <ul class="navbar-nav navbar-collapse justify-content-end ">
+          <li> <a  href="/login" class="nav-link">Login</a> </li>
+          <li>    <a class="nav-link" href="/logout">Logout</a></li>
+      </ul>
+
+    </nav>
+  </header>
+  
+style.css:-
+  --------------------------------------
+  
+  @import url('https://cdn.jsdelivr.net/npm/bootstrap@4.1.0/dist/css/bootstrap.min.css');
+ 
+ 
+ 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+ ------------@ not working in footer---------------------------------------------------------------------------------------------------------------------------
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ @ not working in footer
+@ is NOT working in footer. Please replace it with the ASCII code shown here: &#64;
+
+
+
+BEFORE
+<span class="text-muted">All Rights Reserved 2018 @in28minutes</span>
+AFTER
+<span class="text-muted">All Rights Reserved 2024 &#64;in28minutes</span>
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------Step 29:- styling Footer and Other Components with CSS and Bootstrap--------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+footer.component.html
+----------------------------------------
+
+<footer class="footer">
+	<div class ="container">
+		<span>All Rights Reserved 2018 @in28minutes </span>
+	</div>
+</footer>
+
+
+footer.component.css
+----------------------------------------
+.footer{
+
+position: absolute;
+bottom : 0;
+width:100%;
+height :40px;
+background-color:
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+Standalone Update: Import routerLink to menu.component.ts
+SNIPPETS
+
+import { RouterLink } from '@angular/router'; // Added
+imports: [RouterLink] // Added
+
+
+frontend/todo/src/app/menu/menu.component.ts
+import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router'; // Added
+ 
+@Component({
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.css'],
+    standalone: true, // Generated - Change
+    imports: [RouterLink] // Added
+})
+export class FooterComponent implements OnInit {
+ 
+  constructor() { }
+ 
+  ngOnInit() {
+  }
+ 
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------Step 30:- Good Practice - Use RouterLink instead of href for Routes-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+what Href does is it reload the entire page. 
+what we are developing in here is a single page application,right?we don't need everything reload all time. 
+A) the way we should have done this is by saying Router Link.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------Course Update - Strict Typing of Parameters and Variables---------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/frontend/todo/src/app/service/hardcoded-authentication.service.ts
+-  authenticate(username, password) {
++  authenticate(username: string, password: string) {
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------Step 31:- Creating an Independent Authentication Service Component -----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+here we are going to create sperate authentication service?
+create a service- when ever you want to create some logic,which is common across multiple components,in that scenario we need to create a service.
+creating authentication service?
+A)by saying ng generate service service/hardcodedAuthentication.
+now this is created in service folder so now hardcoded authentication service is created.
+
+--if i want to make use of the service in another component,I would need to make use of dependency injection.
+
+Q)What @injectable does, is make this component available for dependency injection.so,this component would be ready and whatever we define it
+login.compnonent.ts file
+//dependency Injection
+  constructor(private router: Router,private hardcodedAuthenticationService: HardcodedAuthenticationService) {}
+
+  ngOnInit(): void {
+  }
+  
+  
+  hardcoded-authenticatio.service.ts:-
+  --------------------------------------------
+  
+  import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HardcodedAuthenticationService {
+
+  constructor() { }
+
+  authenticate(username: string,password: string){
+    if(username==='in28minutes' && password==='dummy'){
+return true;
+    }return false;
+
+
+
+  }
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------Step 32:- Using Session Storage to Store user Authenticate Token -----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+1. now you can enable this links based on user is already logged in or not.
+for that we need to check user is a;ready logged in or not for that we need to use that something called session storage.
+session storage is something called which is associated with the browser window.it allows us to access the session storage object
+---when user logs in we will put some content into the session storage for all other pouporuse we will kepp checking session storage contains the suthenticated user.
+
+if login is secussfull
+
+sessionStorage.setItem('authenticateruser',username)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------Course Update:hardcodedAuthenticationService------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+In the next step, we are going to use hardcodedAuthenticationService in menu.component.html.
+
+We cannot access the private variables in a view.
+
+RECOMMENDED
+
+Replace private from the code below in menu.component.ts
+
+constructor(private hardcodedAuthenticationService 
+    : HardcodedAuthenticationService) { }
+Code should be
+
+constructor(public hardcodedAuthenticationService 
+    : HardcodedAuthenticationService) { }
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------Step 33:- Enabling menu Links based on User Authenticate Token -----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+we would want to enable and disable menu items based on is user logged in or not.
+--i would want enable this links based on user login.
+before show the links of menu.component.html we need to check if user has logged in or not.
+let's go to componnet.menu.ts
+
+
+*ngIf="isUserloggedIn" 
+
+
+1. if user is logged in,then i would initialize.---------------ng oninit
+
+if user is logged then show{
+home,todos,logout ------------------------- links
+}if user is not logged in{
+
+then show login
+}
+
+
+2. page refresh chesadu so three links sow hcsindi -home,todos,login,logout
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------Step 34 :- Implementing Logout to remove User Authentication Token -----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.start creating logout component ng generate component logout
+2. add routing--------------------{path:'logout', component:LogoutComponent}
+
+
+
+LogoutComponent.html:-
+------------------------
+<H1> you are logout out</H1>
+<div class="container">
+    Thank You For Using Our Application.
+</div>
+
+HardcodedAuthenticationService.ts :-
+--------------------------------------------------
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HardcodedAuthenticationService {
+
+  constructor() { }
+
+  authenticate(username: string,password: string){
+   console.log('before' + this.isUserLoggedIn());
+    if(username==='in28minutes' && password==='dummy'){
+      sessionStorage.setItem('authenticateruser',username)
+      console.log('after' + this.isUserLoggedIn());
+return true;
+    }
+    return false;
+
+  }
+
+  isUserLoggedIn(){
+  
+   let  user=sessionStorage.getItem('authenticateruser');
+   return !(user === null);
+  }
+
+
+  logout(){
+    sessionStorage.removeItem('authenticateruser');
+
+  }
+}
+
+
+LogoutComponent.ts:-
+------------------------
+import { Component, OnInit } from '@angular/core';
+import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
+
+@Component({
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.css']
+})
+export class LogoutComponent implements OnInit {
+
+  constructor(private hardcodedAuthenticationService:HardcodedAuthenticationService) { }
+
+  ngOnInit(): void {
+    this.hardcodedAuthenticationService.logout();
+
+  }
+
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------Step 35 :- Securing Components using Route Guards - Part 1 -----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- lets make the application secure by actually trying to authenticate before user to go to specific URLs.
+--we are defining routes in app.routes.module.ts 
+--so before routing we would want to check something out.we want to check if the user really logged in or before going to any page/screen
+--for that we can specify conditions when these can be activated.this can activate only specific conditions 
+-- welcome component ,listtodos components, logout components this three components can shown when user is  login
+--for this we can implement the service is called a Route guard service.
+--for this we need to create service like  ----- ng generate service service/routeGuard
+-- In RouteGuardService.ts------------------------before implementing this RouteGuardservice this needs to implementing a specific interface that is called canActivate
+  import { Injectable } from '@angular/core';
+
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { HardcodedAuthenticationService } from './hardcoded-authentication.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RouteGuardService implements CanActivate{
+
+  constructor(private hardcodedAuthenticationService:HardcodedAuthenticationService) { }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+
+      if(this.hardcodedAuthenticationService.isUserLoggedIn())
+      return true;
+       return false;
+    }
+
+
+}
+
+-----------now we can make use of this Route Guard service in next step
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------Step 36 :- Securing Components using Route Guards - Part 2 -----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------- in previous stepm we implemneted route Guard services
+--------- now we need to use that service 
+-- we can implement this in welcome.todos,logout in app.routin.mosules .ts on routes path
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { ErrorComponent } from './error/error.component';
+import { ListTodosComponent } from './list-todos/list-todos.component';
+import { LogoutComponent } from './logout/logout.component';
+import { RouteGuardService } from './service/route-guard.service';
+
+const routes: Routes = [
+  {path:'', component: LoginComponent},
+  {path:'login', component: LoginComponent},
+  { path: 'welcome/:name', component:WelcomeComponent,canActivate:[RouteGuardService]},----------------------this one execute only routegaurds service returns true.
+  {path:'todos', component:ListTodosComponent,canActivate:[RouteGuardService]},
+  {path:'logout', component:LogoutComponent,canActivate:[RouteGuardService]},
+  { path: '**', component:ErrorComponent}
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------Step 37 :- Quick Review Authentication service,Dependency zinjection and Route -----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. the most important that we created in the last few steps is the hardcoded authentication service.
+
+
+2. this hardcoded authentication service is having the features to authenticate for enough with hard coding and when a user is athenticated it puts the user details into session storage.ang it also has method to enable us to check.if a user is logged in or if user wants to logout.so this is complete authentication service.this authenticate service is made use of this both login,logout as well as menu component.
+3. this service is used multiple components
+
+Q) how we are providing this service to tgose components?
+A) by using dependency injection
+--where ever you see @injectiontable we can inject that one in any component constructor
+
+
+Route gaurd service:-
+----------------------------------
+we can implement an interface quality CanActivate. we can defined a method called canActivate.here checked is a user is logged in .
+--if user is logged in return true 
+-- if user is not really logged we navigated to the login page

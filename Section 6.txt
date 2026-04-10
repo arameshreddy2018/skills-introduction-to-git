@@ -1,0 +1,774 @@
+73. Step 50 - Connecting Angular Frontend with Restful API - 1 - Creating Data Service
+----------------------------------------------------------------------------------------------------------------------
+
+1.we have created few rest services using Spring Boot and when I run ApI/ URL (hello world bean) I message is back
+2.now we are focusing on how you call these rest Service/backend API from front end/from our Angular Applications
+
+Steps:-
+
+1.	In welcome screen we will add button
+ 
+Welcome.component.html :-
+
+
+Ex:- <div class =”container”>
+
+    Click here to get a customized welcome message
+    <button (click)= "getWelcomeMessage()" class=".btn btn-success" > Get Welcome Message</button>   
+    
+    
+    </div>
+
+
+2.	We need to create function for  Get Welcome Message in 
+
+WelcomeComponent.ts :-
+
+import { WelcomeDataService } from '../service/data/welcome-data.service';
+
+  getWelcomeMessage(){
+    console.log(“get welcome message”);
+       }
+
+
+3.	Now we would want to invoke this HelloworldBean service.
+So how do we invoke this service is we will create a new service.
+this service would call a backend service /a backend API. that’s the reason we would calling is as a Data service.
+
+
+3.1) generate a service inside your project folder 
+C:\Users\pAryabhumi01\Documents\Personal\Angular\frontend\todo/ ng generates service service/data/welcomeDataService.
+Now it will create couple of files those files are. 
+o	Welcome-data. service.spec.ts
+o	Welcome-data.service.ts
+•	We'll go ahead and create a simple method in here, which would help us in retrieving the data from the backend service.
+
+
+Welcome-data.service.ts :-
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'--------------that it's typical thing which is ready
+for dependency injection, because itat injectable within the root scope.
+})
+export class WelcomeDataService {
+
+  constructor(private http:HttpClient) { }
+
+  executeHelloWorldBeanService(){
+
+     return this.http.get('http://localhost:8080/hello-world-bean');
+   console.log("Execute Hello world Bean service from Data service.ts file");
+    
+    }--------------------- •	We'll go ahead and create a simple method in here,which would help us in retrieving the data from the backend service.    
+}
+
+
+
+
+
+
+
+WelcomeComponent.ts :- 
+
+import { WelcomeDataService } from '../service/data/welcome-data.service';
+
+@Component({
+  selector: 'app-welcome',
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.css']
+})
+export class WelcomeComponent implements OnInit {
+message='some welcome message';
+name=''
+  executeHelloWorldBeanService: any;
+  //ActivateRoute 
+  constructor(private route:ActivatedRoute,private service:WelcomeDataService) { }
+
+  ngOnInit(): void {
+
+   // console.log(this.route.snapshot.params['name'])
+    this.name=this.route.snapshot.params['name'];
+  }
+
+  getWelcomeMessage(){
+    console.log(this.service.executeHelloWorldBeanService());
+       }
+
+}
+
+
+75. Step 51 - Connecting Angular Frontend with Restful API - 2 - HttpClientModule an
+-----------------------------------------------------------------------------------------------------------
+1.	In this step, let's focus on really invoking the Hello World Service.Now, how do we invoke the service?
+2.	Angular provides a module called HttpClientModule. And as part of it, we have something called HttpClient.
+3.	We can use HttpClient to invoke GET, POST,DELETE, PUT, all kinds of Http requests.
+4.	let’s get the HTTP thing in here.
+5.	How do I inject it in?
+A)	To add it in constructor 
+
+
+
+Ex:-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class WelcomeDataService {
+
+  constructor(private http:HttpClient) { } ----------------here we are injecting HTTP client
+
+  executeHelloWorldBeanService(){
+
+     return this.http.get('http://localhost:8080/hello-world-bean');-----------here we are invoking Http get Request
+    
+    }
+    
+}
+
+Then welcomeComponent.ts:- we are doing console log
+
+getWelcomeMessage(){
+    console.log(this.service.executeHelloWorldBeanService());
+    this.service.executeHelloWorldBeanService().subscribe();
+       }
+
+
+	When I go and the page refresh it I see an error it’s says “NO provider for Http client
+	So what it's saying is the HttpClient is not really available.Why is it not available?
+	For an Angular application to make use of a component or a utility from a module,what do we need to do?We need to import that module in.The thing is we have not really imported the module in.So, where do we need to import it in?In app.module.ts and the module which you need to import is HttpModule.So, it's HttpClientModule.
+	So you can see that it's from @angular/common/http.
+
+App.module.ts:-
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule } from '@angular/forms';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { LoginComponent } from './login/login.component';
+import { ErrorComponent } from './error/error.component';
+import { ListTodosComponent } from './list-todos/list-todos.component';
+import { MenuComponent } from './menu/menu.component';
+import { FooterComponent } from './footer/footer.component';
+import { LogoutComponent } from './logout/logout.component';
+import { HttpClientModule } from '@angular/common/http';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    WelcomeComponent,
+    LoginComponent,
+    ErrorComponent,
+    ListTodosComponent,
+    MenuComponent,
+    FooterComponent,
+    LogoutComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+	When you save and run there is Observable is printed out to the console
+What is happening is an observable is printed to the console and when I go to the network,clear it by using the Clear and again do Get Welcome Message,you're seeing that no activity is taking place.In the network tab, you can see what are the requests which are going from the client application to our server application,from the front end application to the backend application.And as of now, you can see that there is no request going on.
+
+However, when I go to the console,whenever I press this Get Welcome Message,you'd see that there is an observable which is getting logged.
+
+However, this call is not going over the network.What is happening in here?
+
+------------------------------------------------------------------------------------------------------------------------
+76. Step 52 - Connecting Angular Frontend with Restful API - 3 – Understanding Obser
+-----------------------------------------------------------------------------------------------------------------------------
+
+In the previous step,we executed the hello-world-bean service. However, we saw that the service were not getting invoked and we were printing something called observable in the console.
+
+Q)what is this observable thing and why are we not able to see the service being called on the network?
+
+1.Typically, if I call a HTTP service,it might really take a long time to execute.
+Some services might take three to five seconds to execute.If we do it synchronously, then what would happen?We call the service and we wait for the response.And in the meanwhile, the entire browser would hang That's the reason why we should call all the HTTP services asynchronously.
+
+Now, observables is one of the best approaches to implementing asynchronous communication.
+What Angular does is it makes extensive use of observables
+
+2) What Angular does is it makes extensive use of observables as the interface for most of the asynchronous operations.
+	So if you'd want to make an AJAX request using the HTTP module, Angular Intern makes use of this observable.
+	The most important thing about observables is this is declarative in the sense that over here you can define what URL to call. We will later look at defining, what should happen when I get a response back, what should happen when I get an error back. You can define all that as part of an observable.
+	the observable is not really executed. The request is not really executed until we do something called a subscribe.
+	So basically, observable helps us to define, "Okay, this is the service I would want to call. "This is the data I'm expecting back. "This is the thing "which I have to do when there is an error, "but it does not really invoke the service until somebody subscribes to it.
+Ex:-  getWelcomeMessage(){
+    console.log(this.service.executeHelloWorldBeanService());
+    this.service.executeHelloWorldBeanService().subscribe();
+       }
+
+
+Now we are getting another error that’s 
+
+Error:-
+1.Access to XMLHttpRequest at 'http://localhost:8080/hello-world-bean' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+2.welcome.component.ts:25  
+ GET http://localhost:8080/hello-world-bean net::ERR_FAILED 200 (OK)
+getWelcomeMessage	@	welcome.component.ts:25
+WelcomeComponent_Template_button_click_8_listener	@	welcome.component.html:12
+
+3. 
+welcome.component.ts:25 ERROR 
+1.	HttpErrorResponse {headers: HttpHeaders, status: 0, statusText: 'Unknown Error', url: 'http://localhost:8080/hello-world-bean', ok: false, …}
+1.	error: ProgressEvent {isTrusted: true, lengthComputable: false, loaded: 0, total: 0, type: 'error', …}
+2.	headers: HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, headers: Map(0)}
+3.	message: "Http failure response for http://localhost:8080/hello-world-bean: 0 Unknown Error"
+4.	name: "HttpErrorResponse"
+5.	ok: false
+6.	status: 0
+7.	statusText: "Unknown Error"
+8.	url: "http://localhost:8080/hello-world-bean"
+9.	[[Prototype]]: HttpResponseBase
+	XMLHttpRequest.send		
+	getWelcomeMessage	@	welcome.component.ts:25
+	WelcomeComponent_Template_button_click_8_listener	@	welcome.component.html:12
+	
+
+	
+
+
+
+	If we observe in Network tab the request is executed but response is not really getting back it’s give an error response back .that is response is empty there is nodat present here what’s happening
+
+For example
+1.I'm calling from localhost-4200. To  Localhost-8080. So this is one web server calling another web server.
+2. You're calling a service,which is hosted on a different server from your frontend application.
+And by default, Spring Boot prevents these kinds of request.
+3.So we need to tell Spring Boot to allow requests from a specific URL.
+4. How can I do that?
+A)The way you can do that is by going to our Hello-World controller and adding a simple annotation in @CrossOrigin.So I allow requests from other domains.
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@CrossOrigin(origins="http://localhost:4200/")
+@RestController
+public class HelloWorldController {
+
+	And now, you'd see that observable is printed,but there is no error.And if I go to the Network tab,you'd see that the hello-world-bean message is called and I'm getting a response back.
+	So what is happening now?As soon as I subscribe to the observable,the request is executed.
+	The interesting things if I call subscribe a number of times,I'm now calling it three times, what would happen?
+	he wonderful thing about observables is the fact that just by calling subscribe you can executethe same service again, and again, and again.
+	So if this errors out,let's say this service call error out and you want to retry,with observables it's very, very easy.You just need to call it again.You just need to subscribe to it again.This would retry the entire service call.
+	but what we want to do is we would want to pick up the data from here.So we would want to get the response and we would want to show a message on the screen.
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+77. Step 53 - Connecting Angular Frontend with Restful API - 4 - Understanding Subsc
+-----------------------------------------------------------------------------------------------------------------------------------
+1. In the previous step we saw that when we click the Get Welcome Message,the hello-world-bean service is called and we saw the response coming back.However, we were not able to really get the response and print it on the console.
+
+What we want to do is first get the response and print it on the console and then make use of it and show it on the welcome page.Let's get started with it right now.
+
+2.	The first thing you would need to understand is the fact that subscribe is an asynchronous call. It means this one will not return the result.
+3.	for asynchronous call in java script we need to create a function to get response back and tie it up to the subscribe.
+4.	Now we creating new function like
+
+handleSuccessfulResponse(response){
+console.log(response);
+
+
+}
+5.	We need to call function in inside subscribe function on welcome.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HelloWorldBean, WelcomeDataService } from '../service/data/welcome-data.service';
+
+@Component({
+  selector: 'app-welcome',
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.css']
+})
+export class WelcomeComponent implements OnInit {
+message='some welcome message';
+name='';
+  welcomeMessageFromService:string='';
+
+  executeHelloWorldBeanService: any;
+  //ActivateRoute 
+  constructor(private route:ActivatedRoute,private service:WelcomeDataService) { }
+
+  ngOnInit(): void {
+
+   // console.log(this.route.snapshot.params['name'])
+    this.name=this.route.snapshot.params['name'];
+  }
+
+  getWelcomeMessage(){
+    console.log(this.service.executeHelloWorldBeanService());
+    this.service.executeHelloWorldBeanService().subscribe(
+      handleSucessfullResponse => this.handleSucessfullResponse(handleSucessfullResponse)
+    );
+
+    console.log("last line of getWelcomeMessage() ");
+
+       }
+
+       handleSucessfullResponse(handleSucessfullResponse: any){
+        this.welcomeMessageFromService=handleSucessfullResponse.message;
+        //console.log(handleSucessfullResponse);
+        //console.log(handleSucessfullResponse.message);
+       }
+
+}
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+78. Step 54 - Connecting Angular Frontend with Restful API - 5 - Handling Error Resp
+----------------------------------------------------------------------------------------------------------------------------------------
+
+1.	In the previous steps, we implemented the HTTP call and when we click get welcome message we get your customized welcome message,Hello World, changed.
+
+2.	We are able to get some text from the back end show it on the front end.
+
+3.	That's wonderful.But what if something goes wrong?
+
+4.	What if the server is throwing an exception? What if there's an error when you are calling a specific service?
+
+5.	How do you handle that?
+
+6.	Let's see what would happen right now when there is an error on the server.
+
+Throw new runtime exception.some error happened
+
+public HelloWorldBean  helloWorldBean() {
+		
+		return new RuntimeException("Some Error has happened! Contact support at ***-*** ");
+	}
+
+and now click get welcome message.What would happen?You'd see that there's an error. So it says get 500 error, error response but the user has no signal that some error has happened.
+
+You don't expect the user to go to the console and see the fact that there's an error, right?
+
+You need to tell the user something really went wrong.
+
+How do we do that?
+
+The way we can do that is by using the subscribe method.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+79. Step 55 - Calling Welcome HTTP Service with Path Variables
+----------------------------------------------------------------------------------------------------------------------------
+
+WelcomeComponent.ts :-
+
+export class WelcomeComponent implements OnInit {
+message='some welcome message';
+name='';
+  welcomeMessageFromService:string='';
+  errorMessage:string='';
+
+  getWelcomeMessageWithPathVariable(){
+        // console.log(this.service.executeHelloWorldBeanService());
+         this.service.executeHelloWorldBeanServiceWithPathVariable(this.name).subscribe({
+          next: response => this.handleSucessfullResponse(response),
+           error:error =>this.handleErrorResponse(error)
+       });
+
+
+Welcome.componnet.html :-
+
+
+<div class =”container” *ngIf="errorMessage">
+    <H2> Your Customized Welcome Message</H2>
+    {{errorMessage}}
+    
+    </div>
+
+
+
+
+
+Welcome.data-service.ts :-
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+export class HelloWorldBean {
+  error: any;
+  constructor(public message:string) { }
+
+}
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class WelcomeDataService {
+
+  constructor(private http:HttpClient) { }
+
+  executeHelloWorldBeanService(){
+
+     return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean');
+   //console.log("Execute Hello world Bean service from Data service.ts file");
+    
+    }
+
+    executeHelloWorldBeanServiceWithPathVariable(name: any){
+
+      return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world-bean2/path-variable/${name}`);
+    //console.log("Execute Hello world Bean service from Data service.ts file");
+     
+     }
+    
+}
+
+----------------------------------------------------------------------------------------------------------------
+
+80. Step 56 - Designing RESTful Services for Todo Resource
+---------------------------------------------------------------------------------------------------------------
+start creating to-do services so until now we just have a list of to-dos to shown but those list of to-dos are hardcoded.
+--we will focus here is to start getting this list of to-dos from backend.
+-we would want to do
+ 1. edit the to-dos
+ 2.Add a new to-do
+ 3. delete a new to-do
+ 
+ --so we need to create backend services for each one of those features,and we would want to invoke them from the front end.
+ --services that we would need are 
+ 1. retrieve all Todos for a User. we need to use Get method:- Get/users/{user_name}/todos
+ 2.Delete  a Todo of a user.if we need to delate a particular user we need to use :-DELETE/users/{user_name}/todos{todo_id}
+ 3.we would want to be able to Edit a Todo/update a todo we need to use PUT method. :-PUT/users/{user_name}/todos{todo_id}
+ 4.we would want to able to Create a new Todo.to create new todo we need to use post to-dos URL.
+
+
+-----------------------------------------------------------------------------------------------------------------
+81. Step 57 - Creating REST API for retrieving Todo List
+-----------------------------------------------------------------------------------------------------
+
+1.In this step we would want to retrieve all to-dos for a user get service.
+2. making different specific package so created hello world package and moved all HelloworldBean and HelloWorldBeanController
+3.let’s now focus creating the retrieve all todo’s for a user service.
+ Retrieve all Todos for a User:- GET/users/{user_name}/todos
+4.creating a class :- ToDoResource5
+5.add @RestController annotation
+6.we would want to create getMethod—
+ Public list<Todo> getAllTodos(String username){
+
+}
+7.creating new class called Todo and package is import com.in28minutes.rest.webservices.restfulwebservices.todo;
+Public class Todo{
+
+Private long id;
+Private String username;
+Private String description;
+Private Date targetDate;
+Private boolean isDone;
+
+Creating constructor;
+Generating getters and setters;
+
+
+
+
+}
+
+7.	I want to createservice
+8.	Private TodoHardcodedService todoservice;
+
+Create service TodoHardcodedService and package is import com.in28minutes.rest.webservices.restfulwebservices.todo;
+
+@Service
+Public class TodoHardcodedService{
+
+Private static List<Todo> todos = new ArrayList();
+Private static int idCounter = 0;
+
+Static{
+todos.add(new Todo(++idCounter,”in28minutes”,”Learn to Dance”,new Date(),false));
+todos.add(new Todo(++idCounter,”in28minutes”,”Learn to Microservices”,new Date(),false));
+
+todos.add(new Todo(++idCounter,”in28minutes”,”Learn to Angular”,new Date(),false));
+
+
+
+}
+
+Public List<user> findAll(){
+
+Return todos;
+}
+
+}
+
+For now this service class act as a database.
+
+
+
+82. Step 58 - Connecting Angular Frontend with Todo List RESTful Service
+
+1.in the previous step we created the todos service.
+2.now if we want to create our My Todos application to this service from backend
+How can we that?
+1.	We need to create data service by using command ng generate service service/data/todoData
+2.	2.start create method to retrieve the list of todos.
+retrieveAllTodos(username){
+return this.http.get<Todo[]>( localhost:8080/users/${ username }/todos)
+
+}
+
+3.	Import hTTPClientModule  and  HttpClient in constructor
+Constructor(private http:HTTPClient){}
+
+
+4.	Use above list of todos class in list-todos.componnet.ts
+  constructor(private todoService:TodoDataService) { }
+
+ngOnInit(){
+this.todoService.retrieveAllTodos().subscribe(
+response =>{
+console.log(response);
+this.todos=response;
+})}
+--------------------------------------------------------------------------------------------------------------------------------------
+82. Step 58 - Connecting Angular Frontend with Todo List RESTful Service
+-------------------------------------------------------------------------------------------------------------------------------
+
+if you want to create our My Todos application to this service from the backend
+
+1. create a date service by using ng generate service service/data/todoData
+2. in todo-data.services.ts file create method to retrieve the list of todos.
+
+ retrieveAllTodos(username){
+
+     return this.http.get<Todo[]>(`http://localhost:8080/users/${username}/todos`);
+    
+    }
+	
+	3. we would want to import first in http.
+	
+	constructor(private http:HttpClient){}
+	
+	4.we need to use this todo-data.service.ts class in list-todos.componnet.ts
+	
+	todos:Todo[]
+	
+	constructor(private service:TodoDataService){}
+	
+	ngOnInit{
+	todos.this.todoService.retrieveAllTodos('in28minutes').subscribe(response => {
+	console.log(response);
+	this.todos=response;
+	
+	}
+	
+	}
+	
+	5.add corssorgin annotion on backenservice class here backendservice class in todo 
+	
+	
+	localhost:4200/todos
+	
+	
+------------------------------------------------------------------------------------------------------------------------------------------------
+83. Step 59 - Creating REST API to delete a Todo - 1 - Create DELETE Request Method
+----------------------------------------------------------------------------------------------------------------------------------------
+
+1.here we are adding Delete feature in the next few steps
+2.to delete service you want to have a service exposed.
+3.urL of delete is DELETE/users/{user_name}/todos{todo_id}
+
+4. we need to create delete resource in TodoResourse
+
+  class TodoResource{
+  DELETE/users/{user_name}/todos{todo_id}
+  we would want to create a delete method before we create delete in the resource we need delete method in the Hardcoded service.
+  
+  @DeleteMapping("DELETE/users/{user_name}/todos{id})
+  public ReponseEntity<void> deleteTodo(@pathvariable String username,@pathVariable long id){
+  
+  Todo todo = todoservice.deleteById(id);
+  if (todo!=null){
+  return ReponseEntity.noContent().build();
+  
+  }
+  
+  return ReponseEntity.notFound().build();
+  
+  }
+  
+  
+  
+  
+  
+  note:-
+----------
+  ReponseEntity:- helps us to return a specific status back
+  
+  
+  
+  5. cretea delete todo method in TodoharcodedService class
+  class TodoharcodedService{
+  
+  public Todo deleteById(long id){
+  Todo todo= findById(id);
+  if(todo=null) return null;
+  if(todos.remove(todo)){
+  return todo;
+  }
+  
+  return null;
+  
+  }
+  
+  -- create method for findById
+  
+  public Todo findById(long id){
+  for (Todo todo:todos){
+  if(todo.getId()==id){
+  return todo;
+  
+  }
+  
+  6.define equals methods in Todo.java 
+   rightclick---select source----generating hashcode and equals and select id
+  
+  -------------------------------------------------------------------------------------------------------------------------
+  84. Step 59 - Creating REST API to delete a Todo - 2 - Execute DELETE Request Method
+  -----------------------------------------------------------------------------------------------------------------------
+  --lets try and execute in Delete Request Method.
+  -- what we'll do is we 'll use a RestApI client called Restlet
+  
+------------------------------------------------------------------------------------------------------------------------------------
+------85. Step 60 - Adding Delete Todo Feature to Angular Frontend
+-----------------------------------------------------------------------------------------------------------------------------------
+ --we want to delete add actions  for that we need to go list-todos.component.html
+ 
+ 
+ ------------------------------------------------------------------------------------------------------------------------------------ 
+  86. Step 61 - Creating Todo Component and Handle Routing
+------------------------------------------------------------------------------------------------------------------------------------  
+     
+--adding Update button in list-todo-component.html
+-- adding funtion fot update todo similarly like delete todo'same
+   updateTodo(){
+   
+   console.log (`update {$id}`)
+this.router.navigate(['todos',id])
+
+}
+
+constructor(private router : Router){}
+
+
+
+
+-- when we click update it need to go next page .to go next page we need to generaet/create new component.
+
+ng generate component todo
+
+-- we need to define route for the todo----app-routing.module.ts
+  {path:'todos/id', component:TodoComponent,canActivate:[RouteGuardService]},
+  
+  
+------------------------------------------------------------------------------------------------------------------------------------ 
+  87. Step 62 - Designing todo page with Bootstrap Framework
+------------------------------------------------------------------------------------------------------------------------------------ 
+
+lets define a simple view for the Todo page.
+todo.component.Html
+
+
+ 
+------------------------------------------------------------------------------------------------------------------------------------ 
+88. Step 63 - Creating Retrieve Tod0 Service and Connect Angular Frontend
+------------------------------------------------------------------------------------------------------------------------------------ 
+public class ToDoResource {
+
+	
+	@GetMapping("users/{username}/todos/{id}")
+	public Todo getTodo(@PathVariable String username, @PathVariable long id){
+		
+		return todoHardcodedService.findById(id);
+		
+}
+----------------------------------------------------------------------------------------------------------------
+90. Step 65 - Creating REST API for Updating Todo - PUT Request Method
+-------------------------------------------------------------------------------------------------------
+1. In JPA save() method is used both the update and inserts as well
+
+step 66:-
+-------------------
+--in the last few steps is implemented the services which you would need for doing 
+the delete,put and the post here we are trying to follow  the Restapistandards
+
+--the delete method:-
+--------------------------------
+1. typically returns no content when it's successful 
+2.if it's fails the it would return not found.
+
+--the updated method:-
+-----------------------
+The update request would return a status of okay with the content of the updated resources.
+
+created Resources:-
+---------------------------
+ And the created resource,when you try to do a post,what it does is it returns a status of created and returns the of URI the created resource.
+ 
+ These are basically the standards which are used when we create resources.
+
+-----------------------------------------------------------------------------------------------------------------------------------
+92. Step 66 - 2 - RESTful Web Services - Best Practices
+--------------------------------------------------------------------------------------------------------------------
+1.consumer first:-
+-------------------------------
+1.the first and lat,best practices is consumer first,
+2.Last, but not the least, have great documentation for your APIs.Swagger is one of the most popular documentation standards for restful APIs,but whatever standard you are using,make sure that your consumers understand the documentation that you produce.
+
+2.make the best use of HTTP provides.
+--------------------------------------------------------------
+Restful webservices are based on HTTP.ao make best use of request methods.use the right request method appropritae for your specific actions.GET,pOST,PUT,DELETE	
+
+3.make user to send proper response back.
+200-SUCCESS
+404-RESOURCE NOT FOUND
+400-BAD REQUEST
+201-CREATED
+401-UNAUTHORIZED
+500-SERVER ERROR
+
+4. Ensure that there is no secure info that is sent in your URIs.Things like SSN,
+5.always use plurals.
+For example :- in the course, 
+we always use /users,
+
+any resource that we created, was /users/1,not /user/1.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+93. Step 67 - Implementing Update Todo Feature in Angular Frontend
+------------------------------------------------------------------------------------------------------------------------------------------
+	
+
+
+
+
+
+
+

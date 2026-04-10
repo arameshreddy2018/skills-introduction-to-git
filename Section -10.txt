@@ -1,0 +1,106 @@
+1.Spring security principles:-
+spring security is number one Api to secure your rest API,web applications, and your Microservices in the Spring Ecosystem
+--there are 6 important security principles what you need to take into consideration whenever you build your applications.
+
+2.Authentication:-
+3.Authorization
+4.Spring security Fundamentals
+5.Spring Security Filter Chain :-why does Spring Security intercept all the requests that are coming into your application.
+we will explore different types of authentications:
+6. form authentication
+7.Basic authentication
+8.jWT authentication
+We'll also understand some of the security best practices,
+9.CSRF,CORS
+10.OAuth
+
+1.1.Spring security principles:-
+----------------------------------------
+
+A chain is only as strong as its WEAKEST link:- A small security flaw makes an app with robust architecture vulnerable.
+
+6 principles of building secure systems:
+----------------------------------------------------
+1.Trust Nothing:-
+  1.1 Validate every requests.
+  1.2 Validate piece of data or information that comes into the systems.
+  
+2.Assign Least Privileges:-
+---------------------------------------------
+  2.1 Start the design of the system with security requirements in mind
+  2.2 Have a clear picture of the user roles and accesses
+  2.3 Assign Minimum Possible Privilage at all levels
+      2.3.1 Application
+	  2.3.2 infrastructure(database + server+..)
+	  
+3.Have Complete Mediation :-
+-----------------------------------------------------
+3.1 How were Medieval fort's Protected?
+  every one had to pass through one main gate
+3.2 Apply a well-implemented security filter.Test the role and access of each user.
+
+4.Have defense In Depth :-
+--------------------------------------------------------
+4.1 Whenever we build applications, there are multiple layers,and that's why you need to have multiple levels of security as well.
+4.2 You'd have security at your transport layer, network layer,and also in your infrastructure.
+4.3 You'll also have security at operating system level and your application level as well.
+
+
+5. Have Economy of Mechanism :-
+-----------------------------------------------
+5.1  keeping your security architecture as simple as possible.
+5.2 Simple systems are easier to protect,
+
+6.ensure that you have openness of design :-
+----------------------------------------------
+6.1Make sure that your security design is open,and make sure that you are using some of the security standards, owad, JWT.If you're doing things like this,it's easier to identify and fix security flaws.
+
+
+Spring security executes a series of filters:-
+----------------------------------------------------
+filters provide these features:-
+--------------------------------------
+1.authentication: is it valid user?(ex: basic authentication filter)
+2. authorization :-Does the user have right access?(Ex: AuthorizationFilter)
+3. other features:- 
+	3.1 Cross-Origin Resource sharing(CORs)-CorsFilter
+	    should you allow AJAX calls from other domians?
+	3.2 Cross site Request Forgery(CSRF)-csrfFilter
+	    3.2.1 A malicious website making use of previous authentication on your website.
+		3.2.2 Default: CSRF protection enabled for update requests -Post, PUT etc
+		3.2.3 login page,logout page :- Logoutfilter,DefaultLoginPagegeneratingFilter,DefaultLogoutPageGeneratingFilter
+		3.3.4 Translating execptions into proper Http Responses(ExecptionTranslationfilter)
+		
+4. order of filters is important(typical order shown below)
+
+1. Basic Check Filters - CORS,CSRF
+2. Authentication Filters
+3. Authorization Filters
+
+
+Step 05:- creating Spring boot project for spring security:-
+--------------------------------------------------------------
+start.spring.io
+
+project :- gradle
+language:- java
+Spring Boot:-  3.0.0(RC2) 
+note:- recommendation donot use snapshot versions.Snapshots are versions that are being developed by the Spring Boot team right now.I would recommend you to avoid them as much as possible.
+
+project Metadata:- 
+
+Group:- com.in28minutes
+Artifact Id:- Learn-Spring-Security
+
+
+packaging :- jar
+
+java 17 and above
+
+
+Dependencies:- spring web, Spring security
+		  
+  
+
+  
+    

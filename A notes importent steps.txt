@@ -1,0 +1,20 @@
+1.for npm install need to install node.js
+2. checking node version :- node -v
+note:- anything greater than version 10 is good
+3.checking npm version npm -v
+4.npm init --to create new prokect
+npm install jquery  -- to install any dependencies for example javascript or jquery
+5.to install angularCLI use Latest version ----- npm install -g @angular/cli ---this course update in coourse they are installing(angular version 7.0.3)
+6. if you want to install angularcli with particular version we need to use like this :- npm install -g @angular/cli@7.0.3
+Note :- angular cli almost like a Maven plugin,and we are using npm to download
+7. to check the angular cli version is :- ng version
+8. to creating new Angular application or project  :-we need to execute a command :- ng new todo
+    
+    Which stylesheet format would you like to use? CSS
+
+     Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? no
+9. to build and run application we need to execute command :- ng serve
+
+10.create  a new component --ng generate component (or) n g c
+-------------------------------------------------------------------------------
+11.if you want to route to one-page-another we need to use - a routerLink

@@ -1,0 +1,289 @@
+
+
+Step 44 :- introduction to Rest webservices:-
+-------------------------------------------------------
+what is Rest?what is Rest all about
+A)Rest stands for respresentational state Transfer
+ it is term which is coined by roy fielding
+ --roy fielding id the guy who also developed HTTP protocal.
+ --the key thing  about Rest services is the fact that they want to make best use of HTTP.
+ 
+ Q)now what is HTTP?
+ A)the request and responses are in a format which is defined by HTTP,
+  --HTTp means :- Hypertext transfer protocal
+  --When I type in a URL in the browser it sends a get request to that server.
+  --The server responds back with a HTTP response containing the HTML.
+  --So I'm sending a get request and the server is sending back a response, a HTTP response containing the HTML.
+  --The browser looks at that response,takes the HTML and displays it on this screen.
+  
+  --Let's say there's a form I'm filling up with a list of details and I click the submit button.In those kind of scenarios, typically we are creating a post request.
+  --HTTP defines the headers which are present in the request and the body of the request.
+  --Also, along with the response, there are headers and also the body,
+  --in addition to the request header and the request body HTTP also defines something called request methods.
+ --You can indicate what action you are doing by using the HTTP request methods.
+ 
+  HTTP request methods :-
+  -------------------------
+  GET,I'm trying to get the details of something 
+  POST,I'm trying to create something.
+  PUT,I'm trying to update something.
+
+---A HTTP response on the other hand will also include a HTTP response status code.Was it successful?
+   HTTP Status codes:- 
+   200--was it succefull
+   404, was is page not found and things like that          
+
+
+--Roy Fielding said, why do we need to reinvent the wheel?Why don't we make use of HTTP to develop our web services as well?
+And that's where the concept of RESTful web services comes in.RESTful web services try to define services using the different concepts that are already present in HTTP.
+
+The most important abstraction in REST is something called a resource.A resource is anything that you'd want to expose to the outside world through your application.For example, when I talk about the to do management application the users are a resource,
+
+
+Q)using is using it?
+A) ranga is a resource. 
+
+Q)What are the to-dos also can be a resource.A specific to-do is a resource.A list of to-dos is also a resource.
+
+  When we are talking about developing RESTful services?
+ A) we always thincking about resources. 
+ 
+ What are the resources in my application?
+ A) A to-do or user, aiist of to-dos,
+ 
+ Q)what we do is we would assign a URI to the resource.
+ A 1. A resouirce has an URI(uniform Resource Idenyifier)
+    1.1 /user/ranga/todos/1-------the URI to the first resource that ranga has is URi user Ranga 
+	1.2 /user/ranga /todos/---------------the URi to all the to todos that ranga has 
+	1.3 /user/ranga-------------------the URI resource to ranga
+	
+	REST does not worry about how your are presenting your resource.
+	2. A resource can have different representations
+  2.1 XML ?
+  2.2 HTML ?
+  2.3 JSON ?
+  
+  
+--  The most important thing is the fact that you define your resource and perform the actions on the resource using whatever facilities that are provided by HTTP.
+--if i want to Create a user-Post/users
+-- if i want to delete a user ------DELETE/users
+-- Get all users - Get/users
+-- Get one users - get/users/1
+
+
+The important thing:-
+----------------------------------
+
+1.about REST is the fact that you have to think in terms of resources.What are the different resources that are present in your application that you would want to expose to other applications?
+
+2. and the second thing is make use of HTTP.If you want to do any operations on the resource you have to use the verbs, which are already specified by HTTP,get, put, post,patch and things like that and REST.
+
+3.REST does not worry whether you're using JSON ,XML or whatever format you would want to use.
+
+4. Important thing is transport is always HTTP.
+
+5..REST is completely built on top of HTTP.There is no standard service definition which is attached with REST.
+
+6.That can be a drawback in some scenarios because when a client wants to consume a service it needs to understand the request format
+and response format.
+
+7.So a service definition will be really useful.
+
+7.1.first option is W A D L,WADL, it's called Web Application Definition Language.WADL is one of the formats in which you can specify your RESTful web services.It has not become very popular.
+
+7.2 Another option is Swagger.Swagger is gaining a lot of popularity and we would use Swagger in this course for defining our RESTful services. REST focuses on your resources and how do you perform actions on them?
+
+----------------------------------------------------------------------------------------------------------------------------------------
+----------Section 5: Getting Up and Running with REST and Spring Boot-----------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+
+65.Fastest Aproach to Solve Your Expectations  
+--------------------------------------------------------------
+If you are using Intellij or you are using Java 9+ or you are facing a ClassNotFoundException, we are here to help. This 50-page troubleshooting guide and faq is our way of thanking you for choosing to learn from in28Minutes. It provides solutions for 200 FAQ and Frequently faced Problems.
+
+Here's the Quick Start with Top 10 FAQ
+
+https://github.com/in28minutes/in28minutes-initiatives/blob/master/The-in28Minutes-TroubleshootingGuide-And-FAQ/quick-start.md
+
+--We love all our 150,000 learners. We want to help you in every way possible.We do not want you to get stuck because of a simple error.
+
+--SNAPSHOT, M1, M2, M3, M4 releases are typically WORK IN PROGRESS.
+--The Spring team is still working on them. We recommend NOT using them.
+----------------------------------------------------------------------------------------------------------------------------------------
+RECOMMENDED VERSION: 2.3.1 +   (CHOOSE IN NEXT STEP)
+----------------------------------------------------------------------------------------------------------------------------------------
+
+66.DO NOT SKIP: New to Spring Boot?
+-----------------------------------
+I'm really delighted to have the privilege of being your instructor for this course! Thank You!
+
+I'm so excited for you to start building a REST API!
+
+👉 REMEMBER: SPRING BOOT EXPERIENCE EXPECTED
+
+This section expects you to have a GOOD EXPERIENCE with Spring Boot!
+
+👉  DO NOT WORRY
+
+We have you covered.
+
+👉 WHAT DO YOU NEED TO DO?
+
+If you are NEW to Spring Boot:
+
+COMPLETE this section first- SECTION 11: APPENDIX - INTRODUCTION TO SPRING BOOT IN 10 STEPS
+
+If you are FAMILIAR with Spring Boot:
+
+Go ahead! You are ready to have fun with Full Stack Applications!
+
+--------------------------------------------------------------------------------------------------------------------------------
+------------Step 45 - Initializing a RESTful Services Project with Spring Boot--------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
+
+--we would setup a project using Spring Initializer.
+--We would want to build our restful web services.
+--we'll use start.spring.io initializer our spring project.
+
+  generate :- maven project with Java and Spring boot 2.00(cnapshot version)
+  project metadata:-
+   Group :- com.in28minutes.rest.webservices
+   Artifact :- restful-web-services
+   ---any maven project we need to give groupid and artifact id
+   
+   Dependencies:-we want select few dependencies
+     1. i would want to select web for :- 1.spring boot starter web is the starter project for developing restful webservices
+                                     2.it is also starter project for developing web applications 
+									 
+    2. i would also select devtools:-Dev tools makes it easy for developing applications
+  
+    3.i would want to select JPA at layer point
+    4.i would want to use H2 as the in memory database.
+	--once you select above things click generate project
+	--then Spring Initializer does is it would create a Maven project, put it in a zip and that's what is downloaded to your download folder.
+	--What I recommend you to do is to unzip the zip file to some folder on your hard desk Zip file is downloaded.You can take this, unzip the file to some folder on your local hard desk and launch up Eclipse.
+	--Once Eclipse launches up, you can import the project by using file import existing MAven projects and you can browse through to the directory whereyou unzip your zip file to.This is the route directly to which I unzipped my zip file
+	--Once the project is set up you would see a folder structure like this.
+	it is typicall Maven project struture
+	
+	 src/main/java : 
+	 -----------------
+	 it contains all java code.
+	 
+	 src/main/resources :-
+    -------------------------
+	 We have source main resources with the properties file so there is application.properties which is     the Springboard properties file
+	 
+	 src/test/java :- 
+	 ----------------
+  which can be written down in source test java.
+  
+  pom.xml:-
+  --------------
+  which contains the dependencies, which we have chosen.
+  The Palm XML contains dependencies, starter data JPA, starter web dev tools, H2, and starter test.
+
+These four.The first four dependencies are what we have chosen on the standard spring.io website, web dev tools ,JPA and H2.
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+------------ Step 46 - Creating a Hello World Service--------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
+
+  
+
+ --creating a simple rest controller class-------public class HelloWorldContoller{}
+ -- i would want to create a method  --------- this methode need to reurn hello world
+                                               i want to use Get method and  URI(URI is "/helloworld")
+											   
+for this I want to tell this thing first to spring this is controller (//Controller) :- in the sense this would be handling http requests.
+--we create it as method
+  method:-
+
+  public string  helloWorld(){
+  
+  return "Hello World";
+  }
+  
+Let's focus on the controller first.If you would want to tell String MVC that this is going to handle rest requests,
+
+how do we do that?
+
+A)The way we would do that is by using something called rest controller.now this becomes rest controller
+
+maaping:-
+-- would want to map a GET request to this URI.
+One of the ways of doing that is to create a request mapping.So I type in it request mapping annotation and define the request method to Get and URI (Path="/hello-world")
+
+@RequestMapping(method=RequestMethos.Get,)
+
+
+-------------------------------------------------------------------------------------------------------------------- Step 47 - Enhancing the Hello World Service to return a Bean --------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
+
+1. in this step we would actually create an object for Helloworld and try to return it back
+
+		
+HelloWorldController:-
+---------------------------------------
+		
+		@GetMapping(path="/hello-world-bean")
+	
+	public HelloWorldBean helloworldBean() {
+		
+		return new HelloWorldBean("HelloWorld"); 
+	}	
+
+ 
+2. going to on create 	HelloWorldBean class:-
+----------------------------------------------------------
+
+public class HelloWorldBean {
+	
+	/*
+	 * RequestMapping is Get  Method
+	 * URI-/hello-world
+	 *  method - "Helloworld"
+	 */
+	 
+	 private String message;
+	
+	@GetMapping(path="/hello-world")
+	
+	public HelloWorldBean(String message) {
+	
+	this.message=message;
+		
+		
+	}
+	
+	generating getters and setter ;
+	generating tostirng ; as well
+	
+	
+
+}
+
+this bean is being automatically converted into JSON and retun back output as Jason format
+ 
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------- 70. Step 48 - Quick Review of Spring Boot Auto Configuration and Dispatcher Servlet --------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in thi step we will try and understand what's happening in the background.
+--when we looked into looked we will get few questions?
+1. whatt is dispatcher servlet?
+2.who is configuring dispatcher servlet do?
+3.What does dispatcher servlet do?
+4.How does the HelloWorldBean object get converted to JSON?
+5.who is congiguring the error mapping?
+
+
+--we need to run this application in Debug mode?
+A) for that we need to configure on logging levels
+ logging levels are configured in application.properties file which is present under src/main/resources 
+ 
+ logging.level.org.springframwwork=debug
+ 
+ 1. it says DispathcerSevletAutoConfiguration matched
