@@ -1,0 +1,181 @@
+In this course we are goind to talk about
+
+1.AWS Global Infrastructure ------> AWS regions,availability zones,local zones,Wave length zone
+2. AWS Account and Services -------->  we will talk about what is AWS account and what are typicall AWS services that we will see in your AWS Account.
+and further instead of talking about indivudual AWS services account
+3. let us try to build a sample archetural for building Sample social media application(on-premises version)
+4. we will see how to deploy same application/Same architure using in AWS service (Building sample media application- AWS version)
+
+--then we will understand different purpose of AWS services and how they can used at give architecture 
+so will better understand AWS services and their fucntionalities 
+
+--we will cover 30+ AWS services
+
+--once we reach above all step then still interested
+
+5. Building storng AWS foundation and getting AWS certified
+-----------------------------
+1. AWS Global infrastructure. 
+2. AWS Account and Services.
+3. Building sample social media application(on-premises version).
+4. Building sample social media application(AWS version).
+5. Building strong AWS foundation and getting AWS Certified. 
+
+1. AWS Global Infrastructure:-
+------------------------------------------------------------------
+before understanding or knowing Global Infrastructure we need to know basices of cloud computing
+
+what is cloud computing:-
+A)cloud computing resoucres are owned and managed by the cloud service provider and you connect those recources over the internet.that in the netshell is the cloud computing
+
+cloud compuitng is the on-demand delivery of IT resources over the Internet with pay-as-you-go pricing.
+------------------
+where are this data centers and where we can consuming this cloude services and that really depends on cloud service provider
+
+
+here as we talking about AWS
+AWS as the these DATA centers across the globe and all that falls under AWS Global infrastructure.
+so next few seconds we are going to understand this AWS global infrastruture.
+
+1. AWS Region and Availability zone.
+2. AWS Edge Locations(used by Amazon cloudFront)
+3.AWS LocalZones
+4.AWS Wave length
+5.AWS Outpost
+
+1.AWS Region and Availability zones:-
+------------------------------------------------------
+1.when ever we want to consume the AWS service first we need to select AWS Regions.
+2.As of today they are 34 AWS Regions and this number will grow over the time so out of all this regions we can select which region we want to use.
+3. so region is geograohical area and AWS as so many regions out there
+3.if we talk about region it is a logical entity.which means if we double click into the region actually every region is made up of multiple availability zones(AZ) 
+
+ every region as 3 or more availibility zones. 
+
+why so many availibility zone(AZ's) for one region? 
+a)so for that we need to understand the desing of availability zone(AZ's).
+
+every region as multiple availability zones and this availibility zone are typically located upto 100km from each others. 
+and now the reason for that is if there is any  outage in that Az's,power failure or flodding it will not impact on another Availability zone (Az).they could be on different flood planes and at the same time the distance between these  AZ's is not too much say 1000 of km thats because if  that's the case the data between these az's can not be replicated in real time in order to have that single digit milliseconds between the Az's they need to have 100km.so this is how AZ's are designed.so every AZ's are reduntant power supply and
+all Az connect with high band width network and good power supply.
+so haveing  multiple availiblity zone's and enbale high availability and it's your responsibility to build an application which can handle AZ level failures.
+
+7.futher as i said because this  Az's or lessthan 100 km as apart you could have say primary database  in one AZ's and reputation data base in another AZ's so that there could be synchronous data replication between those databases.
+
+
+8.if we talked about AWS managed services for eaxmle S3,Aurora database,they provide highest durability for your data and that beacuse AWS keeps multiple copies of data across these AZ's.
+
+2.AWS Edge Locations:-
+----------------------------
+1.let's consider that we have selected one of the AWS region in US to deploy your applicstion.
+2. and end user is located at  Asia--so in this case user will experiance the high latency to reach to your application.
+
+if your application is a media appplication for example netflix or you tube .
+ this user may not get best experience that user traffice goes over the non AWS network so we not able to control how that trafic will flow because of that it is using public internet and in order to solve this problem and in order to optimize this network path AWS as something called edge network which uses AWS edge locations .these edge locations located on acorss the globe which are managed by AWS and way its works that if user wants now access that application the traffice goes to nearast AWS Edge location and all this edge locations or connected over AWS backbone network the network which is owned and manged by AWS so it does not use public internet to reach to that application and they are many AWS service which may use of this AWS edge locations and AMazon cloudFront is one of search service so the way that cloude front work is that exactly in simiar prattern user can access the video/media over the AWS NetWork but on top of that  cloude front which is  CDN service can  also cahed to static content  in the  nearset edge location so that if any MANY other user how are wathing same video/media and that at will serve at nearst edge location so its greatly imporves latency to access the media and for this Amazon cloud front services uses AWS edge location and like wise 600+ such edge locations across the global
+
+
+
+3. AWS Local Zones:-
+-----------------------------------------
+local zones :- similar to AZ but are located in metro politian area
+
+northorh vergina region ehich have multiple AZ and it is located in some geographical area -----------> in the USA different citities as well Boston,Nycity,Atlanta all these;
+-- and end users of cloud computing  could be located anywear in the USA right and these cars are in this cars, mobile phones,sensors and everything that connected to the cloude
+
+and  In general AWS region and AZ's are the primarly locations from where will consuming the clode services right and that is also the chepest option but for some reason it is not always  possible to use AWs region reson could be distance between region and end-user so even if you use AWS backbone network  but still there will be some low-latency and if your application is really low latency application and it doesnot make sense to host your application out of AWS Region simillary there could be a requirment with respect to the data residency where we need to either host you data locally into your state or your application into your premises now in that case as well you can host your application in the AWS region
+
+so like wise they can be different regions for which we cannot use AWs Region.
+
+ so what will do in that case so i said AWS didn't stop on AZ's and regions 
+ and today AWS also as some thing called Local Zones.
+ 
+ Local zone  which are soemthing similar to AZ's but they are located in Metroplitian area.
+ 
+ now the users who are located in that city or the companies who have presences they can access  AWS services from Local zone with mucher low-latency 
+ 
+ 
+ AWS Wave length zone:-
+ ------------------------------------
+ 
+ and futher if your using moblie phone for 5g-networks 
+ then AWS services can also be now used from tele comm services providrsd data center.
+ that is also called AWS Wave length zone.AWS deply those servcies into tele com srvice providers data acenter.
+ so from the traffice enduser to teh AWS never levaves that 5g network and thats where they will get millisecon second latency fro that application.
+ 
+ outpost:-
+ ------------------------
+ some time it is noit possibily to use this zone and that you wnat ti host your application locally or you cannot leave your data on premises so int that case AWs will come to your data center in the form of outpost.
+ 
+ basecially these are server rack which can host AWS seervice foreample :- ec2 database
+ 
+ 
+ AWS Account and Services:-
+ ----------------------------------
+ 
+ 1.if i want to use AWS services First thing that we need is AWS Account.
+ 2. once we signed up for your AWS account ------------ we will get access to all AWS REgions--------------> and then as we now regions contains AZs' 
+ and to get access to all regions' , all (Availability Zone)Az's and all AWS services.
+ 
+ 
+now if we talk about different AWs services  and relation with their Az's /regions and services like ------------>EC2(virtual machine) service and it operates at AZ's level.
+
+2.if we talked AWS managed servics like dyamoDb or S3 are regional services
+
+3.there are the services which works accrose the regipons Rouste s3 and these are global services are
+4. finallu some Aws services that are attached to your Account -IAM (identity Access mangment) using this we will create your user Account and this user also have access to all AWs region an dservice
+5. billing service :- where we will get end of month single bill for AWS services we consume across all this regions
+
+6. AWS account is top level Acccount and once if we have your account to access everything in your account
+
+
+AWS SErvice Catogries:-
+they are 10 of AWs service catgories with in each catgieros there 10 of services
+
+
+deply application into AWs:-
+-------------------------------------------------------
+1.now deploy application into AWS data center for that  choose AWS data center so that choose AWS region.
+2 private network ---------------> in this AWS world Private net work is --------------------> VPC that is called Virtual private cloude and it is private for your account unless you want access your application over the internet no one get access to it
+3.all virualMachines for your Wedservers and Application server are ------------------------->EC2(elastic comupte cloude) instances and 
+4. all local disk there----------EBS (elastic block storage) so this is very much like SSD and htts it is that you have in your laptop
+5.in Relational data base in AWS -----------> RDS
+6.no SQL database -------------------in AWS we are using ---------------DynamoDB
+7.in for GraphDb -----------> we can use Neptune datbase in AWS
+8.with repest of in-memory database that we are using for cache -------------------- in AWS we are using for Elastic Cache
+9. load balanced --> in AWs there is a managed load balancer service which is called ELB(Elastic load balancing) and this load balancer distribute the traffic across the backend EC2 instances 
+
+10.in order to scaling this we talked about the horizontal scaling now in AWS that can be done using Auto Scaling group so if you have Auto scaling group we can define your Auto scaling policies for eaxpmle average cpu utilization of you  webtiers 80% we ask you autoscaling group to add one more instances
+
+11. further in order to point your domain name to the IP address we will use AWS Route 53 services
+
+12.External Storage service we need for  ------------in AWS that external service we need for -----Amazon S3 servcie----Amazon s3 service is one of the most importent service in AWS----because amage provides unlimited storage directly over to the internet.
+
+13. convert the videos fron one format for web users and mobile users for this we might thinking to use simple EC2 instances and using those instance convert those videos but imagine that through out the day no upload made by the user still we need to run Ec2 instance and still we need to pay money  for that in this case AWs rather use Lambda . ---------Lambda the way lambda works is as soon there as new picture or media upload then only this lamba triggers and performs its jobs.so through out the days no uploads no lamda function will be trigger so this is called server less computing
+
+14.cdn -------------- in AWS is cloudFront services we typically uses AWs edge locations typically uses across the global
+
+Dataanalytices part
+--------------------------
+
+15.click stream data :- we need to collect continues stream of data for that in---- AWS--------------> we are using Kinesis service
+
+16.ETL :- Amazon glue services
+17.spark Hadoop ------------ EMR(Elastic Map reduce) in AWS
+18.Data Ware house -----------------> Amazon Redshift
+19.Business Intelligence ------------------> Amazon QuickSight
+
+20. ML training---ML model ---in AWS we can use Amazon Sagemaker---deploy this custom model and acess this sagemaker models over the API calls
+21. to check weather upload video/picture apporate or not for that we are using ---------------- AWs AI services----------Amazon Rekognition
+22. SMS Mobile Push Notifications :- Amazon SNS thats is Simple notification service 
+23 Email we can use SES (simple Email service)
+24. Message Queue we can use Amazon SQS(simple Queue service)
+25.Monitoiing Dashboars and collecting all metrices and logging we can use ---------> Amazon cloud watch service
+ 
+ to deploy AWS kind of application we need to make  automation .AWs world we call it as infrastructure as a code.where we write the code for the insfrastrcture and hand over that code to AWS services to deploy that infrastructure.
+ --if you talk about AWS platform srvices
+  we just write JSON or ML template which basically defines what all different AWS services we want to use and how they want connect AWs servics each other and hand over that file to AWS cloud formation in temple we need to define the VPc the dc Cir ranges and how many Ec2 instances we are using and all the onfigurations EC2 instances and the load balancers and databases and evrything an dthis cloud formations deployed entire architecture into AWs for you
+  
+  2.cloud formation is the AWS native service to deploy the infrastructure. 
+  3.if we want to build a devops pipelines (ci cd) where as developers  checks-in new code now it is build tested and deployed into the production. now if you want to do that in AWs they are lot of Devops services first thing every body writes the code check that code in git repostory.
+  
+  devops peple will write the code for Infrastuctre  and -------check-in code commit into the(Git)---------------->Json(IAAC) Infrastructure----------------cloud formation ------deploy application ----devops can use AWS code pipeline 

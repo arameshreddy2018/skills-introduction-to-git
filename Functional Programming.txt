@@ -1,0 +1,126 @@
+functional-programming :-
+
+there are lot of new concepts related to functional programming which are introduced in Java8.
+1.lambaexpressions
+2.streams and lot of things
+
+
+before functional program:-
+
+in a variable intially have some value at in later point of time would have a value for a varable would change.at different stages of this program execution,the sum value will have different values.
+so i would initially have a value of zero,then it will have a value of one.so everty state the variable value will change whichever sum is having ,is called state in all the standard programming things that we do weather it is object oriented programming or procedural programmimg we depend a lot on the state of the program that state of the variable value will keep changaing with time.because of that new programming style which came in is functional programming.
+
+public class Lambada expression
+public void sumOfOddNumbers_usaual){
+
+List<Integer> numbers = Arrays.asList(1,3,4,6,2,7);
+
+int sum = 0 
+
+for (int number : numbers)
+if(number % 2!=0)
+sum += number;
+
+assertEquals(11,sum);
+}
+		  
+
+After functional program:-
+    1.In functional programming, you avoid change to state. 
+	2.in functional programming,one of the things is no changes to state of  a program,
+	so that's the main concept behind functional programming.so once you assign a specific value to variable ,you will not change the value of the variable at anypoint in time
+
+the reason of functional programming  more important is MultiThreading i acn run my code multiple threads without any problem
+
+now will calculate odd numbers in a functional programming style.
+-----------------------------------------------------------------------------------------
+
+public void sumOfOddNumbers_FunctionalProgrammingExample(){
+
+List<Integer> numbers = Arrays.asList(1,3,4,6,2,7);-----any list of objects is called as a streams
+
+int sum = numbers.stream()---------------here i am creating stream from list of object
+          .filter(number -> (number % 2!=0))-----------Intermediate operation
+		  .reduce(0,Integer::sum);----------------Terminal Operation
+		  asserEquals(11,sum);
+		  
+		  }
+		  
+		  
+1.any list of objects is called as a streams		  
+2.here i am creating stream from list of object
+3. from above stream filter those which do not math these list 
+4. then reduce by using this sum
+
+so entire calculation is done,the entire calculated value is assigned to sum.
+
+basically,functional programming is a style of programming where we use streams and lambda expressions to make sure thst your code does not have any state.
+
+
+functional programming :-avoid changing data or immutable state.the way we achived this functional programming is by using streams
+----------------------------
+
+int sum = numbers.stream()---------------here i am creating stream from list of object
+          .filter(number -> (number % 2!=0))-----------Intermediate operation
+		  .reduce(0,Integer::sum);----------------Terminal Operation
+		  asserEquals(11,sum);
+		  
+		  }
+		  
+		  
+Q)what is streams?
+A) A stream is a source of objects.in above example we created stream as  alist.
+
+Streams have intermediate operations and Terminal Operations.in the example above,we used filter as intermediate operation and reduce as a terminal operation.
+in streams we can use lot of  intermediate operations and one Terminal Operations 
+
+intermidiate operations:-
+----------------------------
+1.filterting
+2. map
+3.sorted
+
+1.intermediate operation are those which one it takes streams as an input ans return another stream as an output.
+2.posible to have multiple intermediate operations
+
+
+examples/some of intermidate operations :-
+map:- if you would want to map one value to another value.
+filter :-  if you want to filter ten values from a set of ten, you only want to get three values .
+distinct:-if you only want the set of distinct values.so if you have a set of ten values with duplicates,you want to remove the duplicates out of it.
+sorted :- so basically if you want to sort the list of things.  
+
+
+Terminal operations:-
+---------------------------------
+The terminal operation is the one which on other hand, would consume the whole thing and either send it to an output sum it up or something of that kind .
+2.it might return a single integer or single value,or it might be a list or an array,or it might be saving something to a database 
+
+main point :-Terminal operation either produce a result or create a side effect.
+
+Reduce:-
+----------------
+1.reduce is one of the terminal operations.
+2.Reduce is basically to take the values and combine them into a single value.
+
+foreach:-
+--------------------------
+1.for each is used to create a side effect,print to Output.store to database.
+2.In for each we are passing function/passing method reference
+
+collect:-
+------------------
+1.collect is used to group elements to a collection.
+3. the output of the terminal operator can also be list
+
+what are method References?
+A) Method references are short cut of lambda expressions.
+2.Integer::sum, System.out::print are example of method references.
+
+what are lambada expressions?
+A)A lambda expression is an anonymous function.Simply put,it's a mthos without declaration.there will be no access modifiers,no return value declaration, and no name. it's shorthand that allows you to write a method in the  same place you are going to use it.especially useful in places whee a method is being used only once and the method definition is hsort.
+
+sy:- Parameters > Executed code
+
+
+          

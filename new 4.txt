@@ -1,0 +1,216 @@
+creating EC2 instance:
+the service we need to use for EC2 instance -EC2 Ec2 stands for elastic compute cloude
+
+--Ec2 is the virtual servers in cloude
+1)first select region Ex-Mumbai
+-click launch instance----in this launch instance we need to fill lot of details
+
+sudo su
+yum update -y
+yum install httpd
+systemctl start httpd
+
+section 5:-
+---------------------------
+--setting up python application in data center:-
+-----------------------------------------------------------
+1.first provision a virtual machine.
+2.install operating system.
+3.then i would install python 
+4. then would install the application and its dependencies.
+
+--To understand the different approaches that cloud provides, you need to understand some of the terminology
+1.Iaas :-infrastructure as a service 
+2.paas:- platform as a service
+ and a wide variety of other terminology.
+ 
+ 
+Iaas :-infrastructure as a service :-
+-----------------------------------------------
+1.use, only infratructure from cloud provider
+  .Using VM service to deploy your apps/databases
+  
+2. Cloude provider is responsible for
+  . Hardware,Networking and virtualization
+  
+3. you are responsible for :-
+   1) Os upgrades and patches
+   2) Application code and Runtime
+   3) Configuring load balancing
+   4) Auto scaling --The number of users on your application varies with time, and if I have a lot of users, then I would need a lot of instances.ers, I would want to reduce the number of instances.
+   5) Availability :- 
+   
+   
+  --Now, the question you might be wondering is how can we give some of these responsibilities to the cloud provider?
+  
+2.paas:- platform as a service
+-------------------------------------------------- 
+1.Use a plarform provided by the cloud 
+   1.)Cloude provider is responsible for
+    1) Hardware,Networking and virtualization 
+    2)installing Os(including upgrades and patches)
+   .3)installing Application Runtime 
+   3) Configuring load balancing
+   4) Auto scaling --The number of users on your application varies with time, and if I have a lot of users, then I would need a lot of instances.ers, I would    want    to reduce the number of instances.
+   5) Availability 
+
+2. you are responsible for 
+  1) configuring of (Application and Services)
+  2)Application code (if needed) 
+  
+  
+3)Let's look at a few examples.
+
+ 1) These are basically options that help you to run Python applications, Java applications or Node.js applications in cloud.
+ compute:- AWS Elastic beanStalk, Azure App Service, Google App Engine 
+
+2)if your using AWs then AWS Elastic Beanstalk is a good example of platform as a service.
+
+note:- When you're using Elastic Beanstalk, all that you need to say is this is the code I would want to deploy and I would want to make use of Java ten or Java 18.
+That's all.
+
+3) Databases :- Relational and NoSQL (Amazon RDS, Google cloud SQL, Azure SQl Database etc)
+example of a relational transcational database in AWS is Amazon RDS,
+
+4) Queues,AI, ML,,Analytices, Devops,Operations etc
+
+AWS Elastic Bean stalk
+------------------------------
+
+1) Aws elastic Bean stalk is simplest way to deploy and scale your wed applications in AWS.
+scenario:- If you have web applications to run in use and you'd want to take most of the responsibility in that kind of scenario, you can go for Elastic Beanstalk.
+1.It provides end to end web application management.
+2.It supports a wide variety of languages and frameworks.It supports Java, dot, net, Node.js, BHP, Ruby, Python, Go.You can even deploy containers created using Docker applications.
+3.There are no usage charges for Elastic Beanstalk, but you need to pay for the AWS resources which are provisioned.
+For example, if you're using Elastic Beanstalk to create a few EC2 instances and a load balancer,then you need to pay for ES2 instances and the load balancer.
+             You don't really need to pay anything for the usage of the Elastic Beanstalk Service.
+			 
+Features related to Elastic BeanStalk:-
+---------------------------------------------------
+1) Automatic Load balancing :- If you have multiple EC2 instances, you can tell Elastic Beanstalk to configure a load balancer for you.
+2) Auto Scaling :-  Increase and decrease the number of instances based on the load and 
+3) also perform managed platform updates :- if you want to update the OS or if you'd want to update the runtime, a place Elastic Beanstalk can do that for you without any downtime.
+
+auto scaling group and elastic load balancing:-
+------------------------------------------------------------
+Applications have million users :- same application is deployed to multiple VMS
+
+Q)How do you simplify creation and management of multiple VMs?if i want to create multiple ec2 then iam doing by using 
+A)1.auto scaling groups in AWS  allows you to create and manage a group of EC2 instances. 
+ --And the auto scaling group can also increase the number of instances and decrease the number of instances
+ 
+Q)How do you distribute traffic across multiple EC2 instances ?
+A) Elastic Load Balancing.
+
+--One of the options is to manually set up an auto scaling group and manually setup elastic load balancing.
+-However, the easiest way to set up EC2 instances with auto scaling groups and elastic load balancing enables is to make use of a platform as a service offering in a years, which is Elastic Beanstalk.
+
+--So Elastic Beanstalk helps you to create multiple EC2 instances using an auto scaling group and load balance between them using elastic load balancing.
+
+Demo - Setting up Web Application with AWS Elastic Beanstalk
+-----------------------------------------------------------------------
+1 search :- for Elastic Bean stalk 
+2. services --select Elastic Bean stalk Run and Manage web apps
+3. create Application:-
+  3.1 create web App :-
+      Application information :- application name:- My-first -elastic-beanStalk
+	  platform:- platform (python),platform branch (python 3.8 running on 64bit Amazon Linux 2)
+	  Platform version :- 3.3.15(Recommanded)
+4. Application code:-
+  Sample application:- 
+  
+  then select configure more options:-
+  
+  software :- enable Amazon X-ray :- X-ray is tracing service in AWS
+  capacity and load balancing :-creating multiple instances and load balancing:- edit :- environment type as load balanced :- min - 1 and max- 2
+  
+now app is creating.
+
+16. Step 07 - Demo - Playing with AWS Elastic Beanstalk
+---------------------------------------------------------------------------
+
+Now, before we go further and look at what is happening inside Elastic Beanstalk, 
+before that look at what's happening outside Elastic Beanstalk.
+
+what are the all the recources that are created By Elatic Beanstalk?
+A) in EC2 (Elastic compute):-
+-----------------------------------
+   1)instances is running :- 
+   elastic bean stalk created this Ec2 instance , intall python on it and application on it as well.
+  
+  Auto scaling:-
+  -----------------------
+  2) Q) How is this instance cretaed ?
+    A) 1) this instance is created as part of some thing called an auto scaling group.
+      2)If I would want to create a number of EC2 .The way we can do that is by creating an auto scaling group.
+      3)This auto scaling group is automatically created for us by Elastic Beanstalk.
+
+Load balancing:- 
+-------------------------
+3)Elastic Beanstalk also created Load balancing  
+
+
+elastic bean stalk:
+------------------------
+
+17. Step 08 - Understanding the Need for Docker and Containers
+------------------------------------------------------------------------
+ 1. Understanding the Need for containers  and Containers orchestration.
+ 2.The journey towards container and container orchestration started with microservices.
+ 
+ Microservices:-
+ ------------------
+ 1.Microservices is one of the most popular buzzwords of the last few years.
+ 2.Almost every enterprise out there is heading towards microservices architecture.
+ 
+  Q)what is a microservices architecture?
+  A)The fundamental concept behind microservice architecture is instead of building a large monolith application,how about building very, very small, independently deployable microservices?
+ -- So microservices architecture is all about building small focused microservices, which are independently deployable.
+ --The great thing about the microservices architecture is that it provides you with flexibility to innovate and build applications in different programming languages(go,java,python,JavaScript, etc)
+ 
+ For example, 
+ I can build movie service in :- go.
+I can build customer service in :- Python.
+
+I can build review service in :-Node.js, 
+I can build booking service in :- Java.
+
+However, as they say, with great flexibility comes great problems.
+--One of the challenges with microservices architectures is the fact that deployments become very complex.
+
+--How can we have one way of deploying and monitoring?Go Java, Python or JavaScript microservices?
+   A) containers :-   Docker is one of the most popular ways of building container images
+   2. Docker allows you create Docker images for each of these microservices,
+   3)and you docker image containes all needs of microservice 
+    1)it contains application run time(JDK/Python/NodeJs)
+	2) it allows contains Application code and all the Dependencies that the application need to run.
+	3)therefore you can run your Docker image the same way on any infrastructure because your Docker.
+	--You can run it in your local machine, your corporate data center, or in the cloud the same way.
+	--In summary, a Docker image contains everything that your microservice needs.
+
+
+So what are the advantages of going for Docker?
+A) 1.Docker is cloud neutral
+  2. Docker also brings in standardizationSimplified operations - Consistent deployment,monitopring,logging
+  3. Docker containers are lightweight.
+4.The alternative to Docker containers is to make use of something called virtual machines.
+5.Docker also provides very good isolation for your containers.
+
+
+18. Step 09 - Exploring Container Orchestration in AWS
+-----------------------------------------------------------------------------
+   
+	  
+
+
+
+
+
+   
+  
+
+
+
+
+
+

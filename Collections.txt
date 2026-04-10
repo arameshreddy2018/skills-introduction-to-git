@@ -1,0 +1,397 @@
+collections
+-------------------
+why do we need collections in java?
+A) the basic datastructure of array in java is not dynamic,we cannot increase array size.for that we need to create another array with big size and then copy all the elements from old array to new array.
+
+thats is the reson collections comes into situtation where data is dynaminc.collections allow add element,deleting an element and host of other operations.
+
+there are a number of collections in java allowing to chosse the right collection for right context.
+
+important interfaces in collection hierarchy
+--------------------------
+Collection interface
+Map interface-- does not extends collection.the map is used to store key-value pair
+
+interfaces that extends collection interfaces:
+----------------------------------------------------------
+Set interface :- allows only unique things it does not allow duplication.i do not want same element present twice
+List interface :- list it's position base thing. we can have same elements can present multiple times.add elements in a speicfic postion,delete an element in a specific position
+Queue interface:- queue supports in order of processing.i have list of things todo and i want to order them in they i want to execute the i put them in Queue 
+
+
+looking methods in each interface:
+-----------------------------------------------------
+---------------------------------------------------------
+
+Collection interface :-
+-------------------------------------------
+boolean add(E paramE) -- add an element ,boolean addAll(Collection<? extends E> paramCollection)-- add all from collection,
+remove(object paramobject) -- remove an element,boolean removeAll(Collection paramCollection)--remove all from collection,
+boolean retainAll(Collection paramCollection)--retain only thing which are present from this collection
+int size(),
+boolean isEmpty(),
+void clear(),
+boolean contains(object paramObject);
+boolean containsAll(Collection<?> paramCollection);
+Iterator<E> iterator():- which will enable you to loop around the collection.
+
+List interface Methods:-
+-------------------------------------------------
+boolean addAll(int paramInt,Collection<? extends E> paramCollection);
+
+E get(int paramInt);----getting an value based on index
+E set(int paramInt,E paramE);---setting an value based on index
+
+void add(int paramInt, E paramE);-- add element at a specific index
+E remove(int paramInt)---remove an element at specific index.
+
+int indexOf(Object paramObject);---indexOf specific object
+int lastIndexOf(Object paramObject);-- last indexOf specific object
+
+ListIterator<E> listIterator();
+ListIterator<E> listIterator(int paramInt);
+List<E> sublist(int paramInt1,int paramInt2);--i want list of items between these two indexes
+
+any implementation of list interface would maintain the insertion order.when an Element A is inserted into a list(without specificing position) and then another element B is inserted ,A is stored before B in the List.when new element is inserted without specifying a position,it is inserted at the end of the list of element
+
+2. list interface cares about which position each object 
+ Elements can be added in by specifying position-where should it be added
+  Elements can be added without specifying position-where it should be added at the end
+  
+  
+--  best example of list interface :-
+
+1.Class ArrayList implements List interface.
+-------------------------------------------------------------
+
+1.Class ArrayList implements List interface.
+2. the access time in an arrayList is very fast.
+3. the underlying data structute is an Array.in an array we can easily access an element.
+4. how ever insertion and deletion very slow.
+5.one important thing about ArrayList is it it not Thraed safe.
+
+2.other class implements list interface is Vector
+--------------------------------------------------------------------
+1. Class Vector implements List interface.
+2. the access time in an vector is very fast.
+3. how ever insertion and deletion very slow.
+4. Vector is not Thraed safe.all method in Vector is synchronized.
+
+3. Class LinkedList implements List interface,Queue interface
+-----------------------------------------------------------------------
+1. LinkedList also implements both List and  Queue interface also so supports method peek() ,poll() kind of things to findout next element in the Queue.
+2. Linkedlist has elements linked to each other.
+3. there are doubly linked-forward and backward -one to one another
+4. linkedList is a Ideal choice to implemsnt stack or Queue
+5. Iteration is slower than ArrayList
+6. insertion and deletion is fast
+7. LinkedList also implements Queue interface also so supports method peek() ,poll() kind of things to findout next element in the Queue.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Set interface:-
+------------------------------
+
+1..set interface doesnot allow duplication.
+2. set interface doesnot gaurentee any specific order
+
+1.interface soretedSet  extands Set interfaces:-
+------------------------------------------------------------
+1. to  maintains elements in a sorted order(either natural or via a comparator).
+2.Sortedset interface allow unique values.
+
+it adds methods like SortedSet<E> subSet(E fromElement, E toElement),SortedSet<E> headSet(E toElement),SortedSet<E> tailSet(E fromElement),E first(),E last();
+
+2.interface NavagableSet extends Sortedset:
+-------------------------------------------
+ it provides navigation methods to find elements based on proximity,such as lower(),higher(),floor and ceiling(),or to pollFirst(),Polllast()
+ 
+ 
+Implementations:
+ -----------------------------------
+ 
+ class Hashset implements Set interface:
+ ---------------------------------------
+ 1.hashSet the order of insertion is not maintain but it would not store duplicates values.
+ 2.hash Set uses a kind of a hasing implementation.
+ 
+ 
+ order of insertion is : A,X,B
+ Possible order of storing is : X,A,B
+ 
+ 
+ Class LinkedHashSet implements Set interface:
+ -----------------------------------------------------
+ 1.maintain the order of insertion and make sure there are no duplicates
+ 2.Linkedhash Set also uses a kind of a hasing implementation.
+ 
+
+  order of insertion is : A,X,B
+ Possible order of storing is :A,X,B
+ 
+ 
+ Class TreeSet Implements set,NavigableSet 
+ ----------------------------------------------------------------
+
+1. TreeSet implements Set and NavigableSet. but NavigableSet extended Sortedset because of that basically TreeSet Implements Set Interface,Navigable Interface and SortedSet interface.
+2.TreeSet doesnot maintain ordering/order of insertion but elements are stored in sorted order.
+3.it does not store duplicates.
+4. we can use navigable set to find out a specific elements ina specific range or you can find what is smaller than a current element,what is bigger than a cureent element all kind of good stuff.
+
+ order of insertion is : A,B,C
+ Possible order of storing is :A,B,C
+
+
+Map Interface 
+-----------------------------------------
+1. interface Map<k,v>
+2. interface sortedMap<k,v> extends Map
+3.interface NavigableMap<k,v> extends sortedMap
+
+
+Map Interface: 
+1.This data structure stores data as key-value pairs, allowing users to associate a key (e.g., an element A) with a value (e.g., its count, 5). 
+Core methods include put(key, value), get(key), remove(key), containsKey(), keySet(), and values(). 
+Ordering of elements is not guaranteed in a standard map.
+
+SortedMap Interface: 
+1.This SortedMap extends the Map interface 
+2.  but SortedMap ensures that elements are stored and retrieved in the order of their keys (either natural ordering or via a custom Comparator).
+3.In sortedMap order of Elements is guaranteed order.
+4. SortedMap woulb also provides some methods like subMap(K fromKey, K toKey), headMap(K toKey), tailMap(K fromKey), firstKey(), and lastKey() 
+
+NavigableMap interface:-
+
+The NavigableMap interface extends SortedMap 
+Key Features of NavigableMap
+------------------------------
+Enhanced Navigation: 
+1.It provides methods to find the closest matches for a given key, not just exact matches.
+2.Descending Order Views: It allows traversing the map in both ascending (default) and descending key order.
+NavigableMap also provide some methods:-
+NavigableMap adds methods for retrieving entries based on their proximity to a given key, such as 
+lowerKey()/lowerEntry(), floorKey()/floorEntry(), ceilingKey()/ceilingEntry(), and higherKey()/higherEntry().
+3. It also includes methods to remove the first or last entry (pollFirstEntry()/pollLastEntry()) and
+4. to obtain reverse order views of the map or its key set (descendingMap()/descendingKeySet()).
+ You can find a complete list of methods in the official Java NavigableMap interface documentation. 
+ 
+ Let's look at a few sample implementations of the map:-
+ ---------------------------------------------------------
+ 
+ 1.Class HashMap implements map
+ ------------------------------------
+ anything starts with hash orderying is not gaurentee.
+ 1.unsorted,unorders
+ 2.Keys hashcode() is used
+ 3.hashMap allows a key with null value.
+ 
+ 2.Class HashTable implements Map
+ --------------------------------------
+ 1.Synchronized -Thread Safe
+ 2.unsorted,unordered
+ 3.Key's hashcode() is used
+ 4.hashtable doesnot allow null value
+ 
+ 3.Class LinkedHashMap implements Map
+ --------------------------------------
+ 1.insertion order is maintained(optinally can maintain access order as well)
+ 2.slower insertion and deletion.
+ 3.faster iteration.
+ 
+ 4.class TreeMap implements Navigable Map
+ -------------------------------------------
+ 
+ 1.Sorted order is maintained 
+ 2.we can use all Navigable methods which are present in Navigable interface.
+ 
+ 
+ Queue Interfcae:-
+ -------------------------------------------------------------------------------------
+ 
+ 
+ 1. Queue interface also extends collection interfaces and it supports all the collection elements.
+ 2. Queue is usually used for processing kind of thing.
+ 3. if Queue if i want to store elements in the order and process them to take top element from the collection and process it.
+ 4.Queue extends collection so inherts methods from collection and queue also have some methods like 
+ add(E paramE):- add element into queue,
+ offer():- offer element into queue/insert the specified element into this queue.
+ E remove():- retrieves and removes the head element, remove throws an exception if queue is empty.
+ E poll():- retrieves and removes the head of this queue and pol() would returns null if queue is empty.
+ E element(),
+ E peeK() :-peak would return the element, but it will not remove the element from the head of the queue.
+ 
+ Dqueue interface:-
+ -------------------------
+ 
+ 1. Dqueue is a collection where you can actually insert/add and delete/remove elemnts at both sides of the queue so this is called double ended queue. 
+ void addFirst(E e)------------ add element at first
+ void addLast(E e) ------------ add element at last
+ boolean offerFirst(E e)---------------- offer first
+ boolean offerLast(E e)---------------you can either offerlst
+ E removeFirst();----------------you can remove first
+ E removeLast()------------------- remove last
+ E pollfirst() --- removes and returns the element from the front(first)of queue
+ E polllast()--- removes and returns the element from the front(last)of queue 
+ 
+ 
+ Blocking queue interface
+ --------------------------------------
+ the blocking queue interface is used when you want to supports operations that wait for the queue to become non-empty.
+ 
+ usecase:-
+ -----------
+ I would want to get an element from the queue, but the queue does not have any elements right now in that kind of situation.
+
+I want to wait for an element to become available in those kind of situations.We go for a blocking queue, so interface blocking queue supports those kind of use cases.
+So basically I'm pulling a queue. The queue does not have any elements.I would want to still wait for some time and wait for an element to be available.
+
+this Blocking queue interface also  have some methods
+----------------------------------------------------------------
+1.boolean add(E e) :-
+-- Same as in Queue interface.
+-- Inserts the specified element into queue IMMEDIATELY
+-- Throws exception in case of failure.
+
+2. boolean offer(E e):-
+-- Same as in Queue interface.
+-- Inserts the specified element into queue IMMEDIATELY
+-- Return false in case of failure.
+
+3.void put(E e):-
+-- Inserts the specified element into this queue,waiting
+-- if necessary for space to become availble.
+
+4.boolean offer(E e, long timeout, TimeUnit unit) throws InterruptedException
+--waiting upto the specifies wait time
+
+5.E take() throws InterruptedException;
+-- waits until element becomes available
+
+6.E poll(long timeout,TimeUnit unit) throws InterruptedException;
+
+int remainingCapacity()
+
+boolean remove(object o);
+
+Public boolean containd(object o)
+
+
+three interfaces :-
+-------------------------------
+Queue:- which is kind of the base of all the queue interfaces queue.you would want to store elements for processing and you have whenever you would want you can take the top element from the queue and process it.(FIFO)
+
+Dqueue:- Dqueue interfcae is an double end Queue it is an extendtion of queue interface which will allows add/insertion and delete/remove from both sides like frond and back of the queue.
+
+Blocking queue :- Blocking queue extendes the queue more for the usescase where I want to get the element from the queue,but if the queue is empty I would want to be able to wait for a certain amount of time.so in those kind of scenarios, i would go for a blocking queue.
+
+
+implementations of  a queue:-
+------------------------------------
+
+Class PriorityQueue :-
+1. class priorityQueue implements Queue 
+2. the elements of the Priprity queue are ordered according to their natural ordering.
+the elements are sorted in the natural order, so the elements are stored according to the ordering, which is natural to them.
+
+class ArrayDQueue:-
+1.Arrayqueue is an double ended queue it implements Deque
+
+class ArrayBlockingQueue:-
+1.ArrayBlockingQueue implements BlockingQueue,
+2.it uses array as the underlying data structure.
+3.But you can wait for a certain period before an element becomes available.
+
+class LinkedBlockingQueue:-
+1. LinkedBlockingQueue implements BlockingQueue.
+2.uses linked list as the underlying data structure for blocking queue.
+3.The thing about the linked blocking queue is typically they have better performance than array blocking queue, but sometimes in very concurrent applications the performance is less predictable.
+
+Queue: The standard FIFO (First-In-First-Out) contract. Use this when you just need a simple "line" where the first one in is the first one out.
+Deque (Double-Ended Queue): Pronounced "deck." It’s versatile because it can act as both a Queue (FIFO) and a Stack (LIFO). It's the go-to for ArrayDeque or LinkedList implementations.
+BlockingQueue: This is the thread-safe heavy lifter. As you mentioned, it handles the "waiting" logic for you—perfect for Producer-Consumer patterns where you don't want to manually code wait() and notify() loops. 
+
+
+difference between comparable and comparator interface:-
+-----------------------------------------------------------------------------------
+comparator interface:-
+-------------------------------------
+ If you want to sort elements of a custom class in any way you want (custom order), you typically create a separate class that implements the Comparator interface. 
+ the key difference in the compare() method is that it requires two objects as parameters to decide their order.
+ 		 1.  Collections.sort(cricketers, new DescendingSorter());------------------ArrayListExamples class
+		 
+		 
+		 2.    public static <T> void sort(List<T> list, Comparator<? super T> c) {----------------Collections class
+        list.sort(c);
+    }
+	
+	
+	
+	  3.  int compare(T o1, T o2); ----------------- comparator interface
+	  
+	  
+Comparable interface:-
+--------------------------
+1.If you want to define a natural ordering for a class, you must have that class implement the Comparable interface.
+2.This "natural order" is the default way instances of that class will be sorted. 
+	1.   Collections.sort(cricketers);-----------------------------------ArrayListExamples class
+		 
+	
+	2. public static <T extends Comparable<? super T>> void sort(List<T> list) {
+        list.sort(null);
+    }
+	
+	3.  int compare(T o1, T o2);-----------------------Comparable interface:-
+	
+	
+	
+	static methosd present in the collections class:-
+	-------------------------------------------------------
+	
+	1.static int binarySearch(List,Key)--------------->can be used only on sorted list
+	2.static int binarySearch(List,Key,Comparator);
+	3. public static void reverse(List<?> list) --------------------------------Reverse the order of elements in a list.
+	4. public static Comparator reverseOrder() --------------------------------Reverse the order of elements in a list.
+
+
+	5.    public static <T extends Comparable<? super T>> void sort(List<T> list) {
+        list.sort(null);
+    }
+	
+	6.    public static <T> void sort(List<T> list, Comparator<? super T> c) {
+        list.sort(c);
+    }
+	
+	
+--So all the static methods which are present in the collections class are very useful to do operations on the collection objects.
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

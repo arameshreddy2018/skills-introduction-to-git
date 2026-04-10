@@ -1,0 +1,138 @@
+1.now we are looking in this specific section is advanced collections
+2.what are these advanced collections and how are they different from the synchronized collections that were available in earlier versions of Java?
+3.let's get started with synchronized and concurrent collections.what is the difference between them?
+
+Q)what is difference between synchronized and concurrent collections?
+A)Synchronized collections are implemented using Synchronized keyword(Synchronized methods and Synchronized blocks).
+2. if you take example of Vector class.inside this vector class there is lot of synchronized methods
+3.because of this synchronized() in Vector class.vector class is thread safe.
+4.one thread is executing one of synchronized method inside Vectorclass.other threads needs to wait until execution finished by before thread
+eaxample:- So if I have 100 threads which want to execute other methods on this object.They have to wait until when? Until this method completes execution.So once this method completes execution, then another thread will be able to execute one of the synchronized methods.
+that is very,very severe restriction and that's why synchronized using the synchronized keyword comes with a lot of cost.
+
+5.It's thread safe, but the programs become really slow because you are waiting, waiting, waiting.All the threads are waiting for getting access to the specific methods that they want to execute.
+6. All the pre Java 5 synchronized collections are(HashTable,Vector ) use thsi approach.
+
+
+concurrent collections:-
+--------------------------------------
+1.After java 5 there are new approches to synchronization.new collections that are bringing in new synchronization approches other than Synchronized keyword.these are called concurrent collections.
+2. what are the different types of collections that are present and there different approches to concurrent collections.
+	-- Copy on Write
+	-- Compare and Swap
+	-- Locks
+	
+	let's discuss each approach 
+	
+1.Copy on Write :-
+-----------------------
+1. this CopyOnWriteArrayList class is java utility class
+
+CopyOnWriteArrayList---public Boolean add(E e)
+All values in collection are stored in an internal immutable(not- chnagrable) array.A new array is created if there is any modification to the collection.
+only methods that which has lock will be able to go in and execute this code.
+
+2. whenever you want to modify, then you would need to get a lock.
+
+3.The advantage of this is that the read operations does not need to be synchronized.
+private E get(Object[] a, int index){
+return(E) a[index];
+}
+
+in get() we are doing is all that we are doing is returing the element back.
+We are not having any synchronization code in here
+
+4.So the gets can happen without any synchronization.So multiple methods can be executing the get method at the same time.
+need to get a lock.
+
+5.if you want to read an element, you don't really need to get a lock.
+6..CopyOnWriteArrayList and CopyOnWriteArraySet are implementations of this approach
+
+scenario:-
+High-frequency reads, low-frequency writes.
+
+Subject-Observer Scenario: This is a perfect use case. In an Observer Pattern, the list of listeners changes rarely, but notifications (iterating through the list to call update()) happen constantly. Using CopyOnWriteArrayList ensures notifications are fast and thread-safe.
+
+2.Compare and Swap:-
+----------------------------
+compare ana swap is one of the new approches(JAVA 5) intoduces in java to handle synchronization.
+In traditional approach, amethod whihc modifies a memeber variable used by Multiple thread is completely synchronized- to prevent other threads accessing staale value.
+
+	In compare and swap approach, instaed of synchronizing entire method,the value of the member varianle before calculation is cached.After the calculation, the cached value is compared with the current value of memeber variable
+	
+	ConcurrentLinkedQueue uses this approach.
+	
+Locks:-
+-------------
+CopyOnWriteArrayList----	final ReentrantLock lock = this.Lock;
+3. What is Lock?How is it different from using synchronized approach?
+A)We looked at the vector class where we had a lot of methods with synchronized.Once I have synchronized on 100 methods, then it would mean that only one thread can be executing anyof these 100 methods at any point in time.Java did not have any constructs other than synchronized, so either you can use a synchronized or nothing.Only one thread is allowed to access any of these 100 methods at any given point in time, and that'sa very severe constraint.
+
+lock:-
+1.locks allow more flexible structuring of synchronized code.
+2. when 10 methods are declared as synchronized,only one of them is executed by any of the threads at any point in time.this has severe performance impack
+3.Anthoer new approach introduced in java5 is to use lock and unlock methods .Lock and unLock methods are used to divide methods into diffeetn blocks and help ennhance concurrency.the 10 methods can be divided into different blocks,which can be synchronized based on different variables.
+
+unsupportedOperationException:-
+So all the collections sometimes do not implement everything that is present in the collection interface.So in these kind of scenarios, what would happen is you would throw an unsupported operation exception.
+
+
+what is difference between fail-safe and fail-fast iterators
+------------------------------------------------------------------
+Fail fast:-
+----------------
+1.Fail fast Iterators throw a ConcurrentModificationException if tehre is a modification to the underlying collection is modified.this was the defalut behavior of the synchronized collections of pre Java 5 age.
+
+public class FailFast {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("Key1", "Value1");
+		map.put("Key2", "Value1");
+		map.put("Key3", "Value1");
+		
+		Iterator<String> iterator=map.keySet().iterator();
+		while(iterator.hasNext()) {
+			
+			System.out.println(map.get(iterator.next()));
+			map.put("Key4", "Value4");
+
+	
+		}
+
+		
+
+	}
+
+}
+
+it will throw error :-Exception in thread "main" java.util.ConcurrentModificationException
+	at java.base/java.util.HashMap$HashIterator.nextNode(HashMap.java:1605)
+	at java.base/java.util.HashMap$KeyIterator.next(HashMap.java:1628)
+	at javaPractice/javaPractice.FailFast.main(FailFast.java:20)
+	
+--while i am trying loop around the map and put new value into map or trying to modify map it will throw this ConcurrentModificationException
+
+Fail-safe :-
+1.iterator do not throw Exceptions even when there are changes in the collection.this is the default behaviour of the concurrent collections,introduced since Java 5.
+2.Fail Safe Iterator makes copy of the Internal data Structure(Object array)and iterates over the copied data structure.
+3.The fail safe operations are really efficient when the reads are much, much more than the writes.So when you have more reads then the write operations, then in those kind of situations, the concurrent
+hash map kind of things give you optimal performance.Next, we would want to discuss what are atomic operations in Java.
+	
+	
+Q)what are atomic operations in Java?
+A)So atomic operation is basically something which happens or does not happen.There is no middle ground, so you cannot stop an atomic action in between. it's either complete or incomplete.
+
+in i++(increment)
+--------------------
+here we do threadoperations
+1.Read the value which is currently stored in i.
+2.Add one to it(atomic operation)
+3.store it in i
+
+1. these atomic operations are usually performed as a single unit.
+a good example for that is Atomic Integer.If you look at the Java code, there is a class called Atomic Integer, so it's an Java.util.concurrent
+
+

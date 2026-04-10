@@ -1,0 +1,178 @@
+step 2:-world before the cloude:-
+--------------------------------------
+the world before the cloud.Applications have varying load throughout the year.
+let's take couple of the examples :-
+Example 1. online shopping application:- peak usage during holidays and weekends and less load during rest of the time
+Example 2. start up :- it's suddenly becames popular so how to handle the sudden increase load?
+--A very important thing to remember is that as load varies, the infrastructure that is needed to support your application also varies.
+If you have more load, you need more infrastructure.
+solution(before the cloude): procure(Buy) infrastructure for peak load
+
+So before the cloud, there were several challenges. :-
+1.low infrastructure utilization(peak load provisioning)
+2.needs ahead of time planning.
+3.high cost of procuring infrastructure.Buying infrastructure is not cheap.And in addition to this, you need a dedicated infrastructure maintenance team.Think about a startup.Can it really afford an infrastructure maintenance team?
+
+This is the scenario when cloud started getting really popular with the cloud.We don't buy resources.We actually rent resources.This is called provisioning.
+
+1)what is provisioning?
+A)We don't buy resources.We actually rent resources.This is called provisioning.
+We provision resources whenever we want them and release them back to the cloud when we don't need them.This is called on demand resource provisioning.
+You rent resources based on the demand on your applications and the advantages of going for cloud are really clear.
+
+the advantages of going for cloud :-
+---------------------------------------------------
+1)your trading "capital expenses" for "variable expenses".
+
+capital expenses:-Capital expense is the money you spend ahead of time to buy your infrastructure.
+Instead of that, we are going for variable expense or we are paying rent advantage.
+
+2)benefit from massive economies of scale.:-Each of the popular cloud providers handle millions of servers and therefore they are able to get the best deals from the infrastructure providers.And because the cloud landscape is very competitive, typically the cloud providers pass on that advantage or the benefit to us.
+
+3) stop guessing capacity:-
+1.Whenever the load on your application increases, you can provision/rent more resources.
+2.your application goes down, you can release resources back to the cloud.
+
+4)going global in minutes.
+ex:-Imagine a startup in India with a click of a button.They can deploy their applications to multiple parts of the world to different continents around the world.
+
+Cloud allows businesses and startups to avoid undifferentiated heavy lifting.
+1.If you'd want a highly available and highly durable database, setting it up takes a long time.
+2.You need to worry about setting up standbys.You need to worry about setting up backups for your database.
+
+5).stop spending money running and maintaining your data centers.
+
+
+Aws:-
+------------------
+now look at AWs
+Q)why cloude?
+A) We go to the cloud because it's cost effective.You can avoid planning up front and you can avoid undifferentiated heavy lifting.
+
+Q)  why AWS?
+A)We go to AWS because it's the leading cloud service provider.
+ 2. AWS provides/offers 200+ services.
+ 3.In the last decade, AWS proved itself to be very reliable, very secure and cost effective.
+ There are a number of large enterprises which run their applications on AWS.
+ ex:- Netflix.
+ 
+ Q)who is the compitetors for AWS?
+the main compitetors for AWS :-is Azure and Google cloud.
+
+ 
+ 
+ a best path to learn AWS:
+ ----------------------------------------
+ 1.cloud applications .They make use of multiple services.
+ 2.Important thing for you to understand is that there is no single path to learn these services independently.
+ 
+ setting up our AWS Account:-
+ -------------------------------------
+ 1.we need to Create an AWS Account.
+ 2.we will create secure user to help make use of IAm user
+ 
+ ------------------------------------------------------------------------------------------------------------------------------------
+ 
+ Step 3:-Creating your AWS Account
+ 
+ 1. creating your account with cloud?
+ A) excited to get started with cloud.
+ Things you would need
+ 1.your personal details(including address)
+ 2.A valid debit/credit card.
+ 3.your Mobile phone.
+ 
+ Aws is providing access to you for very powerful infrastucture.you are able to create a number of resources in AWS that's why they wanted to be really  sure who you are before they provide you with the access.that is reason this process reqired little bit of patience! this is one time process
+ 
+ 1.search for  AWS free tier and click the link.
+ 2. then AWS free tier page will open
+ 3. to create an account go head and click on Create an AWS account.
+ 4. start sign up process:-
+ ----------------------------------
+ 1.first thing is we need your email address .this called the root email address. 
+ Root user email adress:- enter your email address.
+ AWS account name :- choose our account name for your account.
+ -- once you fill this two details click your Verify email address. in email your recived your verification code.so we need to enter this verification code in AWS sign up page.
+ -if your not recieve your verification code we can check your spam folder.after make sure if you are not recieve code after 5 minutes click resend code again.
+ 
+ Create your password:- here we need to enter root user password. after enetring our root password make sure you confirm it and click continue.
+ 
+ -- so email Id is your root username and the password is the root user password.
+ 
+2. contact information:-
+--you need to choose if you're using it for business purposes or personal purposes, and also your contact information, your full name,
+phone number, country, your region address, city, state and postal code.
+--Make sure that you read and agree to the terms of the customer agreement and click continue again on
+
+3. Billing information:-
+ we need to enter billing information. after completing billing information we need to click verify and continue
+
+Note:- One of the things that you need to remember is that it will not charge you for a usage as long as you
+are within the free time limits to verify your debit card or credit card areas might do a transaction or a hold up to dollars one.
+
+So you might have a transaction like this, which happens to verify your debit and credit card.Once you verify your debit card and credit card, the last step is to confirm your identity.
+
+4. confirm your identity.
+5. support a select plan :- choose Basic Support-free and click complete sign up
+6. now go to the AWS Management console.if you click this AWS Management console button .you'll be taken to the management console page.you can also reach this page  by searching for management control in google
+7. over here you can click sign in to console
+8. choose Root user to sign in .The route user is the email ID that we made use of to create our account.
+Root user email address:- enter your Root username eamil address.
+next page enter password :- This is the password you would have chosen when you were creating the account.
+click sign in 
+
+Step 4:- Creating your First IAM USer:-
+-----------------------------------------------------
+1. IAM and some of the best practices related to IAM:-
+
+IAM : 
+1.Identity and Access Management.
+2. we are creating some powerful resources in AWS and we need control access to those resources.
+3. we need to identify the right user that is Authentication.
+4.we need to provide access right access to the right user Authorization.
+
+--I am is responsible for authentication and authorization.
+--Root user:- User we created our AWS account with credentials email address and password.do not user ROOT user for day to day activities .
+--for day to day activities create a new IAM USer and Use the IAM user for regular activities.
+
+Things we will do now:-
+-------------------------------
+Step 1. Create an IAM group -developers--with admin access
+IAM group:-You might have thousands of IAM users.You don't want to manage permissions for them individually.That's where we would create a group IAM group.The group which will create is called developers and we'll create a IAM group with the right access.
+
+Step 2. create an IAM user - in28minutes_dev-with group developers
+
+And later on in the course we'll be making use of this IAM user to do all our activities instead of making use of the root account.
+
+
+step 1:- Create an IAM group:-
+------------------------------------------
+1. Before create an IAM group, we will need to login into a AWS management console.
+2. enter first your Root user email address and click next.
+3.enter your root user password
+this would take me to the home page of a AWS management console.
+--There are a wide variety of things that you can do in the management console.
+If you want to see the list of all the services in the U.S., you can click the view all services in here.
+
+now we craete the iAM group for developers:-
+------------------------------------------------------------
+1.in search box serch for IAm 
+2. IAM - manage access to resources.in IAM we can create users,you can create groups, and you can manage permissions for them.
+left side:- Access management- user groups-create groups-user group
+user group is :- developers,
+attach permissions :-Adiminstrator access
+Typically you'd want to restrict the amount of permissions that you would give to your IAM users.
+click create groups
+--now developers group create 
+-- now create users-- add user
+user name:- in28minutes_dev 
+access type is AWS Mangement console access
+
+
+
+
+
+ 
+
+
+

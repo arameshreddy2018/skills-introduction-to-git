@@ -1,0 +1,3 @@
+Generics:-
+
+generics are used to create Generic classes and generic methods which can work with different types(classes).

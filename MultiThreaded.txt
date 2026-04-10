@@ -1,0 +1,68 @@
+Multithreading :-
+---------------------
+in Java allows multiple tasks to run concurrently within a single program, improving performance and responsiveness.
+
+Need for Threads in Java
+--------------------------------
+Threads are essential for:
+Concurrency: Executing multiple tasks simultaneously or in an overlapping manner [1].
+Responsiveness: Keeping a program's user interface responsive even when a long-running task is executing in the background.
+Resource Sharing: Threads share the same memory space and resources of a single process, making communication between them efficient, unlike separate processes that require inter-process communication mechanisms [1].
+Parallelism: Utilizing modern multi-core CPUs effectively by running different threads on different cores in parallel [1]. 
+
+How to Create a Thread:-
+-------------------------------------
+There are two primary ways to create a thread in Java:
+1.Implementing the Runnable interface: This is often the preferred way as it allows your class to inherit from other classes if needed. You pass an instance of your Runnable class to the Thread constructor.
+example:-
+----------
+public class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Thread running with Runnable interface.");
+    }
+}
+// To create a thread:
+MyRunnable myRunnable = new MyRunnable();
+Thread thread = new Thread(myRunnable);
+
+
+2.Extending the Thread class
+
+public class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread running by extending Thread class.");
+    }
+}
+// To create a thread:
+MyThread thread = new MyThread();
+
+
+Q)How to Run a Thread?
+A)thread.start();
+
+
+Different States of a Thread :-
+---------------------------------
+A thread can exist in one of the following states as defined by the java.lang.Thread.State enum [1]: 
+NEW: The thread has been created but has not yet started.
+RUNNABLE: The thread is either currently executing or ready to execute (waiting for CPU time).
+BLOCKED: The thread is waiting to acquire a monitor lock (e.g., to enter a synchronized block).
+WAITING: The thread is waiting indefinitely for another thread to perform a particular action (e.g., calling Object.wait(), Thread.join(), or LockSupport.park()).
+TIMED_WAITING: The thread is waiting for another thread to perform an action for a specified waiting time (e.g., calling Thread.sleep(), Object.wait(long timeout), or Thread.join(long timeout)).
+TERMINATED: The thread has completed its execution and is dead. 
+
+Thread Priority
+--------------------------
+Every thread has a priority, a number between 1 (minimum) and 10 (maximum). The scheduler uses priorities to determine which thread to run when multiple threads are waiting [1]. Priorities are defined as constants in the Thread class: MIN_PRIORITY (1), NORM_PRIORITY (5, the default), and MAX_PRIORITY (10) [1]. 
+
+Executor Service and Callable:
+----------------------------------------
+Executor Service: The ExecutorService provides a higher-level framework for managing the execution of tasks in a pool of threads. It separates task submission from the mechanics of how each task will be run, managed, and executed.
+Callable: While Runnable represents a task that doesn't return a value and cannot throw a checked exception, the Callable interface represents a task that returns a result and can throw an exception. When submitted to an ExecutorService, a Callable returns a Future object, which can be used to retrieve the result of the computation once it is complete. 
+
+Synchronization of Threads :-
+--------------------------------------
+Synchronization is crucial to manage concurrent access to shared resources and prevent data corruption [1]. Java provides several mechanisms: 
+synchronized keyword: Used on methods or blocks of code. Only one thread can execute a synchronized method or block on a given object instance at a time [1].
+volatile keyword: Ensures that changes to a variable are immediately visible to all other threads [1].
+java.util.concurrent.locks package:- Provides more flexible and advanced locking mechanisms than the synchronized keyword, such as ReentrantLock [1]. 

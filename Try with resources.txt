@@ -1,0 +1,302 @@
+exception handling:-
+
+
+
+
+
+disucss different things related exception handling
+1. why exception handling important in java
+2.different syntaxes invloved in exception handling with java
+
+1.finally
+2.try without the catch
+
+
+hiraricy of exceptions class:-
+error
+exception 
+checked expection
+unchecked exepection,
+
+throws
+
+
+custom expection
+
+couple of new features which are introduced into java.
+
+end this section about exception handling best pratices.
+
+---------------------------------------------------------------------------
+1.Q) why exception handling important in java
+A)1) A friendly message to the user.
+  2) The second one is engough information for support developer to debug the problem
+  
+2)what is design pattern is used to implement exception handling features in most languages?
+  A)chain of responsibility.
+
+
+3.hiraricy of exceptions class:-
+------------------------------------------
+1.Throwable is the topmost class
+2. error and 2.exception
+  -- Error extends Throwable.
+  -- Exception extends Throwable
+  
+  --error:- Error is basically that anything you cannot handle,nothing that programmer can never be able to that's an error.
+  handle like jvm crashes and out of memory error.
+  So basically you can think of things like out of memory, if JVM runs out of memory, there is nothing a programmer can do about it.So those kind of things are called errors.
+
+  --exceptions:-I am trying to read a file and file is not found, so you can probably retry or you can probably try for another file or something of that kind.Those are the things which are called exceptions.
+
+exception also two types :-
+---------------------------------
+1.checked exceptions  and  2.unchecked exceptions 
+
+checked exceptions :-
+----------------------------
+1.A method will throw a checked exception when it wants the calling method.Whichever method is calling that method, it wants that method to know that I am throwing an exception.
+Do something about it.So if I want the calling method to try and handle this exception or do something about this exception or to know about this exception, then I would use something called a checked exception.  
+
+2. any exceptions that doesnot extends runtime exception and that extends exception is called checked exceptions.
+     ex:- 
+	 class Exception extends Exception{}
+     Class  B Extends Exception{}----------------this is called checked exception.
+	 
+	 class checkedException extends Exception{}
+	 class checkedException1  extends checkedexception{}
+    
+
+2.unchecked exceptions(run time exceptions) :- 
+--------------------------------------------------------
+
+1. then the calling method does not need to know, does not need to do anything about that specific exception.then we will use unchecked exception.
+
+2.any exceptions that extends runtime exception that exception is called unchecked exceptions.
+ex:- class runtimeException extends Exception{}
+     Class  B Extends RutntimeException{}----------------this is called unchecked exception.
+
+	 class uncheckedException extends RutntimeException{}
+	 class uncheckedException1  extends uncheckedException{}
+
+
+
+Q) What is the difference between Error and Expection?
+error :- error which is not handled by programmer for example StackOverFlowErrpr, OutofMemoryError.
+
+Exception:- Exception is used when a programmer can handle the exception.
+
+
+Q) what is difference between Checked Exception and Unchecked Exception?
+
+Unchecked Exception:- Any class that are subclasses of RunTimeException or extends RunTimeExceptions then thoses classes are called Unchecked exceptions.
+checked Exception :- Any class that are not subclasses of RunTimeException or extends Exceptions then thoses classes are called Unchecked exceptions.
+
+
+Throwing an Exception:-
+----------------------------
+to throw an exception:-
+------------------------------------
+business login:-
+------------------
+
+if two currency do not match we are throwing an exception .now we will see how to throw unchecked exception or runtimeExpetions
+
+1. thowing runtime exception by using throw key word
+ex:- 
+
+class Amount{
+
+String currency;
+int amount;
+
+ public Amount(String currency, int amount){
+ 
+ this.currency = currency
+ this.amount = amount;
+ }
+
+
+}
+----
+class AmountAdder{
+static Amount addAmounts(Amount amount1,A mount amount2){
+if(!amount1.currency.equals(amount2.currency)){
+throw new runtimeException("Currencies don't match));
+}
+return new Amount(amount1.currency,amount1.amount+ amount2.amount);
+}
+}
+--------------------
+public class ExceptionHandlingExample2{
+public static void main(String[] args){
+AmountAdder.amount
+}
+
+}
+
+
+Q)what happens when you throw checked Exception from a method?
+A)now we are changed above method from runtimeexception to exception thats meaning unchecked exption to exception for that 
+option1:- decalring that a method throw an exception.
+option 2:- handle that exception by using try catch
+summary:-
+So when I'm throwing an chekection exception, I have to declare in a method signature by using throws keyword saying I'm throwing an exception.
+then, the calling methods should decide whether i need to throw the exception or  handle the exception by using try catch.
+
+
+option1:- decalring that a method throw an exception.
+----------------------------------------------------------------------------
+1.any method which throws  an checked exception  should say in its signature that it is throwing an exception.
+2. if a method throws an exception that caller method should throw an excpetion.
+class Amount{
+
+String currency;
+int amount;
+
+ public Amount(String currency, int amount){
+ 
+ this.currency = currency
+ this.amount = amount;
+ }
+
+
+}
+----
+class AmountAdder{
+static Amount addAmounts(Amount amount1,A mount amount2) throws Exception {
+if(!amount1.currency.equals(amount2.currency)){
+throw new Exception("Currencies don't match));
+}
+return new Amount(amount1.currency,amount1.amount+ amount2.amount);
+}
+}
+--------------------
+public class ExceptionHandlingExample2{
+public static void main(String[] args) throws Exception {
+AmountAdder.amount
+}
+
+}
+
+option 2:- handle that exception by using try catch
+-----------------------------------------------------------------------
+
+String currency;
+int amount;
+
+ public Amount(String currency, int amount){
+ 
+ this.currency = currency
+ this.amount = amount;
+ }
+
+
+}
+----
+class AmountAdder{
+static Amount addAmounts(Amount amount1,A mount amount2) throw exception {
+if(!amount1.currency.equals(amount2.currency)){
+throw new Exception("Currencies don't match));
+}
+return new Amount(amount1.currency,amount1.amount+ amount2.amount);
+}
+}
+--------------------
+public class ExceptionHandlingExample2{
+public static void main(String[] args) throw exception {
+try{
+AmountAdder.amount
+} catch{
+}
+}
+
+}
+
+
+custom Exception
+-----------------------
+ 
+we can create custom exceptions two ways
+1.extend Exceptions or subclass of Exception:creating Checked Exception.then the method which is throwing the checked exception has to declare iam throwing checked exception then calling method has to throws the expection by using Throws keyword or handle the exception by using try catch
+
+2.extends Runtimeexceptions then we are creating unchecked Exception.calling method no need to haandle.
+
+1.public class CheckedExceptionsAddingTryCatch {
+
+	public static void main(String[] args)  {
+		// TODO Auto-generated method stub
+			try {
+				AmountAdder1.addAmounts1(new Amount1("Rupees" ,10), new Amount1("dollers", 20));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("handled Exception");
+			}catch (CurrenciesDoNotMAtchException e) {
+				System.out.println("handled CurrenciesDoNotMAtchException");
+				
+			}
+
+
+	}
+
+}
+
+Q) how do you handle multiple exceptions types with same exception handling block?
+A)public class CheckedExceptionsAddingTryCatch {
+
+	public static void main(String[] args)  {
+		// TODO Auto-generated method stub
+			try {
+				AmountAdder1.addAmounts1(new Amount1("Rupees" ,10), new Amount1("dollers", 20));
+			} catch (IOException|SQlException e) {
+				// TODO Auto-generated catch block
+				System.out.println("handled Exception");
+			}
+
+
+	}
+
+}
+
+trywith Resource:
+-----------------------
+
+from java 7
+when the try block ends the resource are automatically released . we do not need to create a separate finally block.
+
+    public void tryWithResourceMethod() {
+
+
+	try(BufferedReader br= new BufferedReader(new FileReader("FILE_PATH")))
+	{
+	String line;
+	while((line=br.readLine())!=null){
+	System.out.println(line);
+	}
+	}catch(IOException e){
+	e.printStackTrace();
+	}
+}
+}
+
+How does try with resource works?
+a) try-with-resource is available to any class that implements the AutoCloseable interface.
+in above class BufferReader implements Auto closeable interface.
+
+public interface Autoclosable{
+void close() throws Exception;
+}
+
+best practices of exception handling
+-----------------------------------------------
+1.Never Hide Exceptions
+2.do not use exception handling for flow control in a program.they have signifcant performance impact.
+3.think about user.what does the user wants to see if tehre is an exception?
+4.think about support developer.what does the support developer need to debug the exception?
+5.cheked exception:-can the calling method do something about this exception then it handle the exception and do something good about it?
+
+   unchekedException:-if calling method doesnot do anything then better to go with uncheked eception
+   If you look at spring framework, it chooses to make most of the exceptions, most of the Jdbc exceptions as unchecked exceptions because there is nothing you would be able to do about a Jdbc exception.
+
+If a Jdbc exception is thrown, then all that we can do is throw a sample message to the user saying,okay, some database exception happened and then you would need the support developer to go and look
+at what the cause of the exception is.

@@ -1,0 +1,25 @@
+serialization:-
+---------------------- 
+serialization helps us to save or retrieve state of an object
+basiucally serilization is two steps 
+1.serialization :- to convert object state to some internal object representation.
+2.deserialization :- reverse .convert internal representation to object.
+
+Two important methods
+-----------------------------------
+ObjectOutputStream.writeObject()//serialize and write to file
+ObjectInputStream.readObject()// read from file and deserialize
+
+if any member variable in that object if you don't want serilization then make that memeber variable as a transient.
+
+how do you serialize an object using serializable interface
+-----------------------------------------------------------------------
+
+if any  object that  implements serializable interface.then that object is serializable.
+
+	
+note:-
+	objects in bytes(binay format )lo convert chesi file lo store cheyyadam= serialization by using writeObject().
+	
+	binay data to object ga convert cheyali ante = deserialization--readObject()
+

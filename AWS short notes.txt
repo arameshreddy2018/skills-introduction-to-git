@@ -1,0 +1,7 @@
+
+
+Iaas:-
+
+EC2 instances :- to setup Virtual Machines
+
+3CX8W-M4WJ3-ZB7BK

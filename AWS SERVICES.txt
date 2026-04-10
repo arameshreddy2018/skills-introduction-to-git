@@ -1,0 +1,2 @@
+1. Amazon CloudFront:-which need to use this AWS edge locations
+2.CDN service :- which will cahed the static content in the  nearset edge location the media service . so its greatly imporves latency to access the media for this Amazon cloud front 
