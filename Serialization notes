@@ -1,0 +1,9 @@
+1. Serialization (ObjectOutputStream)
+What it does: Converts an object's state (its data/fields) into a stream of bytes.
+Correction: This is not actually "JVM bytecode" (like a .class file). It is a special binary format used by Java to reconstruct that specific instance of data later.
+Requirement: You must implement the Serializable interface for this to work. 
+2. Deserialization (ObjectInputStream)
+What it does: Converts that stream of bytes back into a live Java Object in memory.
+Requirement: The class definition must be available in the classpath, and the serialVersionUID should match. 
+3. Human-Readable Text (PrintWriter)
+What it does: Writes data as plain text (strings, numbers) that a human can read in a .txt or .log file.
