@@ -23,3 +23,59 @@ note:-
 	
 	binay data to object ga convert cheyali ante = deserialization--readObject()
 
+
+examples:-
+---------------
+
+Class Rectangle implemenst Serializable{
+public Rectangle(int length,int breadth){
+this.length = length;
+this.breadth = breadth;
+area = length * breadth;
+}
+int length;
+int breadth;
+int area;
+}
+Q) How do you serialization an object in java?
+A) FileOutputStream fileOutputstream = new FileOutputstream("Rectangle.ser");
+  ObjectOutputStream output = new ObjectOutputStream(fileOutputstream);
+		 output.writeObject(new Rectangle(5,6)); 
+         output.close();
+
+
+Q) Deserialize an java object?
+A)FileInputStream fileInputstream = new FileOutputstream("Rectangle.ser");
+  ObjectInputStream objectInputStream = new ObjectInputStream(fileInputstream);
+Rectangle rectangleObj = 		(Rectangle) objectInputStream.readObject(); 
+         objectInputStream.close();
+
+Syatem.out.println(rectangleObj.length);//5
+Syatem.out.println(rectangleObj.breadth);//6
+Syatem.out.println(rectangleObj.area); // 30
+
+remember:- the object that you want to serialize should need to implement Seralizable interface.
+
+Transient:-
+----------------
+what ever the variable you do't want serilize in a objects .those variable we need to mark as transient.
+
+or 
+
+when i say a variable, when i mark a member variable as transient,then it will not be serialized.
+
+
+serialize a hierarchy of objects:-
+--------------------------------------------------
+-- we would need to implement seralizable in each of the classes in hierarchy.
+-- constructor will not called when an object is de-serialized
+
+--static variables are not part of the object. so they are not serialized.
+
+
+
+
+
+
+
+
