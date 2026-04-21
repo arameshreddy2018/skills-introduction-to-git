@@ -95,6 +95,12 @@ Set interface:-
 1..set interface doesnot allow duplication.
 2. set interface doesnot gaurentee any specific order
 
+interfaces that are extends set interface:-
+1.sortedSet
+2.Navigable set
+
+
+
 1.interface soretedSet  extands Set interfaces:-
 ------------------------------------------------------------
 1. to  maintains elements in a sorted order(either natural or via a comparator).
@@ -107,13 +113,14 @@ it adds methods like SortedSet<E> subSet(E fromElement, E toElement),SortedSet<E
  it provides navigation methods to find elements based on proximity,such as lower(),higher(),floor and ceiling(),or to pollFirst(),Polllast()
  
  
-Implementations:
+Implementations classes for set interface:
  -----------------------------------
  
  class Hashset implements Set interface:
  ---------------------------------------
  1.hashSet the order of insertion is not maintain but it would not store duplicates values.
  2.hash Set uses a kind of a hasing implementation.
+3.does not gurentee ordering of insertion or maintain the order of insertion.
  
  
  order of insertion is : A,X,B
@@ -124,6 +131,8 @@ Implementations:
  -----------------------------------------------------
  1.maintain the order of insertion and make sure there are no duplicates
  2.Linkedhash Set also uses a kind of a hasing implementation.
+3. LinkedHashSet gurentee ordering of insertion or maintain the order on insertion.
+
  
 
   order of insertion is : A,X,B
@@ -315,8 +324,12 @@ difference between comparable and comparator interface:-
 -----------------------------------------------------------------------------------
 comparator interface:-
 -------------------------------------
- If you want to sort elements of a custom class in any way you want (custom order), you typically create a separate class that implements the Comparator interface. 
- the key difference in the compare() method is that it requires two objects as parameters to decide their order.
+Use Comparator when you need flexibility. This is ideal if you want to sort the same list in different ways (e.g., once by "Price" and once by "Rating") or if you cannot modify the original class code. 
+
+How it works: You create a separate class (or use a lambda expression) that implements Comparator and its compare() method.
+Modern Java (8+): You can easily create comparators using Comparator.comparing() and chain them with .thenComparing().
+Usage: Pass the comparator as a second argument: Collections.sort(list, myComparator)
+
  		 1.  Collections.sort(cricketers, new DescendingSorter());------------------ArrayListExamples class
 		 
 		 
@@ -331,9 +344,22 @@ comparator interface:-
 	  
 Comparable interface:-
 --------------------------
-1.If you want to define a natural ordering for a class, you must have that class implement the Comparable interface.
-2.This "natural order" is the default way instances of that class will be sorted. 
-	1.   Collections.sort(cricketers);-----------------------------------ArrayListExamples class
+Use Comparable when a class has a single, obvious way it should be sorted by default (its natural order). For example, String implements Comparable to sort alphabetically, and Integer sorts numerically. 
+Medium
+Medium
+ +4
+How it works: You modify the class to implement Comparable and override the compareTo() method.
+Return values:
+Negative: Current object is "less than" the other.
+Zero: Both are equal.
+Positive: Current object is "greater than" the other.
+Usage: Just call Collections.sort(list) or Arrays.sort(array)
+
+class cricters implement comaprable()
+{
+
+}
+1.   Collections.sort(cricketers);-----------------------------------ArrayListExamples class
 		 
 	
 	2. public static <T extends Comparable<? super T>> void sort(List<T> list) {
@@ -342,7 +368,9 @@ Comparable interface:-
 	
 	3.  int compare(T o1, T o2);-----------------------Comparable interface:-
 	
-	
+	When to use which?
+Use Comparable if the sorting logic is intrinsic and "standard" for the class.
+Use Comparator for third-party classes you can't edit, or when you need specialized sorting rules for specific tasks
 	
 	static methosd present in the collections class:-
 	-------------------------------------------------------
@@ -363,6 +391,54 @@ Comparable interface:-
 	
 	
 --So all the static methods which are present in the collections class are very useful to do operations on the collection objects.
+
+
+
+
+
+Qucick comparion:-
+-----------------------
+
+Comparable:-
+1.defines "natural ordering" for a class
+2.compareTo(T o)
+3.inside the class being sorted
+
+ ex:- class Cricketer implements Comparable<Cricketer>{
+ public int compareTo(Cricketer  o){
+
+}
+}
+
+4.single sorting sequesnce.
+5.java .lang
+
+6.collections.sort(Cricketer)
+-------------------------------------------------------------------------------------------
+
+comparator
+-----------------
+1.defines custom or multiple sorting rules.
+2.compare(T o1, T o2).
+3.Outside the class (separate class or lambda).
+example :-
+
+class DescendingSorter implements comparator<Cricketer>{
+
+public int compare(Cricketer cricketer1, Cricketer cricketer2){
+
+
+}
+
+}
+----------
+
+
+collections.sort(cricketer,new DescendingSorter())
+
+4.Multiple sorting sequences (by name, age, etc.).
+5.java.util
+
 
 
 
